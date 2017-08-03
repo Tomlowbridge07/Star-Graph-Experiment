@@ -1,0 +1,8 @@
+#ifndef USEFULFUNCTIONSHEADERDEF
+#define USEFULFUNCTIONSHEADERDEF
+
+//Prototypes
+int gcd(int a, int b);
+
+
+#endif //USEFULFUNCTIONSHEADERDEF

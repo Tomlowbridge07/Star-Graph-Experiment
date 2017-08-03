@@ -1,0 +1,199 @@
+#include "SpecialGraphGenerator.hpp"
+
+#include<cassert>
+
+//Standard Constructor
+SpecialGraphGenerator::SpecialGraphGenerator()
+{
+ mpAdjacencyMatrix=NULL;
+}
+
+//Destructor
+SpecialGraphGenerator::~SpecialGraphGenerator()
+{
+ delete mpAdjacencyMatrix;
+}
+
+//Line Graph Constructor
+void SpecialGraphGenerator::GenerateLine(int n)
+{
+ //Create Storage for matrix
+ delete mpAdjacencyMatrix;
+ mpAdjacencyMatrix=new IntMatrix(n,n);
+ mpAdjacencyMatrix->Fill(0);
+
+ //Place 1 for Adjacent nodes
+ int i=1;
+ while(i<=n)
+ {
+  if(i==1)
+  {
+   (*mpAdjacencyMatrix)(i,i)=1;
+   (*mpAdjacencyMatrix)(i,i+1)=1;
+  }
+  else if(i==n)
+  {
+   (*mpAdjacencyMatrix)(i,i-1)=1;
+   (*mpAdjacencyMatrix)(i,i)=1;
+  }
+  else
+  {
+   (*mpAdjacencyMatrix)(i,i-1)=1;
+   (*mpAdjacencyMatrix)(i,i)=1;
+   (*mpAdjacencyMatrix)(i,i+1)=1;
+  }
+  i=i+1;
+ }
+}
+
+//Star Graph Constructor
+void SpecialGraphGenerator::GenerateStar(int n)
+{
+ //Create Storage for matrix
+ delete mpAdjacencyMatrix;
+ mpAdjacencyMatrix=new IntMatrix(n+1,n+1);
+ mpAdjacencyMatrix->Fill(0);
+
+ //Place 1 for Adjacent nodes
+ int i=1;
+ int j=1;
+ while(i<=n)
+ {
+  if(i==1)
+  {
+   (*mpAdjacencyMatrix)(i,i)=1;
+   j=1;
+   while(j<=n)
+   {
+    (*mpAdjacencyMatrix)(i,j+1)=1;
+    j=j+1;
+   }
+  }
+  else
+  {
+   (*mpAdjacencyMatrix)(i,1)=1;
+   (*mpAdjacencyMatrix)(i,i)=1;
+  }
+  i=i+1;
+ }
+}
+
+//Extended Star Graph Constructor
+void SpecialGraphGenerator::GenerateExtendedStar(int n, int k)
+{
+  //Create Storage for matrix
+ delete mpAdjacencyMatrix;
+ mpAdjacencyMatrix=new IntMatrix(n+k+1,n+k+1);
+ mpAdjacencyMatrix->Fill(0);
+
+ //Place 1 for Adjacent nodes
+ int i=1;
+ int j=1;
+ while(i<=n+k+1)
+ {
+  if(i<=k+1) //if in line segment(branch)
+  {
+   if(i==1)
+   {
+    (*mpAdjacencyMatrix)(i,i)=1;
+    (*mpAdjacencyMatrix)(i,i+1)=1;
+   }
+   else
+   {
+    (*mpAdjacencyMatrix)(i,i-1)=1;
+    (*mpAdjacencyMatrix)(i,i)=1;
+    (*mpAdjacencyMatrix)(i,i+1)=1;
+   }
+  }
+  else if(i==k+2)
+  {
+   (*mpAdjacencyMatrix)(i,i-1)=1;
+   (*mpAdjacencyMatrix)(i,i)=1;
+   j=1;
+   while(j<=n-1)
+   {
+    (*mpAdjacencyMatrix)(i,j+k+2)=1;
+    j=j+1;
+   }
+  }
+  else
+  {
+   (*mpAdjacencyMatrix)(i,k+2)=1;
+   (*mpAdjacencyMatrix)(i,i)=1;
+  }
+  i=i+1;
+ }
+}
+
+
+//General (Extended) Star Graph
+void SpecialGraphGenerator::GenerateGeneralStar(int n, IntVector k)
+{
+ //Check assumptions about vector
+ assert(k.GetSize()<=n);
+
+ //Order vector from highest to lowest
+ k.BubbleSort();
+ k.Reverse();
+
+ int numextensions=k.GetSize();
+ int sum=k.Sum();
+
+ //Create Storage for matrix
+ delete mpAdjacencyMatrix;
+ mpAdjacencyMatrix=new IntMatrix(n+sum+1,n+sum+1);
+ mpAdjacencyMatrix->Fill(0);
+
+ //Start Construction
+ int extensionnumber=1;
+ int priorbranchcount=0;
+ int i=1;
+ int j=1;
+ while(extensionnumber<=numextensions) //In each extension run through the line
+ {
+  i=1;
+  while(i<=k(extensionnumber)+1)
+  {
+   if(i==1) //Start of line segment
+   {
+    (*mpAdjacencyMatrix)(priorbranchcount+i,priorbranchcount+i)=1;
+    (*mpAdjacencyMatrix)(priorbranchcount+i,priorbranchcount+i+1)=1;
+   }
+   else if(i==k(extensionnumber)+1) //Attacthed to centre
+   {
+    (*mpAdjacencyMatrix)(priorbranchcount+i,priorbranchcount+i-1)=1;
+    (*mpAdjacencyMatrix)(priorbranchcount+i,priorbranchcount+i)=1;
+    (*mpAdjacencyMatrix)(priorbranchcount+i,n+sum+1)=1;
+
+    (*mpAdjacencyMatrix)(n+sum+1,priorbranchcount+i)=1; //This is the centres connection which is added her to make it easier
+   }
+   else //Interal line segment pieces
+   {
+    (*mpAdjacencyMatrix)(priorbranchcount+i,priorbranchcount+i-1)=1;
+    (*mpAdjacencyMatrix)(priorbranchcount+i,priorbranchcount+i)=1;
+    (*mpAdjacencyMatrix)(priorbranchcount+i,priorbranchcount+i)=1;
+   }
+   i=i+1;
+  }
+  priorbranchcount=priorbranchcount+k(extensionnumber)+1;
+  extensionnumber=extensionnumber+1;
+ }
+ //Deal with singletons
+ int numsingletons=n+sum+1-(priorbranchcount)-1; //Note. -1 for centre
+ i=1;
+ while(i<=numsingletons)
+ {
+  (*mpAdjacencyMatrix)(priorbranchcount+i,priorbranchcount+i)=1;
+  (*mpAdjacencyMatrix)(priorbranchcount+i,n+sum+1)=1;
+  i=i+1;
+ }
+ //Deal with centret to itsself
+ (*mpAdjacencyMatrix)(n+sum+1,n+sum+1)=1;
+}
+
+
+//Setters and Getters
+IntMatrix SpecialGraphGenerator::GetAdjacenyMatrix()
+{
+ return (*mpAdjacencyMatrix);
+}
