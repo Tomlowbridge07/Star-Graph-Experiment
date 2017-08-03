@@ -885,3 +885,135 @@
 	"BatchTimeMixedPolicyEvaluation.hpp"
 	<cmath>
 
+1498645664 source:e:\files\documents\git repositories\star graph experiment\abstractpatroller.cpp
+	"AbstractPatroller.hpp"
+	<assert.h>
+	<iostream>
+	<fstream>
+	<iomanip>
+	<cmath>
+	"Matrix.hpp"
+	"Vector.hpp"
+	"IntMatrix.hpp"
+	"IntVector.hpp"
+
+1498649693 e:\files\documents\git repositories\star graph experiment\abstractpatroller.hpp
+	"Matrix.hpp"
+	"Vector.hpp"
+	"IntMatrix.hpp"
+	"IntVector.hpp"
+	<string>
+
+1487331925 e:\files\documents\git repositories\star graph experiment\matrix.hpp
+	"Vector.hpp"
+	"IntMatrix.hpp"
+
+1498733901 e:\files\documents\git repositories\star graph experiment\vector.hpp
+	<iostream>
+
+1495558743 e:\files\documents\git repositories\star graph experiment\intmatrix.hpp
+	"IntVector.hpp"
+
+1501613310 e:\files\documents\git repositories\star graph experiment\intvector.hpp
+	<iostream>
+
+1501678057 source:e:\files\documents\git repositories\star graph experiment\batchmixedpolicyevaluation.cpp
+	"BatchMixedPolicyEvaluation.hpp"
+
+1501678057 e:\files\documents\git repositories\star graph experiment\batchmixedpolicyevaluation.hpp
+	"MixedPatroller.hpp"
+	"MixedAttackGenerator.hpp"
+	"Vector.hpp"
+	"Matrix.hpp"
+	"IntVector.hpp"
+	"IntMatrix.hpp"
+
+1498596407 e:\files\documents\git repositories\star graph experiment\mixedpatroller.hpp
+	"AbstractPatroller.hpp"
+
+1501693052 e:\files\documents\git repositories\star graph experiment\mixedattackgenerator.hpp
+	"AbstractPatroller.hpp"
+
+1501770878 source:e:\files\documents\git repositories\star graph experiment\batchtimemixedpolicyevaluation.cpp
+	"BatchTimeMixedPolicyEvaluation.hpp"
+	<cmath>
+
+1501678057 e:\files\documents\git repositories\star graph experiment\batchtimemixedpolicyevaluation.hpp
+	"BatchMixedPolicyEvaluation.hpp"
+
+1495558775 source:e:\files\documents\git repositories\star graph experiment\intmatrix.cpp
+	<cmath>
+	<cassert>
+	<iomanip>
+	"IntMatrix.hpp"
+	"IntVector.hpp"
+
+1501676897 source:e:\files\documents\git repositories\star graph experiment\intvector.cpp
+	<cmath>
+	<cassert>
+	<iomanip>
+	<fstream>
+	"IntVector.hpp"
+
+1487331843 source:e:\files\documents\git repositories\star graph experiment\matrix.cpp
+	<cmath>
+	<cassert>
+	<iomanip>
+	"Matrix.hpp"
+	"Vector.hpp"
+
+1501693065 source:e:\files\documents\git repositories\star graph experiment\mixedattackgenerator.cpp
+	"MixedAttackGenerator.hpp"
+	"UsefulFunctions.hpp"
+	<cassert>
+
+1498846130 e:\files\documents\git repositories\star graph experiment\usefulfunctions.hpp
+
+1499872511 source:e:\files\documents\git repositories\star graph experiment\mixedpatroller.cpp
+	"MixedPatroller.hpp"
+	<assert.h>
+
+1501261959 source:e:\files\documents\git repositories\star graph experiment\mixedpolicyevaluation.cpp
+	"MixedPolicyEvaluation.hpp"
+	"MixedAttackGenerator.hpp"
+	<iomanip>
+	<iostream>
+	<fstream>
+
+1501693891 e:\files\documents\git repositories\star graph experiment\mixedpolicyevaluation.hpp
+	"AbstractPatroller.hpp"
+	"PathWaitPatroller.hpp"
+	"MixedPatroller.hpp"
+
+1498649693 e:\files\documents\git repositories\star graph experiment\pathwaitpatroller.hpp
+	"AbstractPatroller.hpp"
+
+1498828948 source:e:\files\documents\git repositories\star graph experiment\pathgenerator.cpp
+	"PathGenerator.hpp"
+
+1498818515 e:\files\documents\git repositories\star graph experiment\pathgenerator.hpp
+	"IntVector.hpp"
+	"IntMatrix.hpp"
+
+1498828094 source:e:\files\documents\git repositories\star graph experiment\pathwaitpatroller.cpp
+	"PathWaitPatroller.hpp"
+	<cassert>
+
+1498826784 source:e:\files\documents\git repositories\star graph experiment\specialgraphgenerator.cpp
+	"SpecialGraphGenerator.hpp"
+	<cassert>
+
+1498732171 e:\files\documents\git repositories\star graph experiment\specialgraphgenerator.hpp
+	"IntVector.hpp"
+	"IntMatrix.hpp"
+
+1498846066 source:e:\files\documents\git repositories\star graph experiment\usefulfunctions.cpp
+	"UsefulFunctions.hpp"
+
+1498733950 source:e:\files\documents\git repositories\star graph experiment\vector.cpp
+	<cmath>
+	<cassert>
+	<iomanip>
+	<fstream>
+	"Vector.hpp"
+
