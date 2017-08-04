@@ -37,6 +37,7 @@ int main(int argc,char* argv[])
  TimeBatcher.EvaluateBatchTimeTest(4,1);
 
  //Testing linux machines response to github
+ //Getting username to work
 
 /*
  SpecialGraphGenerator GraphGen;
