@@ -76,7 +76,8 @@ public:
   //Added By T.Lowbridge
 
    //Save Vector Vector in columns in file
-   void SaveVectors(const IntVector v,const std::string FileName="2Vectors_Ouput.dat");
+   void SaveVectors(const IntVector v,
+        const std::string FileName="2Vectors_Ouput.dat");
 
    //Reverse Vector
    void Reverse();
@@ -87,24 +88,17 @@ public:
    //Evaluate Vector at a function
    void Evaluate(int (*pFunc)(int x));
 
-   //Max of the vector
+   //Max and Min Utilities
    int Max();
-
-   //Find the element that generates the maximum
    int MaxElement();
-
-    //Min of the vector
    int Min();
-
-   //Find the element that generates the minimum
    int MinElement();
 
-   //BubbleSorts
-   //This returns as a seperate vector the bubble sorted vector
-   IntVector ReturnBubbleSort(IntVector* pPermutation);
-
-   //This performs the bubble sort on this vector
+   //BubbleSorts:
+   //Internal Bubble Sort
    void BubbleSort();
+   //Returning Bubble Sort
+   IntVector ReturnBubbleSort(IntVector* pPermutation);
 
    //Set to Identity Permutation
    void SetToIdentityPerm();

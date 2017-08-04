@@ -12,8 +12,8 @@
 
 int main(int argc,char* argv[])
 {
- IntVector VectorK(2);
- VectorK(1)=2; VectorK(2)=1;
+ IntVector VectorK(4);
+ VectorK(1)=2; VectorK(2)=1; VectorK(3)=1; VectorK(4)=1;
  SpecialGraphGenerator GraphGen;
  GraphGen.GenerateGeneralExtendedStar(4,VectorK);
  IntMatrix Star(GraphGen.GetAdjacenyMatrix());
@@ -23,7 +23,7 @@ int main(int argc,char* argv[])
  AttackNodes(1)=1;
  AttackNodes(2)=4;
  AttackNodes(3)=6;
- AttackNodes(4)=7;
+ AttackNodes(4)=8;
  PathGen.GeneratePathsFromDepth(AttackNodes,AttackNodes);
  IntMatrix Paths(PathGen.GetPaths());
  std::flush(std::cout<<"Paths are: \n"<<Paths<<"\n");
