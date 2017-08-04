@@ -127,7 +127,7 @@ void SpecialGraphGenerator::GenerateExtendedStar(int n, int k)
 
 
 //General (Extended) Star Graph
-void SpecialGraphGenerator::GenerateGeneralStar(int n, IntVector k)
+void SpecialGraphGenerator::GenerateGeneralExtendedStar(int n, IntVector k)
 {
  //Check assumptions about vector
  assert(k.GetSize()<=n);
@@ -147,6 +147,7 @@ void SpecialGraphGenerator::GenerateGeneralStar(int n, IntVector k)
  //Start Construction
  int extensionnumber=1;
  int priorbranchcount=0;
+ int centreid=n+sum+1;
  int i=1;
  int j=1;
  while(extensionnumber<=numextensions) //In each extension run through the line
@@ -163,15 +164,15 @@ void SpecialGraphGenerator::GenerateGeneralStar(int n, IntVector k)
    {
     (*mpAdjacencyMatrix)(priorbranchcount+i,priorbranchcount+i-1)=1;
     (*mpAdjacencyMatrix)(priorbranchcount+i,priorbranchcount+i)=1;
-    (*mpAdjacencyMatrix)(priorbranchcount+i,n+sum+1)=1;
+    (*mpAdjacencyMatrix)(priorbranchcount+i,centreid)=1;
 
-    (*mpAdjacencyMatrix)(n+sum+1,priorbranchcount+i)=1; //This is the centres connection which is added her to make it easier
+    (*mpAdjacencyMatrix)(centreid,priorbranchcount+i)=1; //This is the centres connection which is added her to make it easier
    }
    else //Interal line segment pieces
    {
     (*mpAdjacencyMatrix)(priorbranchcount+i,priorbranchcount+i-1)=1;
     (*mpAdjacencyMatrix)(priorbranchcount+i,priorbranchcount+i)=1;
-    (*mpAdjacencyMatrix)(priorbranchcount+i,priorbranchcount+i)=1;
+    (*mpAdjacencyMatrix)(priorbranchcount+i,priorbranchcount+i+1)=1;
    }
    i=i+1;
   }
@@ -184,7 +185,8 @@ void SpecialGraphGenerator::GenerateGeneralStar(int n, IntVector k)
  while(i<=numsingletons)
  {
   (*mpAdjacencyMatrix)(priorbranchcount+i,priorbranchcount+i)=1;
-  (*mpAdjacencyMatrix)(priorbranchcount+i,n+sum+1)=1;
+  (*mpAdjacencyMatrix)(priorbranchcount+i,centreid)=1;
+  (*mpAdjacencyMatrix)(centreid,priorbranchcount+i)=1;
   i=i+1;
  }
  //Deal with centret to itsself

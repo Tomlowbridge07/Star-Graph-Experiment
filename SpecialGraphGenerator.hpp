@@ -25,7 +25,7 @@ class SpecialGraphGenerator
 
 
  //General (Extended) Star Graph
- void GenerateGeneralStar(int n, IntVector k);
+ void GenerateGeneralExtendedStar(int n, IntVector k);
 
 
  //Setters and Getters

@@ -12,6 +12,32 @@
 
 int main(int argc,char* argv[])
 {
+ IntVector VectorK(2);
+ VectorK(1)=2; VectorK(2)=1;
+ SpecialGraphGenerator GraphGen;
+ GraphGen.GenerateGeneralExtendedStar(4,VectorK);
+ IntMatrix Star(GraphGen.GetAdjacenyMatrix());
+ std::flush(std::cout<<"Star graph is: \n"<<Star<<"\n");
+ PathGenerator PathGen(Star);
+ IntVector AttackNodes(4);
+ AttackNodes(1)=1;
+ AttackNodes(2)=4;
+ AttackNodes(3)=6;
+ AttackNodes(4)=7;
+ PathGen.GeneratePathsFromDepth(AttackNodes,AttackNodes);
+ IntMatrix Paths(PathGen.GetPaths());
+ std::flush(std::cout<<"Paths are: \n"<<Paths<<"\n");
+ PathWaitPatroller PWPat(Star,AttackNodes,Paths,15,10);
+ PWPat.PrintPurePatrollerOptions();
+ MixedPatroller MPWPat(PWPat);
+ MixedAttackGenerator Gen(PWPat);
+ Gen.GenerateGeneralExtendedStarTestPW(4,VectorK);
+ MPWPat.SetMixedAttackerStrategy(Gen.GetGeneratedAttackVector());
+ MPWPat.EvaluateAttackerAgainstPurePatroller();
+ std::cout<<MPWPat.GetAttackerAgainstPureEvaluation().Max();
+
+
+/*
  //Used to find solutions to weighting and attack positions
  SpecialGraphGenerator GraphGen;
  GraphGen.GenerateExtendedStar(4,1);
@@ -27,14 +53,21 @@ int main(int argc,char* argv[])
  IntMatrix Paths(PathGen.GetPaths());
  std::flush(std::cout<<"Paths are:"<<Paths<<"\n");
  PathWaitPatroller PWPat(Star,AttackNodes,Paths,9,6);
- //PWPat.PrintPurePatrollerOptions();
+ PWPat.PrintPurePatrollerOptions();
  MixedPatroller MPWPat(PWPat);
- BatchMixedPolicyEvaluation Batcher(MPWPat,0.01);
+ MixedAttackGenerator Gen(PWPat);
+ Gen.GenerateExtendedStarTestOddPW(4,1);
+ MPWPat.SetMixedAttackerStrategy(Gen.GetGeneratedAttackVector());
+ MPWPat.EvaluateAttackerAgainstPurePatroller();
+ std::cout<<MPWPat.GetAttackerAgainstPureEvaluation().Max();
+
+
+ /*BatchMixedPolicyEvaluation Batcher(MPWPat,0.01);
  Batcher.EvaluateBatchTest1(4,1);
  std::cout<<"Batcher output: \n"
  <<Batcher.GetEvaluationVector()<<Batcher.GetBestPatrollerStrat();
  BatchTimeMixedPolicyEvaluation TimeBatcher(Batcher);
- TimeBatcher.EvaluateBatchTimeTest(4,1);
+ TimeBatcher.EvaluateBatchTimeTest(4,1); */
 
 /*
  SpecialGraphGenerator GraphGen;
