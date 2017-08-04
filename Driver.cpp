@@ -36,9 +36,6 @@ int main(int argc,char* argv[])
  BatchTimeMixedPolicyEvaluation TimeBatcher(Batcher);
  TimeBatcher.EvaluateBatchTimeTest(4,1);
 
- //Testing linux machines response to github
- //Getting username to work
-
 /*
  SpecialGraphGenerator GraphGen;
  GraphGen.GenerateExtendedStar(4,1);
