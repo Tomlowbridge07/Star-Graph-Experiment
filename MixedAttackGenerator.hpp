@@ -36,8 +36,10 @@ class MixedAttackGenerator
  //Star overall (i.e timed attacked when possible otherwise normal diametric)
  void GenerateOverallExtendedStarAttack(int n,int k);
 
-  /*Methods to internally set Generated Attack- Designed for use with Path Wait Patroller
- generation of attacks*/
+ /*
+ Methods to internally set Generated Attack- Designed
+ for use with Path Wait Patroller generation of attacks
+ */
  //Uniform
  void GenerateUniformAttackPW();
  //Line (under diametric attack)
@@ -53,7 +55,8 @@ class MixedAttackGenerator
  //Star overall (i.e timed attacked when possible otherwise normal diametric)
  void GenerateOverallExtendedStarAttackPW(int n,int k);
 
- /* Methods to set attack patterns depending on a step parameter- Designed for uise
+ /*
+ Methods to set attack patterns depending on a step parameter- Designed for use
  with the path wait patroller
  */
  //Extended Star time variables
@@ -64,7 +67,7 @@ class MixedAttackGenerator
  void GenerateExtendedStarTest5PW(int n,int k,double weight);
 
  //Infromed from time position test
- void GenerateExtendedStarTestOddPW(int n,int k); //Odd is just as equally good as even (just even has more choice for optimal attacks)
+ void GenerateExtendedStarTestOddPW(int n,int k);
  void GenerateExtendedStarTestEvenPW(int n,int k);
  void GenerateExtendedStarTestOverallPW(int n, int k);
 
@@ -72,7 +75,8 @@ class MixedAttackGenerator
  void GenerateGeneralExtendedStarTestPW(int n, IntVector VectorK);
 
  //For use with the batch time posistion testing
- void GenerateExtendedStarTestTimePW(int n,int k,double weight,IntVector TimesToAttack);
+ void GenerateExtendedStarTestTimePW(int n,int k,double weight,
+                                     IntVector TimesToAttack);
 
  protected:
 
