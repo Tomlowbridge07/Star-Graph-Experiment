@@ -207,9 +207,18 @@ std::ostream& operator<<(std::ostream& output,
 
 // Added by T.Lowbridge
 
-//Saves 2 vectors in column form in a file
-//Vectors are saved in the order written
-void IntVector::SaveVectors(const IntVector v,const std::string FileName/*="2Vectors_Ouput.dat"*/)
+// Two Vector Saver
+/*
+This method saves 2 vectors (the current one and the inputted one) into an
+output file with the vectors organised into columns
+
+Example: (1,4,-2),(4,0,2) ---> 1 4
+                               4 0
+                              -2 2/*
+This method returns the minimum value of the vector
+*/
+void IntVector::SaveVectors(const IntVector v,
+                const std::string FileName/*="2Vectors_Ouput.dat"*/)
 {
  //assert they are both the same length
  assert(mSize==v.GetSize());
@@ -234,7 +243,11 @@ void IntVector::SaveVectors(const IntVector v,const std::string FileName/*="2Vec
  outfile.close();
 }
 
-//Reverses a Vectors Components
+//Reverse
+/*
+This method reverses the values in a vector
+i.e (1,-6,5)->(5,-6,1)
+*/
 void IntVector::Reverse()
 {
  IntVector Temp(*this);
@@ -246,7 +259,10 @@ void IntVector::Reverse()
  }
 }
 
-//Fills a Vectors Components with a given value
+//Fill
+/*
+This method overwrites the values of the vector with the FillValue
+*/
 void IntVector::Fill(const int FillValue)
 {
  int i=0;
@@ -257,8 +273,12 @@ void IntVector::Fill(const int FillValue)
  }
 }
 
-//Overwrites the Vector with its enteries evaluated a given function
-//Note. The order remains the same (no reordering takes place just evaluation)
+
+//Function evaluation
+/*
+This method evaluates the values of the vector and overwrites the values in the
+vector for the pointed function
+*/
 void IntVector::Evaluate(int (*pFunc)(int x))
 {
  int i=0;
@@ -269,7 +289,10 @@ void IntVector::Evaluate(int (*pFunc)(int x))
  }
 }
 
-//Max of the vector
+//Maximum value
+/*
+This method returns the maximum value of the vector
+*/
 int IntVector::Max()
 {
  int i=1;
@@ -292,7 +315,10 @@ int IntVector::Max()
  return maxer;
 }
 
-//Max Element
+//Maximum Element
+/*
+This method returns the 1-based index maximum element of a vector
+*/
 int IntVector::MaxElement()
 {
  int i=1;
@@ -318,7 +344,10 @@ int IntVector::MaxElement()
  return element;
 }
 
-//Min of the vector
+//Minimum value
+/*
+This method returns the minimum value of the vector
+*/
 int IntVector::Min()
 {
  int i=1;
@@ -341,7 +370,10 @@ int IntVector::Min()
  return miner;
 }
 
-//Find the element that generates the minimum
+//Mimimum element finder
+/*
+This method returns the 1-based index minimum element of a vector
+*/
 int IntVector::MinElement()
 {
  int i=1;
@@ -367,8 +399,47 @@ int IntVector::MinElement()
  return element;
 }
 
-//BubbleSort
-//This Returns the vector and allows a pointers to hold the info
+//Internal Bubble sort
+/*
+This method performs the bubble sort on the vector internally.
+
+Note. It does not remember which componenets were switched (if that is
+wished it is best to use ReturnBubbleSort)
+*/
+void IntVector::BubbleSort()
+{
+ bool Swapped=true;
+ int i=1;
+ int run=1;
+ int temp=0;
+ int temp2=0;
+ while(run<=mSize && Swapped==true)
+ {
+  i=1;
+  Swapped=false;
+  while(i<=mSize-run)
+  {
+   if(mData[i-1]>mData[i])
+   {
+    temp=mData[i-1];
+    mData[i-1]=mData[i];
+    mData[i]=temp;
+    Swapped=true;
+   }
+   i=i+1;
+  }
+  run=run+1;
+ }
+}
+
+//Returning BubbleSort
+/*
+This method performs the bubble sort on a vector externally and outputing
+the sorted vector
+
+Note. It allows a pointer to store which componenets were switched in the form
+of a permutation vector (which used 1-based indexing)
+*/
 IntVector IntVector::ReturnBubbleSort(IntVector* pPermutation)
 {
  //Create Storage for pPermutation
@@ -404,35 +475,13 @@ IntVector IntVector::ReturnBubbleSort(IntVector* pPermutation)
  return *this;
 }
 
-void IntVector::BubbleSort()
-{
- bool Swapped=true;
- int i=1;
- int run=1;
- int temp=0;
- int temp2=0;
- while(run<=mSize && Swapped==true)
- {
-  i=1;
-  Swapped=false;
-  while(i<=mSize-run)
-  {
-   if(mData[i-1]>mData[i])
-   {
-    temp=mData[i-1];
-    mData[i-1]=mData[i];
-    mData[i]=temp;
-    Swapped=true;
-   }
-   i=i+1;
-  }
-  run=run+1;
- }
-}
 
 
 //Set to identity perm
-//using 1-based indexing
+/*
+This method sets the vector to the identity vector i.e (1,2,3,4,...,n)
+Note. It uses 1-based indexing for the identity
+*/
 void IntVector::SetToIdentityPerm()
 {
  int i=1;
@@ -443,6 +492,28 @@ void IntVector::SetToIdentityPerm()
  }
 }
 
+//Calculate the Vector Sum
+/*
+This method Sums the components of the vector up
+*/
+int IntVector::Sum()
+{
+ int i=1;
+ int Sum=0;
+ while(i<=mSize)
+ {
+  Sum=Sum+mData[i-1];
+  i=i+1;
+ }
+ return Sum;
+}
+
+//Calculates the average vector component
+/*
+This method calculates the average component value by summing and dividing
+by the size of the vector.
+Note. This outputs a double while all values are integers
+*/
 double IntVector::Average()
 {
  int i=1;
@@ -455,19 +526,11 @@ double IntVector::Average()
  return Sum/(double)mSize;
 }
 
-int IntVector::Sum()
-{
- int i=1;
- double Sum=0;
- while(i<=mSize)
- {
-  Sum=Sum+mData[i-1];
-  i=i+1;
- }
- return Sum;
-}
-
 //Extend vector
+/*
+This method extends a vector's size by the ExtendBy variables size
+The Extended Values are set to zero
+*/
 void IntVector::Extend(int ExtendBy)
 {
  IntVector Temp(*this);

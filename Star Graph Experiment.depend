@@ -1017,3 +1017,148 @@
 	<fstream>
 	"Vector.hpp"
 
+1501845947 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/AbstractPatroller.cpp
+	"AbstractPatroller.hpp"
+	<assert.h>
+	<iostream>
+	<fstream>
+	<iomanip>
+	<cmath>
+	"Matrix.hpp"
+	"Vector.hpp"
+	"IntMatrix.hpp"
+	"IntVector.hpp"
+
+1501845947 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/AbstractPatroller.hpp
+	"Matrix.hpp"
+	"Vector.hpp"
+	"IntMatrix.hpp"
+	"IntVector.hpp"
+	<string>
+
+1501845947 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Matrix.hpp
+	"Vector.hpp"
+	"IntMatrix.hpp"
+
+1501845947 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Vector.hpp
+	<iostream>
+
+1501845947 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/IntMatrix.hpp
+	"IntVector.hpp"
+
+1501845947 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/IntVector.hpp
+	<iostream>
+
+1501845947 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/BatchMixedPolicyEvaluation.cpp
+	"BatchMixedPolicyEvaluation.hpp"
+
+1501845947 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/BatchMixedPolicyEvaluation.hpp
+	"MixedPatroller.hpp"
+	"MixedAttackGenerator.hpp"
+	"Vector.hpp"
+	"Matrix.hpp"
+	"IntVector.hpp"
+	"IntMatrix.hpp"
+
+1501845947 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/MixedPatroller.hpp
+	"AbstractPatroller.hpp"
+
+1501849190 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/MixedAttackGenerator.hpp
+	"AbstractPatroller.hpp"
+
+1501845947 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/BatchTimeMixedPolicyEvaluation.cpp
+	"BatchTimeMixedPolicyEvaluation.hpp"
+	<cmath>
+
+1501845947 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/BatchTimeMixedPolicyEvaluation.hpp
+	"BatchMixedPolicyEvaluation.hpp"
+
+1501845947 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/IntMatrix.cpp
+	<cmath>
+	<cassert>
+	<iomanip>
+	"IntMatrix.hpp"
+	"IntVector.hpp"
+
+1501845947 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/IntVector.cpp
+	<cmath>
+	<cassert>
+	<iomanip>
+	<fstream>
+	"IntVector.hpp"
+
+1501845947 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Matrix.cpp
+	<cmath>
+	<cassert>
+	<iomanip>
+	"Matrix.hpp"
+	"Vector.hpp"
+
+1501855221 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/MixedAttackGenerator.cpp
+	"MixedAttackGenerator.hpp"
+	"UsefulFunctions.hpp"
+	<cassert>
+
+1501845947 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/UsefulFunctions.hpp
+
+1501845947 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/MixedPatroller.cpp
+	"MixedPatroller.hpp"
+	<assert.h>
+
+1501845947 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/MixedPolicyEvaluation.cpp
+	"MixedPolicyEvaluation.hpp"
+	"MixedAttackGenerator.hpp"
+	<iomanip>
+	<iostream>
+	<fstream>
+
+1501845947 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/MixedPolicyEvaluation.hpp
+	"AbstractPatroller.hpp"
+	"PathWaitPatroller.hpp"
+	"MixedPatroller.hpp"
+
+1501845947 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/PathWaitPatroller.hpp
+	"AbstractPatroller.hpp"
+
+1501845947 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/PathGenerator.cpp
+	"PathGenerator.hpp"
+
+1501845947 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/PathGenerator.hpp
+	"IntVector.hpp"
+	"IntMatrix.hpp"
+
+1501845947 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/PathWaitPatroller.cpp
+	"PathWaitPatroller.hpp"
+	<cassert>
+
+1501854825 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/SpecialGraphGenerator.cpp
+	"SpecialGraphGenerator.hpp"
+	<cassert>
+
+1501854031 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/SpecialGraphGenerator.hpp
+	"IntVector.hpp"
+	"IntMatrix.hpp"
+
+1501845947 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/UsefulFunctions.cpp
+	"UsefulFunctions.hpp"
+
+1501845947 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Vector.cpp
+	<cmath>
+	<cassert>
+	<iomanip>
+	<fstream>
+	"Vector.hpp"
+
+1501855160 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Driver.cpp
+	<iostream>
+	"IntMatrix.hpp"
+	"AbstractPatroller.hpp"
+	"MixedPatroller.hpp"
+	"MixedPolicyEvaluation.hpp"
+	"PathWaitPatroller.hpp"
+	"SpecialGraphGenerator.hpp"
+	"PathGenerator.hpp"
+	"Vector.hpp"
+	"BatchMixedPolicyEvaluation.hpp"
+	"BatchTimeMixedPolicyEvaluation.hpp"
+

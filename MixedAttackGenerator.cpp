@@ -12,8 +12,10 @@ MixedAttackGenerator::MixedAttackGenerator(AbstractPatroller& aPatrollerSystem)
  mpPatrollerSystem=&aPatrollerSystem;
 
  //Set Generated Attacks to empty/Null
- mpGeneratedAttackVector=new Vector(mpPatrollerSystem->GetNumPureAttackOptions());
- mpGeneratedAttackMatrix=new Matrix(1,mpPatrollerSystem->GetNumPureAttackOptions());
+ mpGeneratedAttackVector=
+ new Vector(mpPatrollerSystem->GetNumPureAttackOptions());
+ mpGeneratedAttackMatrix=
+ new Matrix(1,mpPatrollerSystem->GetNumPureAttackOptions());
 }
 
 //Destructor
@@ -31,8 +33,10 @@ void MixedAttackGenerator::SetPatrollerSystem(AbstractPatroller& aPatrollerSyste
  //Set Generated Attacks to empty/Null
  delete mpGeneratedAttackVector;
  delete mpGeneratedAttackVector;
- mpGeneratedAttackVector=new Vector(mpPatrollerSystem->GetNumPureAttackOptions());
- mpGeneratedAttackMatrix=new Matrix(1,mpPatrollerSystem->GetNumPureAttackOptions());
+ mpGeneratedAttackVector=
+ new Vector(mpPatrollerSystem->GetNumPureAttackOptions());
+ mpGeneratedAttackMatrix=
+ new Matrix(1,mpPatrollerSystem->GetNumPureAttackOptions());
 }
 AbstractPatroller* MixedAttackGenerator::GetPatrollerSystem()
 {
@@ -55,7 +59,8 @@ void MixedAttackGenerator::GenerateUniformAttack()
  int i=1;
  while(i<=mpPatrollerSystem->GetNumPureAttackOptions())
  {
-  (*mpGeneratedAttackVector)(i)=(double)1/(double)(mpPatrollerSystem->GetNumPureAttackOptions());
+  (*mpGeneratedAttackVector)(i)=
+  (double)1/(double)(mpPatrollerSystem->GetNumPureAttackOptions());
   i=i+1;
  }
 }
@@ -66,7 +71,8 @@ void MixedAttackGenerator::GenerateLineAttack(int n)
  {
   int block=1;
   int i=1;
-  int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
+  int blocksize=
+  (mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
   while(block <= n-2)
   {
    if(block==1)
@@ -74,7 +80,8 @@ void MixedAttackGenerator::GenerateLineAttack(int n)
     i=1;
     while(i<=blocksize)
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=(double)1/(double)(2*blocksize);
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     (double)1/(double)(2*blocksize);
      i=i+1;
     }
    }
@@ -83,7 +90,8 @@ void MixedAttackGenerator::GenerateLineAttack(int n)
     i=1;
     while(i<=blocksize)
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=(double)1/(double)(2*blocksize);
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     (double)1/(double)(2*blocksize);
      i=i+1;
     }
    }
@@ -103,7 +111,8 @@ void MixedAttackGenerator::GenerateLineAttack(int n)
  {
   int block=1;
   int i=1;
-  int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
+  int blocksize=
+  (mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
   while(block <= n)
   {
    if(block==1)
@@ -111,7 +120,8 @@ void MixedAttackGenerator::GenerateLineAttack(int n)
     i=1;
     while(i<=blocksize)
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=(double)1/(double)(2*blocksize);
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     (double)1/(double)(2*blocksize);
      i=i+1;
     }
    }
@@ -120,7 +130,8 @@ void MixedAttackGenerator::GenerateLineAttack(int n)
     i=1;
     while(i<=blocksize)
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=(double)1/(double)(2*blocksize);
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     (double)1/(double)(2*blocksize);
      i=i+1;
     }
    }
@@ -144,7 +155,8 @@ void MixedAttackGenerator::GenerateTimedLineAttack(int n)
  {
   int block=1;
   int i=1;
-  int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
+  int blocksize=
+  (mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
   while(block <= n-2)
   {
    if(block==1)
@@ -154,7 +166,8 @@ void MixedAttackGenerator::GenerateTimedLineAttack(int n)
     {
      if(i<=n-1)
      {
-      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=(double)1/(double)(2*(n-1));
+      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+      (double)1/(double)(2*(n-1));
      }
      else
      {
@@ -170,7 +183,8 @@ void MixedAttackGenerator::GenerateTimedLineAttack(int n)
     {
      if(i<=n-1)
      {
-      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=(double)1/(double)(2*(n-1));
+      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+      (double)1/(double)(2*(n-1));
      }
      else
      {
@@ -195,7 +209,8 @@ void MixedAttackGenerator::GenerateTimedLineAttack(int n)
  {
   int block=1;
   int i=1;
-  int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
+  int blocksize=
+  (mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
   while(block <= n)
   {
    if(block==1)
@@ -205,7 +220,8 @@ void MixedAttackGenerator::GenerateTimedLineAttack(int n)
     {
      if(i<=n-1)
      {
-      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=(double)1/(double)(2*(n-1));
+      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+      (double)1/(double)(2*(n-1));
      }
      else
      {
@@ -221,7 +237,8 @@ void MixedAttackGenerator::GenerateTimedLineAttack(int n)
     {
      if(i<=n-1)
      {
-      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=(double)1/(double)(2*(n-1));
+      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+      (double)1/(double)(2*(n-1));
      }
      else
      {
@@ -261,7 +278,8 @@ void MixedAttackGenerator::GenerateExtendedStarAttack(int n,int k)
  {
   int block=1;
   int i=1;
-  int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
+  int blocksize=
+  (mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
   while(block<=n+k-2)
   {
    if(block==1)
@@ -269,7 +287,8 @@ void MixedAttackGenerator::GenerateExtendedStarAttack(int n,int k)
     i=1;
     while(i<=blocksize)
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=(double)(k+1)/(double)((n+k)*blocksize);
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     (double)(k+1)/(double)((n+k)*blocksize);
      i=i+1;
     }
    }
@@ -278,7 +297,8 @@ void MixedAttackGenerator::GenerateExtendedStarAttack(int n,int k)
     i=1;
     while(i<=blocksize)
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=(double)1/(double)((n+k)*blocksize);
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     (double)1/(double)((n+k)*blocksize);
      i=i+1;
     }
    }
@@ -298,7 +318,8 @@ void MixedAttackGenerator::GenerateExtendedStarAttack(int n,int k)
  {
   int block=1;
   int i=1;
-  int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
+  int blocksize=
+  (mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
   while(block<=n+k)
   {
    if(block==1)
@@ -306,7 +327,8 @@ void MixedAttackGenerator::GenerateExtendedStarAttack(int n,int k)
     i=1;
     while(i<=blocksize)
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=(double)(k+1)/(double)((n+k)*blocksize);
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     (double)(k+1)/(double)((n+k)*blocksize);
      i=i+1;
     }
    }
@@ -315,7 +337,8 @@ void MixedAttackGenerator::GenerateExtendedStarAttack(int n,int k)
     i=1;
     while(i<=blocksize)
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=(double)1/(double)((n+k)*blocksize);
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     (double)1/(double)((n+k)*blocksize);
      i=i+1;
     }
    }
@@ -339,7 +362,8 @@ void MixedAttackGenerator::GenerateTimedExtendedStarAttack(int n,int k)
  {
   int block=1;
   int i=1;
-  int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
+  int blocksize=
+  (mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
   while(block<=n+k-2)
   {
    if(block==1)
@@ -349,7 +373,8 @@ void MixedAttackGenerator::GenerateTimedExtendedStarAttack(int n,int k)
     {
      if(i<=2*(k+1))
      {
-      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=(double)(k+1)/(double)((n+k)*blocksize);
+      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+      (double)(k+1)/(double)((n+k)*blocksize);
      }
      else
      {
@@ -365,7 +390,8 @@ void MixedAttackGenerator::GenerateTimedExtendedStarAttack(int n,int k)
     {
      if(i<=2*(k+1))
      {
-      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=(double)1/(double)((n+k)*blocksize);
+      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+      (double)1/(double)((n+k)*blocksize);
      }
      else
      {
@@ -390,7 +416,8 @@ void MixedAttackGenerator::GenerateTimedExtendedStarAttack(int n,int k)
  {
   int block=1;
   int i=1;
-  int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
+  int blocksize=
+  (mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
   while(block<=n+k)
   {
    if(block==1)
@@ -400,7 +427,8 @@ void MixedAttackGenerator::GenerateTimedExtendedStarAttack(int n,int k)
     {
      if(i<=2*(k+1))
      {
-      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=(double)(k+1)/(double)((n+k)*blocksize);
+      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+      (double)(k+1)/(double)((n+k)*blocksize);
      }
      else
      {
@@ -416,7 +444,8 @@ void MixedAttackGenerator::GenerateTimedExtendedStarAttack(int n,int k)
     {
      if(i<=2*(k+1))
      {
-      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=(double)1/(double)((n+k)*blocksize);
+      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+      (double)1/(double)((n+k)*blocksize);
      }
      else
      {
@@ -440,7 +469,8 @@ void MixedAttackGenerator::GenerateTimedExtendedStarAttack(int n,int k)
 }
 void MixedAttackGenerator::GenerateOverallExtendedStarAttack(int n,int k)
 {
- if(mpPatrollerSystem->GetGameTime()>= mpPatrollerSystem->GetAttackTime()+(2*(k+1)))
+ if(mpPatrollerSystem->GetGameTime()>=
+    mpPatrollerSystem->GetAttackTime()+(2*(k+1)))
  {
   GenerateTimedExtendedStarAttack(n,k);
  }
@@ -458,7 +488,8 @@ void MixedAttackGenerator::GenerateUniformAttackPW()
  int i=1;
  while(i<=mpPatrollerSystem->GetNumPureAttackOptions())
  {
-  (*mpGeneratedAttackVector)(i)=(double)1/(double)(mpPatrollerSystem->GetNumPureAttackOptions());
+  (*mpGeneratedAttackVector)(i)=
+  (double)1/(double)(mpPatrollerSystem->GetNumPureAttackOptions());
   i=i+1;
  }
 }
@@ -472,7 +503,8 @@ void MixedAttackGenerator::GenerateTimedLineAttackPW(int n)
 {
  int block=1;
  int i=1;
- int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
+ int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem
+                ->GetAttackTime()+1);
  while(block <= 2)
  {
   i=1;
@@ -480,7 +512,8 @@ void MixedAttackGenerator::GenerateTimedLineAttackPW(int n)
   {
    if(i<=n-1)
    {
-    (*mpGeneratedAttackVector)((block-1)*blocksize+i)=(double)1/(double)(2*(n-1));
+    (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+    (double)1/(double)(2*(n-1));
    }
    else
    {
@@ -502,6 +535,8 @@ void MixedAttackGenerator::GenerateOverallLineAttackPW(int n)
   GenerateLineAttackPW(n);
  }
 }
+
+
 //Extended Star (under weighted attack)
 void MixedAttackGenerator::GenerateExtendedStarAttackPW(int n,int k)
 {
@@ -512,7 +547,8 @@ void MixedAttackGenerator::GenerateTimedExtendedStarAttackPW(int n,int k)
 {
  int block=1;
  int i=1;
- int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
+ int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem
+                ->GetAttackTime()+1);
  int timechoice1=6;
  int timechoice2=2;
  while(block <= n)
@@ -524,7 +560,8 @@ void MixedAttackGenerator::GenerateTimedExtendedStarAttackPW(int n,int k)
    {
     if(i<=timechoice1)
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=(double)(k+1)/(double)((n+k)*timechoice1);
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     (double)(k+1)/(double)((n+k)*timechoice1);
     }
     else
     {
@@ -540,11 +577,13 @@ void MixedAttackGenerator::GenerateTimedExtendedStarAttackPW(int n,int k)
    {
     if(i==1)
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=(double)(1)/(double)((n+k)*timechoice2);
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     (double)(1)/(double)((n+k)*timechoice2);
     }
     else if(i==4)
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=(double)(1)/(double)((n+k)*timechoice2);
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     (double)(1)/(double)((n+k)*timechoice2);
     }
     else
     {
@@ -557,9 +596,17 @@ void MixedAttackGenerator::GenerateTimedExtendedStarAttackPW(int n,int k)
  }
  std::flush(std::cout<<(*mpGeneratedAttackVector));
 }
+
+//Overall Attack on Extended Star Graph
+/*
+Assuming to use Guessed Time Appropiate Strategy
+
+Note. THIS IS REALLY FOR TEST PURPOSES AND DID NOT GIVE THE WANTED VALUE
+*/
 void MixedAttackGenerator::GenerateOverallExtendedStarAttackPW(int n,int k)
 {
- if(mpPatrollerSystem->GetGameTime()>= mpPatrollerSystem->GetAttackTime()+2*(k+1))
+ if(mpPatrollerSystem->GetGameTime()>=
+    mpPatrollerSystem->GetAttackTime()+2*(k+1))
  {
   GenerateTimedExtendedStarAttackPW(n,k);
  }
@@ -570,15 +617,19 @@ void MixedAttackGenerator::GenerateOverallExtendedStarAttackPW(int n,int k)
 }
 
 
-/* Methods to set attack patterns depending on a step parameter- Designed for use
-with the path wait patroller
+//Testing Attacking Strategies
+/*
+The following 5 methods are variations on attacking time positions and weights
+used as a test to attempt to find the correct attacking strategy
+
+NOTE. THESE ARE NOT REALLY INTENDED FOR USE
 */
-//Extended Star time variables
 void MixedAttackGenerator::GenerateExtendedStarTest1PW(int n,int k,double weight)
 {
  int block=1;
  int i=1;
- int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
+ int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem
+                ->GetAttackTime()+1);
  int timechoice1=3;
  int timechoice2=1;
  while(block <= n)
@@ -590,7 +641,8 @@ void MixedAttackGenerator::GenerateExtendedStarTest1PW(int n,int k,double weight
    {
     if(i<=timechoice1)
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=((double)(1)/(double)(timechoice1)) * weight;
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     ((double)(1)/(double)(timechoice1)) * weight;
     }
     else
     {
@@ -606,7 +658,8 @@ void MixedAttackGenerator::GenerateExtendedStarTest1PW(int n,int k,double weight
    {
     if(i<=timechoice2)
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=((double)(1)/(double)(timechoice2)) * ((double)(1-weight)/(double)(n-1));
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     ((double)(1)/(double)(timechoice2)) * ((double)(1-weight)/(double)(n-1));
     }
     else
     {
@@ -624,7 +677,8 @@ void MixedAttackGenerator::GenerateExtendedStarTest2PW(int n,int k,double weight
 {
  int block=1;
  int i=1;
- int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
+ int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem
+                ->GetAttackTime()+1);
  int timechoice1=6;
  while(block <= n)
  {
@@ -637,12 +691,14 @@ void MixedAttackGenerator::GenerateExtendedStarTest2PW(int n,int k,double weight
    {
     if(i % 3 ==1 && j<=numtimesofattack)
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=((double)(1)/(double)(numtimesofattack)) * weight;
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     ((double)(1)/(double)(numtimesofattack)) * weight;
      j=j+1;
     }
     else if(i % 3 ==2 && j<=numtimesofattack)
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=((double)(1)/(double)(numtimesofattack)) * weight;
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     ((double)(1)/(double)(numtimesofattack)) * weight;
      j=j+1;
     }
     else
@@ -661,7 +717,9 @@ void MixedAttackGenerator::GenerateExtendedStarTest2PW(int n,int k,double weight
    {
     if(i % 2 ==1 && j<=numtimesofattack)
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=((double)(1)/(double)(numtimesofattack)) * ((double)(1-weight)/(double)(n-1));
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     ((double)(1)/(double)(numtimesofattack)) *
+     ((double)(1-weight)/(double)(n-1));
      j=j+1;
     }
     else
@@ -681,7 +739,8 @@ void MixedAttackGenerator::GenerateExtendedStarTest3PW(int n,int k,double weight
 {
  int block=1;
  int i=1;
- int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
+ int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem
+                ->GetAttackTime()+1);
  int timechoice1=6;
  while(block <= n)
  {
@@ -692,7 +751,8 @@ void MixedAttackGenerator::GenerateExtendedStarTest3PW(int n,int k,double weight
    {
     if(i<=timechoice1)
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=((double)(1)/(double)(timechoice1)) * weight;
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     ((double)(1)/(double)(timechoice1)) * weight;
     }
     else
     {
@@ -708,11 +768,13 @@ void MixedAttackGenerator::GenerateExtendedStarTest3PW(int n,int k,double weight
    {
     if(i==1)
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=((double)(1)/(double)(2)) * ((double)(1-weight)/(double)(n-1));
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     ((double)(1)/(double)(2)) * ((double)(1-weight)/(double)(n-1));
     }
     else if(i==blocksize)
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=((double)(1)/(double)(2)) * ((double)(1-weight)/(double)(n-1));
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     ((double)(1)/(double)(2)) * ((double)(1-weight)/(double)(n-1));
     }
     else
     {
@@ -730,7 +792,8 @@ void MixedAttackGenerator::GenerateExtendedStarTest4PW(int n,int k,double weight
 {
  int block=1;
  int i=1;
- int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
+ int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem
+                ->GetAttackTime()+1);
  int timechoice1=6;
  while(block <= n)
  {
@@ -741,7 +804,8 @@ void MixedAttackGenerator::GenerateExtendedStarTest4PW(int n,int k,double weight
    {
     if(i<=timechoice1)
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=((double)(1)/(double)(timechoice1)) * weight;
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     ((double)(1)/(double)(timechoice1)) * weight;
     }
     else
     {
@@ -765,7 +829,8 @@ void MixedAttackGenerator::GenerateExtendedStarTest4PW(int n,int k,double weight
     }
     else
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=((double)(1)/(double)(blocksize-2)) * ((double)(1-weight)/(double)(n-1));
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     ((double)(1)/(double)(blocksize-2)) * ((double)(1-weight)/(double)(n-1));
     }
     i=i+1;
    }
@@ -774,122 +839,13 @@ void MixedAttackGenerator::GenerateExtendedStarTest4PW(int n,int k,double weight
  }
  std::flush(std::cout<<(*mpGeneratedAttackVector));
 }
-
-void MixedAttackGenerator::GenerateExtendedStarTestOddPW(int n,int k)
-{
- int block=1;
- int i=1;
- int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
- double weight1=(double)(k+1)/(double)(n+k);
- double weight2=(double)(1)/(double)(n+k);
- int timechoice1=2*(k+1);
- int timechoice2=2;
- while(block <= n)
- {
-  if(block==1)
-  {
-   i=1;
-   while(i<=blocksize)
-   {
-    if(i<=timechoice1)
-    {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=((double)(1)/(double)(timechoice1)) * weight1;
-    }
-    else
-    {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=0;
-    }
-    i=i+1;
-   }
-  }
-  else
-  {
-   i=1;
-   while(i<=blocksize)
-   {
-    if(i==k+1 || i==k+2)
-    {
-      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=((double)(1)/(double)(timechoice2)) * weight2;
-    }
-    else
-    {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=0;
-    }
-    i=i+1;
-   }
-  }
-  block=block+1;
- }
- std::flush(std::cout<<(*mpGeneratedAttackVector));
-}
-
-void MixedAttackGenerator::GenerateExtendedStarTestEvenPW(int n,int k)
-{
- int block=1;
- int i=1;
- int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
- double weight1=(double)(k+1)/(double)(n+k);
- double weight2=(double)(1)/(double)(n+k);
- int timechoice1=k+1;
- int timechoice2=1;
- while(block <= n)
- {
-  if(block==1)
-  {
-   i=1;
-   while(i<=blocksize)
-   {
-    if(i<=2*(k+1) && i % 2==1)
-    {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=((double)(1)/(double)(timechoice1)) * weight1;
-    }
-    else
-    {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=0;
-    }
-    i=i+1;
-   }
-  }
-  else
-  {
-   i=1;
-   while(i<=blocksize)
-   {
-    if(i==k+1)
-    {
-      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=((double)(1)/(double)(timechoice2)) * weight2;
-    }
-    else
-    {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=0;
-    }
-    i=i+1;
-   }
-  }
-  block=block+1;
- }
- std::flush(std::cout<<(*mpGeneratedAttackVector));
-}
-
-void MixedAttackGenerator::GenerateExtendedStarTestOverallPW(int n, int k)
-{
- if(mpPatrollerSystem->GetAttackTime() % 2==0) //If even
- {
-  GenerateExtendedStarTestEvenPW(n,k);
- }
- else //If odd
- {
-  GenerateExtendedStarTestOddPW(n,k);
- }
-}
-
-
 
 void MixedAttackGenerator::GenerateExtendedStarTest5PW(int n,int k,double weight)
 {
  int block=1;
  int i=1;
- int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
+ int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem
+                ->GetAttackTime()+1);
  int timechoice1=6;
  while(block <= n)
  {
@@ -900,7 +856,8 @@ void MixedAttackGenerator::GenerateExtendedStarTest5PW(int n,int k,double weight
    {
     if(i<=timechoice1)
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=((double)(1)/(double)(timechoice1)) * weight;
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     ((double)(1)/(double)(timechoice1)) * weight;
     }
     else
     {
@@ -916,7 +873,8 @@ void MixedAttackGenerator::GenerateExtendedStarTest5PW(int n,int k,double weight
    {
     if(i>=4 && i<=blocksize-3)
     {
-      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=((double)(1)/(double)(blocksize-6)) * ((double)(1-weight)/(double)(n-1));
+      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+      ((double)(1)/(double)(blocksize-6)) * ((double)(1-weight)/(double)(n-1));
     }
     else
     {
@@ -930,12 +888,209 @@ void MixedAttackGenerator::GenerateExtendedStarTest5PW(int n,int k,double weight
  std::flush(std::cout<<(*mpGeneratedAttackVector));
 }
 
+//Extended Star Graph Test (Odd)
+/*
+This method generates an attack on S_{n}^{k} using the Odd strategy
+*/
+void MixedAttackGenerator::GenerateExtendedStarTestOddPW(int n,int k)
+{
+ int block=1;
+ int i=1;
+ int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem
+                ->GetAttackTime()+1);
+ double weight1=(double)(k+1)/(double)(n+k);
+ double weight2=(double)(1)/(double)(n+k);
+ int timechoice1=2*(k+1);
+ int timechoice2=2;
+ while(block <= n)
+ {
+  if(block==1)
+  {
+   i=1;
+   while(i<=blocksize)
+   {
+    if(i<=timechoice1)
+    {
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     ((double)(1)/(double)(timechoice1)) * weight1;
+    }
+    else
+    {
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=0;
+    }
+    i=i+1;
+   }
+  }
+  else
+  {
+   i=1;
+   while(i<=blocksize)
+   {
+    if(i==k+1 || i==k+2)
+    {
+      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+      ((double)(1)/(double)(timechoice2)) * weight2;
+    }
+    else
+    {
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=0;
+    }
+    i=i+1;
+   }
+  }
+  block=block+1;
+ }
+ std::flush(std::cout<<(*mpGeneratedAttackVector));
+}
 
+//Extended Star Graph Test (Even)
+/*
+This method generates an attack on S_{n}^{k} using the Even Strategy
 
-void MixedAttackGenerator::GenerateExtendedStarTestTimePW(int n,int k,double weight,IntVector TimesToAttack)
+Note. We could use just the Odd Type of attack to produce equally good
+results (This is an optional extra when m is odd)
+*/
+void MixedAttackGenerator::GenerateExtendedStarTestEvenPW(int n,int k)
+{
+ int block=1;
+ int i=1;
+ int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem
+                ->GetAttackTime()+1);
+ double weight1=(double)(k+1)/(double)(n+k);
+ double weight2=(double)(1)/(double)(n+k);
+ int timechoice1=k+1;
+ int timechoice2=1;
+ while(block <= n)
+ {
+  if(block==1)
+  {
+   i=1;
+   while(i<=blocksize)
+   {
+    if(i<=2*(k+1) && i % 2==1)
+    {
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     ((double)(1)/(double)(timechoice1)) * weight1;
+    }
+    else
+    {
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=0;
+    }
+    i=i+1;
+   }
+  }
+  else
+  {
+   i=1;
+   while(i<=blocksize)
+   {
+    if(i==k+1)
+    {
+      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+      ((double)(1)/(double)(timechoice2)) * weight2;
+    }
+    else
+    {
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=0;
+    }
+    i=i+1;
+   }
+  }
+  block=block+1;
+ }
+ std::flush(std::cout<<(*mpGeneratedAttackVector));
+}
+
+//Extended Star Graph Test (Overall)
+/*
+This method generates an attack on S_{n}^{k} using the Odd and Even varied
+strategies
+*/
+void MixedAttackGenerator::GenerateExtendedStarTestOverallPW(int n, int k)
+{
+ if(mpPatrollerSystem->GetAttackTime() % 2==0) //If even
+ {
+  GenerateExtendedStarTestEvenPW(n,k);
+ }
+ else //If odd
+ {
+  GenerateExtendedStarTestOddPW(n,k);
+ }
+}
+
+//General Extended Star Graph Test
+/*
+This method generates an attack on S_{n}^{VecK} according to the testing
+strategy
+
+Note.This function expects the Vector K to be in size order to allow correct
+allignment with the node numbers
+*/
+void MixedAttackGenerator::GenerateGeneralExtendedStarTestPW(int n,
+                           IntVector VectorK)
+{
+ int block=1;
+ int i=1;
+ int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem
+                ->GetAttackTime()+1);
+ int kmax=VectorK.Max();
+ int ksum=VectorK.Sum();
+ while(block<= n)
+ {
+  if(block<=VectorK.GetSize()) //if it is a extended arm
+  {
+    i=1;
+    while(i<=blocksize)
+    {
+     if(i>=(kmax+1-VectorK(block)) && i<=(kmax+2+VectorK(block)))
+     {
+      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+      ((double)(1))/(double)(2*(VectorK(block)+1)) *
+      ((double)(VectorK(block)+1))/((double)(n+ksum));
+     }
+     else
+     {
+      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=0;
+     }
+     i=i+1;
+    }
+  }
+  else
+  {
+    i=1;
+    while(i<=blocksize)
+    {
+     if(i==kmax+1 || i==kmax+2)
+     {
+      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+      ((double)(1))/((double)(2*(1))) * ((double)(1))/((double)(n+ksum));
+     }
+     else
+     {
+      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=0;
+     }
+     i=i+1;
+    }
+  }
+  block=block+1;
+ }
+ std::flush(std::cout<<(*mpGeneratedAttackVector));
+}
+
+//Time Testing Extended Star
+/*
+This method generates a mixed attack vector applying:
+-Weight to extended external node
+-Choosing times according to the binary TimesToAttack vector
+
+These are both meant to be varied by the batch picker
+*/
+void MixedAttackGenerator::GenerateExtendedStarTestTimePW(int n,int k,
+                           double weight,IntVector TimesToAttack)
 {
  int i=1;
- int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem->GetAttackTime()+1);
+ int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem
+                ->GetAttackTime()+1);
  //Need to know how many attacks are there on each of the nodes
  int extendedcounter=0;
  while(i<=blocksize)
@@ -957,14 +1112,16 @@ void MixedAttackGenerator::GenerateExtendedStarTestTimePW(int n,int k,double wei
   i=i+1;
  }
 
- //If no attack takes places at an extended node we need to ignore the weight and place only weight 1 on normal
+ //If no attack takes places at an extended node we need to ignore the weight
+ // and place only weight 1 on normal
  if(extendedcounter==0)
  {
   weight=0;
  }
 
 
- //If no attack takes place at a normal node we nede to ignore the weight and palce only weight 1 on extended
+ //If no attack takes place at a normal node we nede to ignore the weight
+ // and palce only weight 1 on extended
  if(normalcounter==0)
  {
   weight=1;
@@ -983,7 +1140,8 @@ void MixedAttackGenerator::GenerateExtendedStarTestTimePW(int n,int k,double wei
    {
     if(TimesToAttack(i)==1)
     {
-     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=((double)(1)/(double)(extendedcounter)) * weight;
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     ((double)(1)/(double)(extendedcounter)) * weight;
     }
     else
     {
@@ -999,7 +1157,9 @@ void MixedAttackGenerator::GenerateExtendedStarTestTimePW(int n,int k,double wei
    {
     if(TimesToAttack(blocksize+i)==1)
     {
-      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=((double)(1)/(double)(normalcounter)) * ((double)(1-weight)/(double)(n-1));
+      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+      ((double)(1)/(double)(normalcounter)) *
+      ((double)(1-weight)/(double)(n-1));
     }
     else
     {
