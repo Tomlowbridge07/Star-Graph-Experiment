@@ -26,7 +26,8 @@ MixedAttackGenerator::~MixedAttackGenerator()
 }
 
 //Setters and Getters
-void MixedAttackGenerator::SetPatrollerSystem(AbstractPatroller& aPatrollerSystem)
+void MixedAttackGenerator::
+    SetPatrollerSystem(AbstractPatroller& aPatrollerSystem)
 {
  mpPatrollerSystem=&aPatrollerSystem;
 
@@ -53,7 +54,10 @@ Matrix MixedAttackGenerator::GetGeneratedAttackMatrix()
 
 /*Methods to internally set Generated Attack- Designed for use with normal
 generation of attacks*/
+
 //Uniform
+//This generated attack attacks at all times an all nodes (under the current
+//patroller system) with equal weight
 void MixedAttackGenerator::GenerateUniformAttack()
 {
  int i=1;
@@ -64,6 +68,7 @@ void MixedAttackGenerator::GenerateUniformAttack()
   i=i+1;
  }
 }
+
 //Line (under diametric attack)
 void MixedAttackGenerator::GenerateLineAttack(int n)
 {
@@ -148,7 +153,9 @@ void MixedAttackGenerator::GenerateLineAttack(int n)
   }
  }
 }
+
 //Line (under timed attack)
+//The timed attack only attakcs during the first diameter slots
 void MixedAttackGenerator::GenerateTimedLineAttack(int n)
 {
  if(mpPatrollerSystem->GetAttackTime()>=3)
@@ -260,6 +267,8 @@ void MixedAttackGenerator::GenerateTimedLineAttack(int n)
   }
  }
 }
+//This combines the choice of the timed attack when possible and the uniform
+//when not possible
 void MixedAttackGenerator::GenerateOverallLineAttack(int n)
 {
  if(mpPatrollerSystem->GetGameTime()>= mpPatrollerSystem->GetAttackTime()+n-1)
@@ -480,8 +489,8 @@ void MixedAttackGenerator::GenerateOverallExtendedStarAttack(int n,int k)
  }
 }
 
-/*Methods to internally set Generated Attack- Designed for use with Path Wait Patroller
-generation of attacks*/
+/*Methods to internally set Generated Attack- Designed for use with
+Path Wait Patroller generation of attacks*/
 //Uniform- Same as before
 void MixedAttackGenerator::GenerateUniformAttackPW()
 {
@@ -496,7 +505,8 @@ void MixedAttackGenerator::GenerateUniformAttackPW()
 //Line (under diametric attack)
 void MixedAttackGenerator::GenerateLineAttackPW(int n)
 {
- GenerateUniformAttackPW(); //Note the line attack is uniform on these slected points
+ //Note the line attack is uniform on these selected points
+ GenerateUniformAttackPW();
 }
 //Line (under timed attack)
 void MixedAttackGenerator::GenerateTimedLineAttackPW(int n)
@@ -624,7 +634,8 @@ used as a test to attempt to find the correct attacking strategy
 
 NOTE. THESE ARE NOT REALLY INTENDED FOR USE
 */
-void MixedAttackGenerator::GenerateExtendedStarTest1PW(int n,int k,double weight)
+void MixedAttackGenerator::GenerateExtendedStarTest1PW(int n,
+                                                       int k,double weight)
 {
  int block=1;
  int i=1;
@@ -673,7 +684,8 @@ void MixedAttackGenerator::GenerateExtendedStarTest1PW(int n,int k,double weight
  std::flush(std::cout<<(*mpGeneratedAttackVector));
 }
 
-void MixedAttackGenerator::GenerateExtendedStarTest2PW(int n,int k,double weight)
+void MixedAttackGenerator::GenerateExtendedStarTest2PW(int n,
+                                                       int k,double weight)
 {
  int block=1;
  int i=1;
@@ -735,7 +747,8 @@ void MixedAttackGenerator::GenerateExtendedStarTest2PW(int n,int k,double weight
  std::flush(std::cout<<(*mpGeneratedAttackVector));
 }
 
-void MixedAttackGenerator::GenerateExtendedStarTest3PW(int n,int k,double weight)
+void MixedAttackGenerator::GenerateExtendedStarTest3PW(int n,
+                                                       int k,double weight)
 {
  int block=1;
  int i=1;
@@ -788,7 +801,8 @@ void MixedAttackGenerator::GenerateExtendedStarTest3PW(int n,int k,double weight
  std::flush(std::cout<<(*mpGeneratedAttackVector));
 }
 
-void MixedAttackGenerator::GenerateExtendedStarTest4PW(int n,int k,double weight)
+void MixedAttackGenerator::GenerateExtendedStarTest4PW(int n,
+                                                       int k,double weight)
 {
  int block=1;
  int i=1;
@@ -840,7 +854,8 @@ void MixedAttackGenerator::GenerateExtendedStarTest4PW(int n,int k,double weight
  std::flush(std::cout<<(*mpGeneratedAttackVector));
 }
 
-void MixedAttackGenerator::GenerateExtendedStarTest5PW(int n,int k,double weight)
+void MixedAttackGenerator::GenerateExtendedStarTest5PW(int n,
+                                                       int k,double weight)
 {
  int block=1;
  int i=1;
