@@ -44,7 +44,7 @@ class BatchTimeMixedPolicyEvaluation
   IntMatrix* mpBestTimePosPatrollerStrat;
 
   //Conversion of number to binary vector
-  void ConvToBinary(int number,IntVector* pStorageVector,int StartEntry);
+  void ConvToBinary(int number,IntVector* pStorageVector,int StartEntry=1);
 
  private:
 
