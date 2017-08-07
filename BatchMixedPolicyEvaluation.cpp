@@ -1,8 +1,9 @@
 #include "BatchMixedPolicyEvaluation.hpp"
 
 //Standard constructor
-//No call to the standard constructor is called
-BatchMixedPolicyEvaluation::BatchMixedPolicyEvaluation(MixedPatroller& aMixedPatrollerSystem,double StepSize)
+BatchMixedPolicyEvaluation::
+    BatchMixedPolicyEvaluation(MixedPatroller& aMixedPatrollerSystem,
+                               double StepSize)
 {
  mpMixedPatrollerSystem=&aMixedPatrollerSystem;
 
@@ -13,9 +14,13 @@ BatchMixedPolicyEvaluation::BatchMixedPolicyEvaluation(MixedPatroller& aMixedPat
  //Store entries for Evaluation
  mpStepEvaluation=new Vector(mNumSteps+1);
  mpKeyProbability=new Vector(mNumSteps+1);
- mpAllEvaluations=new Matrix(mpMixedPatrollerSystem->GetPatrollerSystem()->GetNumPurePatrolOptions(),mNumSteps+1);
+ mpAllEvaluations=
+ new Matrix(mpMixedPatrollerSystem->GetPatrollerSystem()
+            ->GetNumPurePatrolOptions(),mNumSteps+1);
  mpBestPatrollerStratNum=new IntVector(mNumSteps+1);
- mpBestPatrollerStrat=new IntMatrix(mNumSteps+1,mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime());
+ mpBestPatrollerStrat=
+ new IntMatrix(mNumSteps+1,mpMixedPatrollerSystem
+               ->GetPatrollerSystem()->GetGameTime());
 
  //Store Empty/Null Matrices for MT Space Evaluation
  mpMTSpaceEvaluation=new Matrix(1,1);
@@ -40,7 +45,8 @@ BatchMixedPolicyEvaluation::~BatchMixedPolicyEvaluation()
 }
 
 //Setters and Getters
-void BatchMixedPolicyEvaluation::SetMixedPatrollerSystem(MixedPatroller& aMixedPatrollerSystem)
+void BatchMixedPolicyEvaluation::
+    SetMixedPatrollerSystem(MixedPatroller& aMixedPatrollerSystem)
 {
  mpMixedPatrollerSystem=&aMixedPatrollerSystem;
 }
@@ -53,9 +59,13 @@ void BatchMixedPolicyEvaluation::SetStepSize(int StepSize)
  //Store entries for Evaluation
  mpStepEvaluation=new Vector(mNumSteps);
  mpKeyProbability=new Vector(mNumSteps);
- mpAllEvaluations=new Matrix(mpMixedPatrollerSystem->GetPatrollerSystem()->GetNumPurePatrolOptions(),mNumSteps);
+ mpAllEvaluations=
+ new Matrix(mpMixedPatrollerSystem->GetPatrollerSystem()
+            ->GetNumPurePatrolOptions(),mNumSteps);
  mpBestPatrollerStratNum=new IntVector(mNumSteps);
- mpBestPatrollerStrat=new IntMatrix(mNumSteps,mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime());
+ mpBestPatrollerStrat=
+ new IntMatrix(mNumSteps,mpMixedPatrollerSystem
+               ->GetPatrollerSystem()->GetGameTime());
 }
 int BatchMixedPolicyEvaluation::GetNumSteps()
 {
@@ -110,27 +120,43 @@ IntMatrix BatchMixedPolicyEvaluation::GetMTSpaceBestPatrollerstrat()
  return (*mpMTSpaceBestPatrollerStrat);
 }
 
-void BatchMixedPolicyEvaluation::EvaluateSingle(Vector MixedAttackerStrat,int entry)
+//Single Attack Evaluation
+/*
+This method evaluates a single MixedAttacker Profile, by calling the evaluation
+in the class MixedPatroller. It then stores the values in the entry given.
+*/
+void BatchMixedPolicyEvaluation::
+    EvaluateSingle(Vector MixedAttackerStrat,int entry)
 {
  //Once Set up We evaluate the mixed attacker strat.
  mpMixedPatrollerSystem->SetMixedAttackerStrategy(MixedAttackerStrat);
  mpMixedPatrollerSystem->EvaluateAttackerAgainstPurePatroller();
 
- //Store the Best the patroller can do purely and the key probability (i.e that on external node)
- (*mpStepEvaluation)(entry)=(mpMixedPatrollerSystem->GetAttackerAgainstPureEvaluation()).Max();
+ //Store the Best the patroller can do purely and the key probability
+ //(i.e that on external node)
+ (*mpStepEvaluation)(entry)=
+ (mpMixedPatrollerSystem->GetAttackerAgainstPureEvaluation()).Max();
  (*mpKeyProbability)(entry)=MixedAttackerStrat(1);
 
  //Store the evaluation vector for the particular strategy
- mpAllEvaluations->SetCol(entry,mpMixedPatrollerSystem->GetAttackerAgainstPureEvaluation());
+ mpAllEvaluations
+ ->SetCol(entry,mpMixedPatrollerSystem->GetAttackerAgainstPureEvaluation());
 
  //Store the strategy number
- (*mpBestPatrollerStratNum)(entry)=(mpMixedPatrollerSystem->GetAttackerAgainstPureEvaluation()).MaxElement();
+ (*mpBestPatrollerStratNum)(entry)=
+ (mpMixedPatrollerSystem->GetAttackerAgainstPureEvaluation()).MaxElement();
 
  //store the strategy
- mpBestPatrollerStrat->SetRow(entry,mpMixedPatrollerSystem->GetPatrollerSystem()->ConvertPatrollerOptionNum(((*mpBestPatrollerStratNum)(entry))));
+ mpBestPatrollerStrat
+ ->SetRow(entry,mpMixedPatrollerSystem->GetPatrollerSystem()
+          ->ConvertPatrollerOptionNum(((*mpBestPatrollerStratNum)(entry))));
 }
 
-//For each weight evaluate all
+//Test Evaluation
+/*
+This method runs a batch test on multiple weights generating attacks using
+a chosen method (hard-coded). It stores all the evaluations
+*/
 void BatchMixedPolicyEvaluation::EvaluateBatchTest1(int n, int k)
 {
  //Delete and reinizalize
@@ -142,9 +168,13 @@ void BatchMixedPolicyEvaluation::EvaluateBatchTest1(int n, int k)
 
  mpStepEvaluation=new Vector(mNumSteps+1);
  mpKeyProbability=new Vector(mNumSteps+1);
- mpAllEvaluations=new Matrix(mpMixedPatrollerSystem->GetPatrollerSystem()->GetNumPurePatrolOptions(),mNumSteps+1);
+ mpAllEvaluations=
+ new Matrix(mpMixedPatrollerSystem->GetPatrollerSystem()
+            ->GetNumPurePatrolOptions(),mNumSteps+1);
  mpBestPatrollerStratNum=new IntVector(mNumSteps+1);
- mpBestPatrollerStrat=new IntMatrix(mNumSteps+1,mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime());
+ mpBestPatrollerStrat=
+ new IntMatrix(mNumSteps+1,mpMixedPatrollerSystem
+               ->GetPatrollerSystem()->GetGameTime());
 
  int i=0;
  double weight;
@@ -164,7 +194,14 @@ void BatchMixedPolicyEvaluation::EvaluateBatchTest1(int n, int k)
  }
 }
 
-void BatchMixedPolicyEvaluation::EvaluateBatchTimePosTest(int n, int k,IntVector TimePosAttackVector)
+//For use with BatchTimeMixedPolicyEvaluation
+/*
+This method is designed to take a time position vector and goes for all weights
+using a particular attack generator method designed for use with a time position
+attack vector.
+*/
+void BatchMixedPolicyEvaluation::
+    EvaluateBatchTimePosTest(int n, int k,IntVector TimePosAttackVector)
 {
  //Delete and reinizalize
  delete mpStepEvaluation;
@@ -175,9 +212,13 @@ void BatchMixedPolicyEvaluation::EvaluateBatchTimePosTest(int n, int k,IntVector
 
  mpStepEvaluation=new Vector(mNumSteps+1);
  mpKeyProbability=new Vector(mNumSteps+1);
- mpAllEvaluations=new Matrix(mpMixedPatrollerSystem->GetPatrollerSystem()->GetNumPurePatrolOptions(),mNumSteps+1);
+ mpAllEvaluations=
+ new Matrix(mpMixedPatrollerSystem->GetPatrollerSystem()
+            ->GetNumPurePatrolOptions(),mNumSteps+1);
  mpBestPatrollerStratNum=new IntVector(mNumSteps+1);
- mpBestPatrollerStrat=new IntMatrix(mNumSteps+1,mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime());
+ mpBestPatrollerStrat=
+ new IntMatrix(mNumSteps+1,mpMixedPatrollerSystem
+               ->GetPatrollerSystem()->GetGameTime());
 
  int i=0;
  double weight;

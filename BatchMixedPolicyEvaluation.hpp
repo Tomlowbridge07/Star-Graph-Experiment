@@ -9,9 +9,13 @@
 #include "IntMatrix.hpp"
 
 /*
-This inherited class is designed to evaluate a batch of attack styles
-for a set step size (going through a variety of attack styles at a step
-size)
+This class is designed to evaluate an attack for a mixed policy for a variety of
+weights (the weight is the total weight placed on the extended node)
+
+This class is primarily designed to be used to get an evaluation on the
+extended star graph.
+
+(A similar adaptation of the class could be used for multiple weights)
 
 Note. This Class is similar to MixedPolicyEvaluation
 */
@@ -20,7 +24,8 @@ class BatchMixedPolicyEvaluation
  public:
 
  //Standard constructor
- BatchMixedPolicyEvaluation(MixedPatroller& aMixedPatrollerSystem,double StepSize);
+ BatchMixedPolicyEvaluation(MixedPatroller& aMixedPatrollerSystem,
+                            double StepSize);
 
  //Deconstructor
  ~BatchMixedPolicyEvaluation();
@@ -43,8 +48,14 @@ class BatchMixedPolicyEvaluation
  IntMatrix GetMTSpaceBestPatrollerstrat();
 
  //Evaluations
+
+ //Single Attack Evaulation
  void EvaluateSingle(Vector MixedAttackerStrat,int entry);
+
+ //Evaluate a test batch (test 1)
  void EvaluateBatchTest1(int n, int k);
+
+ //This is designed for use with the Class BatchTimeMixedPolicyEvaluation
  void EvaluateBatchTimePosTest(int n, int k,IntVector TimePosAttackVector);
 
  protected:
@@ -54,15 +65,23 @@ class BatchMixedPolicyEvaluation
  //Store the Patrolling System
  MixedPatroller* mpMixedPatrollerSystem;
 
- Vector* mpStepEvaluation; //Used to store the value of the game for that step
- Vector* mpKeyProbability; //Used to store the key probability (i.e the probability that each step used)
+ //Used to store the value of the game for that step
+ Vector* mpStepEvaluation;
 
- Matrix* mpAllEvaluations; //Used to store the evaluation at all steps for all strategies
+ //Used to store the key probability (i.e the probability that each step used)
+ Vector* mpKeyProbability;
 
- //Stores the Strategy the patroller will use against each of the key probability strategies
+ //Used to store the evaluation at all steps for all strategies
+ Matrix* mpAllEvaluations;
+
+ //Stores the Strategy the patroller will use against each
+ //of the key probability strategies
  //Note. Stores the strategy number as according to patroller strategy options.
- IntVector* mpBestPatrollerStratNum; //Used alongside the Step Evaluation to see what the best strategy for the patroller was
+ //Used alongside the Step Evaluation to see what the best
+ //strategy for the patroller was
+ IntVector* mpBestPatrollerStratNum;
 
+ //Store the strategy the patroller will use against each choice of weight
  IntMatrix* mpBestPatrollerStrat;
 
  int mStartT;
@@ -74,7 +93,8 @@ class BatchMixedPolicyEvaluation
  Matrix* mpMTSpaceKeyProbability;
  IntMatrix* mpMTSpaceBestPatrollerStratNum;
 
- //Note strategies are stored as a whole number with mGamtime
+ //Note strategies are stored as a whole number with mGamtime length (not a
+ //                                                                   vector)
  IntMatrix* mpMTSpaceBestPatrollerStrat;
 
  private:
