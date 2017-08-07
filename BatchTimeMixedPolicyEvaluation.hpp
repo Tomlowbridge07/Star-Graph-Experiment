@@ -38,9 +38,19 @@ class BatchTimeMixedPolicyEvaluation
 
   //Vectors stores the best choice of weight for that particular position
   //of time attacks
-  Vector* mpTimePosEvaluation; //Store the evaluation of the time positions choice
-  Vector* mpBestTimePosWeight; //
+
+  //Store the evaluation of the time positions choice
+  Vector* mpTimePosEvaluation;
+
+  //Stores the Best choice of weight for that choice of time positions
+  Vector* mpBestTimePosWeight;
+
+  //Stores the Best Patroller strategy number for that choice of time position
+  //and the choice of the best weight
   IntVector* mpBestTimePosPatrollerStratNum;
+
+  //Stores the Best Patroller strategy for that choice of time position
+  // and the choice of the best weight
   IntMatrix* mpBestTimePosPatrollerStrat;
 
   //Conversion of number to binary vector
