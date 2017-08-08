@@ -56,6 +56,9 @@ class MixedPolicyEvaluation
  void EvaluateOverallStarGraphPW(int n,int k);
 
 
+ void EvaluateExtendedStarGraphTestPW(int n,int k);
+
+
  //MTSpace Evaluations for normal walk style
  void EvaluateLineGraphMTSpaceBest(int n,int StartM , int StartT , int LastM , int LastT);
  void EvaluateTimedLineGraphMTSpaceBest(int n,int StartM , int StartT , int LastM , int LastT);

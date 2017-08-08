@@ -7,7 +7,8 @@
 #include<fstream>
 
 //Standard
-MixedPolicyEvaluation::MixedPolicyEvaluation(MixedPatroller& aMixedPatrollerSystem)
+MixedPolicyEvaluation::
+    MixedPolicyEvaluation(MixedPatroller& aMixedPatrollerSystem)
 {
  mpMixedPatrollerSystem=&aMixedPatrollerSystem;
 
@@ -15,7 +16,8 @@ MixedPolicyEvaluation::MixedPolicyEvaluation(MixedPatroller& aMixedPatrollerSyst
  mpStepEvaluation=new Vector(1);
  mpKeyProbability=new Vector(1);
  mpBestPatrollerStratNum=new IntVector(1);
- mpBestPatrollerStrat=new IntMatrix(1,mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime());
+ mpBestPatrollerStrat=new IntMatrix(1,mpMixedPatrollerSystem
+                                    ->GetPatrollerSystem()->GetGameTime());
 
  //Store Empty/Null Matrices for MT Space Evaluation
  mpMTSpaceEvaluation=new Matrix(1,1);
@@ -40,7 +42,8 @@ MixedPolicyEvaluation::~MixedPolicyEvaluation()
 }
 
 //Setters and Getters
-void MixedPolicyEvaluation::SetMixedPatrollerSystem(MixedPatroller& aMixedPatrollerSystem)
+void MixedPolicyEvaluation::
+    SetMixedPatrollerSystem(MixedPatroller& aMixedPatrollerSystem)
 {
  mpMixedPatrollerSystem=&aMixedPatrollerSystem;
 }
@@ -93,18 +96,22 @@ void MixedPolicyEvaluation::EvaluateGraph(Vector MixedAttackerStrat)
  mpStepEvaluation=new Vector(1);
  mpKeyProbability=new Vector(1);
  mpBestPatrollerStratNum=new IntVector(1);
- mpBestPatrollerStrat=new IntMatrix(1,mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime());
+ mpBestPatrollerStrat=
+ new IntMatrix(1,mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime());
 
  //Once Set up We evaluate the mixed attacker strat.
  mpMixedPatrollerSystem->SetMixedAttackerStrategy(MixedAttackerStrat);
  mpMixedPatrollerSystem->EvaluateAttackerAgainstPurePatroller();
  //Store the Best the patroller can do purely and the key probability (i.e that on external node)
- (*mpStepEvaluation)(1)=(mpMixedPatrollerSystem->GetAttackerAgainstPureEvaluation()).Max();
+ (*mpStepEvaluation)(1)=
+ (mpMixedPatrollerSystem->GetAttackerAgainstPureEvaluation()).Max();
  (*mpKeyProbability)(1)=MixedAttackerStrat(1);
  //Store the strategy number
- (*mpBestPatrollerStratNum)(1)=(mpMixedPatrollerSystem->GetAttackerAgainstPureEvaluation()).MaxElement();
+ (*mpBestPatrollerStratNum)(1)=
+ (mpMixedPatrollerSystem->GetAttackerAgainstPureEvaluation()).MaxElement();
  //store the strategy
- mpBestPatrollerStrat->SetRow(1,mpMixedPatrollerSystem->GetPatrollerSystem()->ConvertPatrollerOptionNum((*mpBestPatrollerStratNum)(1)));
+ mpBestPatrollerStrat->SetRow(1,mpMixedPatrollerSystem->GetPatrollerSystem()->
+                    ConvertPatrollerOptionNum((*mpBestPatrollerStratNum)(1)));
 }
 
 //Evaluations designed to use the generators for a normal walk style
@@ -223,7 +230,18 @@ void MixedPolicyEvaluation::EvaluateOverallStarGraphPW(int n,int k)
  MixedAttackGenerator Generator(*mpMixedPatrollerSystem->GetPatrollerSystem());
  Generator.GenerateOverallExtendedStarAttackPW(n,k);
  Vector MixedAttackerStrat(Generator.GetGeneratedAttackVector());
- std::flush(std::cout<<"hi");
+ EvaluateGraph(MixedAttackerStrat);
+}
+
+/*
+These methods were developed alongside new strategies
+*/
+void MixedPolicyEvaluation::EvaluateExtendedStarGraphTestPW(int n,int k)
+{
+ //Generated the attack
+ MixedAttackGenerator Generator(*mpMixedPatrollerSystem->GetPatrollerSystem());
+ Generator.GenerateExtendedStarTestOddPW(n,k);
+ Vector MixedAttackerStrat(Generator.GetGeneratedAttackVector());
  EvaluateGraph(MixedAttackerStrat);
 }
 
