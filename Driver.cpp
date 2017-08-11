@@ -1,5 +1,6 @@
 #include<iostream>
 #include "IntMatrix.hpp"
+#include "Int3DMatrix.hpp"
 #include "AbstractPatroller.hpp"
 #include "MixedPatroller.hpp"
 #include "MixedPolicyEvaluation.hpp"
@@ -38,7 +39,7 @@ int main(int argc,char* argv[])
  MPWPat.EvaluateAttackerAgainstPurePatroller();
  std::cout<<MPWPat.GetAttackerAgainstPureEvaluation().Max();
 */
-
+/*
  SpecialGraphGenerator GraphGen;
  GraphGen.GenerateExtendedStar(4,1);
  IntMatrix Star(GraphGen.GetAdjacenyMatrix());
@@ -62,12 +63,13 @@ int main(int argc,char* argv[])
  //Testing Max and Min elements
  IntVector Test(6);
  Test(1)=5; Test(2)=-2; Test(3)=5; Test(4)=0; Test(5)=-2; Test(6)=5;
- std::cout<<Test.MinElements();
+ std::cout<<Test.MaxElements();
+*/
 
-
-
-
-
+ //Testing Int3DMatrix
+ Int3DMatrix Matrix1(79,10,20);
+ Int3DMatrix Copy(Matrix1);
+ std::flush(std::cout<<"\n About to return 0");
 
 
 /*

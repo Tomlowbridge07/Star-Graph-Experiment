@@ -27,7 +27,7 @@ IntVector::IntVector(int size)
    mData = new int [mSize];
    for (int i=0; i<mSize; i++)
    {
-      mData[i] = 0.0;
+      mData[i] = 0;
    }
 }
 
@@ -354,7 +354,6 @@ IntVector IntVector::MaxElements()
  int i=1;
  IntVector maxelements(1);
  int maxer=(*this).Max();
- std::cout<<"Maxer is "<<maxer;
  int counter=1;
  while(i<=mSize)
  {

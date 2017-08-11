@@ -117,8 +117,8 @@ int& IntMatrix::operator()(int i, int j)
 // Overloading the assignment operator
 IntMatrix& IntMatrix::operator=(const IntMatrix& otherMatrix)
 {
-   assert(mNumRows = otherMatrix.mNumRows);
-   assert(mNumCols = otherMatrix.mNumCols);
+   assert(mNumRows == otherMatrix.mNumRows);
+   assert(mNumCols == otherMatrix.mNumCols);
 
    for (int i=0; i<mNumRows; i++)
    {
