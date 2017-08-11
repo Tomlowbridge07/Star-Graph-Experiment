@@ -246,7 +246,8 @@ void MixedPolicyEvaluation::EvaluateExtendedStarGraphTestPW(int n,int k)
 }
 
 //MTSpace Evaluations for normal walk style
-void MixedPolicyEvaluation::EvaluateLineGraphMTSpaceBest(int n,int StartM ,int StartT , int LastM , int LastT)
+void MixedPolicyEvaluation::EvaluateLineGraphMTSpaceBest
+(int n,int StartM ,int StartT , int LastM , int LastT)
 {
   //Set variable
   mStartT=StartT;
@@ -292,14 +293,19 @@ void MixedPolicyEvaluation::EvaluateLineGraphMTSpaceBest(int n,int StartM ,int S
       std::flush(std::cout<<"Evaluation Complete, moving on \n");
       //Save best values for attacker
       BestElement=(*mpStepEvaluation).MinElement();
-      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=(*mpStepEvaluation)(BestElement);
-      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=(*mpKeyProbability)(BestElement);
-      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=(*mpBestPatrollerStratNum)(BestElement);
+      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=
+      (*mpStepEvaluation)(BestElement);
+      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=
+      (*mpKeyProbability)(BestElement);
+      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=
+      (*mpBestPatrollerStratNum)(BestElement);
 
       //Saving the Converted patrol vector
 
       //Take best
-      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartT+1,LastT*(j-StartM)+1,mpBestPatrollerStrat->GetBlock(BestElement,1,1,mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
+      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartT+1,LastT*(j-StartM)+1,
+      mpBestPatrollerStrat->GetBlock(BestElement,1,1,
+      mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
      }
      else
      {
@@ -313,7 +319,8 @@ void MixedPolicyEvaluation::EvaluateLineGraphMTSpaceBest(int n,int StartM ,int S
     i=i+1;
   }
 }
-void MixedPolicyEvaluation::EvaluateTimedLineGraphMTSpaceBest(int n,int StartM ,int StartT , int LastM , int LastT)
+void MixedPolicyEvaluation::EvaluateTimedLineGraphMTSpaceBest
+(int n,int StartM ,int StartT , int LastM , int LastT)
 {
   //Set variable
   mStartT=StartT;
@@ -331,7 +338,8 @@ void MixedPolicyEvaluation::EvaluateTimedLineGraphMTSpaceBest(int n,int StartM ,
   mpMTSpaceEvaluation=new Matrix(LastT-StartT+1,LastM-StartM+1);
   mpMTSpaceKeyProbability=new Matrix(LastT-StartT+1,LastM-StartM+1);
   mpMTSpaceBestPatrollerStratNum=new IntMatrix(LastT-StartT+1,LastM-StartM+1);
-  mpMTSpaceBestPatrollerStrat=new IntMatrix(LastT-StartT+1,LastT*(LastM-StartM+1));
+  mpMTSpaceBestPatrollerStrat=
+  new IntMatrix(LastT-StartT+1,LastT*(LastM-StartM+1));
 
   //Set to Basic Game Time and Attack Time
   mpMixedPatrollerSystem->GetPatrollerSystem()->SetAttackTime(1);
@@ -359,14 +367,19 @@ void MixedPolicyEvaluation::EvaluateTimedLineGraphMTSpaceBest(int n,int StartM ,
       std::flush(std::cout<<"Evaluation Complete, moving on \n");
       //Save best values for attacker
       BestElement=(*mpStepEvaluation).MinElement();
-      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=(*mpStepEvaluation)(BestElement);
-      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=(*mpKeyProbability)(BestElement);
-      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=(*mpBestPatrollerStratNum)(BestElement);
+      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=
+      (*mpStepEvaluation)(BestElement);
+      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=
+      (*mpKeyProbability)(BestElement);
+      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=
+      (*mpBestPatrollerStratNum)(BestElement);
 
       //Saving the Converted patrol vector
 
       //Take best
-      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartT+1,LastT*(j-StartM)+1,mpBestPatrollerStrat->GetBlock(BestElement,1,1,mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
+      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartT+1,LastT*(j-StartM)+1,
+      mpBestPatrollerStrat->GetBlock(BestElement,1,1,
+      mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
      }
      else
      {
@@ -380,7 +393,8 @@ void MixedPolicyEvaluation::EvaluateTimedLineGraphMTSpaceBest(int n,int StartM ,
     i=i+1;
   }
 }
-void MixedPolicyEvaluation::EvaluateOverallLineGraphMTSpaceBest(int n,int StartM ,int StartT , int LastM , int LastT)
+void MixedPolicyEvaluation::EvaluateOverallLineGraphMTSpaceBest
+(int n,int StartM ,int StartT , int LastM , int LastT)
 {
   //Set variable
   mStartT=StartT;
@@ -398,7 +412,8 @@ void MixedPolicyEvaluation::EvaluateOverallLineGraphMTSpaceBest(int n,int StartM
   mpMTSpaceEvaluation=new Matrix(LastT-StartT+1,LastM-StartM+1);
   mpMTSpaceKeyProbability=new Matrix(LastT-StartT+1,LastM-StartM+1);
   mpMTSpaceBestPatrollerStratNum=new IntMatrix(LastT-StartT+1,LastM-StartM+1);
-  mpMTSpaceBestPatrollerStrat=new IntMatrix(LastT-StartT+1,LastT*(LastM-StartM+1));
+  mpMTSpaceBestPatrollerStrat=
+  new IntMatrix(LastT-StartT+1,LastT*(LastM-StartM+1));
 
   //Set to Basic Game Time and Attack Time
   mpMixedPatrollerSystem->GetPatrollerSystem()->SetAttackTime(1);
@@ -426,14 +441,19 @@ void MixedPolicyEvaluation::EvaluateOverallLineGraphMTSpaceBest(int n,int StartM
       std::flush(std::cout<<"Evaluation Complete, moving on \n");
       //Save best values for attacker
       BestElement=(*mpStepEvaluation).MinElement();
-      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=(*mpStepEvaluation)(BestElement);
-      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=(*mpKeyProbability)(BestElement);
-      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=(*mpBestPatrollerStratNum)(BestElement);
+      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=
+      (*mpStepEvaluation)(BestElement);
+      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=
+      (*mpKeyProbability)(BestElement);
+      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=
+      (*mpBestPatrollerStratNum)(BestElement);
 
       //Saving the Converted patrol vector
 
       //Take best
-      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartT+1,LastT*(j-StartM)+1,mpBestPatrollerStrat->GetBlock(BestElement,1,1,mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
+      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartT+1,LastT*(j-StartM)+1,
+      mpBestPatrollerStrat->GetBlock(BestElement,1,1,
+      mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
      }
      else
      {
@@ -447,7 +467,8 @@ void MixedPolicyEvaluation::EvaluateOverallLineGraphMTSpaceBest(int n,int StartM
     i=i+1;
   }
 }
-void MixedPolicyEvaluation::EvaluateStarGraphMTSpaceBest(int n,int k,int StartM ,int StartT , int LastM , int LastT)
+void MixedPolicyEvaluation::EvaluateStarGraphMTSpaceBest
+(int n,int k,int StartM ,int StartT , int LastM , int LastT)
 {
   //Set variable
   mStartT=StartT;
@@ -465,7 +486,8 @@ void MixedPolicyEvaluation::EvaluateStarGraphMTSpaceBest(int n,int k,int StartM 
   mpMTSpaceEvaluation=new Matrix(LastT-StartT+1,LastM-StartM+1);
   mpMTSpaceKeyProbability=new Matrix(LastT-StartT+1,LastM-StartM+1);
   mpMTSpaceBestPatrollerStratNum=new IntMatrix(LastT-StartT+1,LastM-StartM+1);
-  mpMTSpaceBestPatrollerStrat=new IntMatrix(LastT-StartT+1,LastT*(LastM-StartM+1));
+  mpMTSpaceBestPatrollerStrat=
+  new IntMatrix(LastT-StartT+1,LastT*(LastM-StartM+1));
 
   //Set to Basic Game Time and Attack Time
   mpMixedPatrollerSystem->GetPatrollerSystem()->SetAttackTime(1);
@@ -493,14 +515,19 @@ void MixedPolicyEvaluation::EvaluateStarGraphMTSpaceBest(int n,int k,int StartM 
       std::flush(std::cout<<"Evaluation Complete, moving on \n");
       //Save best values for attacker
       BestElement=(*mpStepEvaluation).MinElement();
-      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=(*mpStepEvaluation)(BestElement);
-      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=(*mpKeyProbability)(BestElement);
-      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=(*mpBestPatrollerStratNum)(BestElement);
+      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=
+      (*mpStepEvaluation)(BestElement);
+      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=
+      (*mpKeyProbability)(BestElement);
+      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=
+      (*mpBestPatrollerStratNum)(BestElement);
 
       //Saving the Converted patrol vector
 
       //Take best
-      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartT+1,LastT*(j-StartM)+1,mpBestPatrollerStrat->GetBlock(BestElement,1,1,mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
+      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartT+1,LastT*(j-StartM)+1,
+      mpBestPatrollerStrat->GetBlock(BestElement,1,1,
+      mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
      }
      else
      {
@@ -514,7 +541,8 @@ void MixedPolicyEvaluation::EvaluateStarGraphMTSpaceBest(int n,int k,int StartM 
     i=i+1;
   }
 }
-void MixedPolicyEvaluation::EvaluateTimedStarGraphMTSpaceBest(int n,int k,int StartM ,int StartT , int LastM , int LastT)
+void MixedPolicyEvaluation::EvaluateTimedStarGraphMTSpaceBest
+(int n,int k,int StartM ,int StartT , int LastM , int LastT)
 {
   //Set variable
   mStartT=StartT;
@@ -532,7 +560,8 @@ void MixedPolicyEvaluation::EvaluateTimedStarGraphMTSpaceBest(int n,int k,int St
   mpMTSpaceEvaluation=new Matrix(LastT-StartT+1,LastM-StartM+1);
   mpMTSpaceKeyProbability=new Matrix(LastT-StartT+1,LastM-StartM+1);
   mpMTSpaceBestPatrollerStratNum=new IntMatrix(LastT-StartT+1,LastM-StartM+1);
-  mpMTSpaceBestPatrollerStrat=new IntMatrix(LastT-StartT+1,LastT*(LastM-StartM+1));
+  mpMTSpaceBestPatrollerStrat=
+  new IntMatrix(LastT-StartT+1,LastT*(LastM-StartM+1));
 
   //Set to Basic Game Time and Attack Time
   mpMixedPatrollerSystem->GetPatrollerSystem()->SetAttackTime(1);
@@ -560,14 +589,19 @@ void MixedPolicyEvaluation::EvaluateTimedStarGraphMTSpaceBest(int n,int k,int St
       std::flush(std::cout<<"Evaluation Complete, moving on \n");
       //Save best values for attacker
       BestElement=(*mpStepEvaluation).MinElement();
-      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=(*mpStepEvaluation)(BestElement);
-      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=(*mpKeyProbability)(BestElement);
-      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=(*mpBestPatrollerStratNum)(BestElement);
+      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=
+      (*mpStepEvaluation)(BestElement);
+      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=
+      (*mpKeyProbability)(BestElement);
+      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=
+      (*mpBestPatrollerStratNum)(BestElement);
 
       //Saving the Converted patrol vector
 
       //Take best
-      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartT+1,LastT*(j-StartM)+1,mpBestPatrollerStrat->GetBlock(BestElement,1,1,mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
+      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartT+1,LastT*(j-StartM)+1,
+      mpBestPatrollerStrat->GetBlock(BestElement,1,1,
+      mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
      }
      else
      {
@@ -581,7 +615,8 @@ void MixedPolicyEvaluation::EvaluateTimedStarGraphMTSpaceBest(int n,int k,int St
     i=i+1;
   }
 }
-void MixedPolicyEvaluation::EvaluateOverallStarGraphMTSpaceBest(int n,int k,int StartM ,int StartT , int LastM , int LastT)
+void MixedPolicyEvaluation::EvaluateOverallStarGraphMTSpaceBest
+(int n,int k,int StartM ,int StartT , int LastM , int LastT)
 {
   //Set variable
   mStartT=StartT;
@@ -599,7 +634,8 @@ void MixedPolicyEvaluation::EvaluateOverallStarGraphMTSpaceBest(int n,int k,int 
   mpMTSpaceEvaluation=new Matrix(LastT-StartT+1,LastM-StartM+1);
   mpMTSpaceKeyProbability=new Matrix(LastT-StartT+1,LastM-StartM+1);
   mpMTSpaceBestPatrollerStratNum=new IntMatrix(LastT-StartT+1,LastM-StartM+1);
-  mpMTSpaceBestPatrollerStrat=new IntMatrix(LastT-StartT+1,LastT*(LastM-StartM+1));
+  mpMTSpaceBestPatrollerStrat=
+  new IntMatrix(LastT-StartT+1,LastT*(LastM-StartM+1));
 
   //Set to Basic Game Time and Attack Time
   mpMixedPatrollerSystem->GetPatrollerSystem()->SetAttackTime(1);
@@ -627,14 +663,19 @@ void MixedPolicyEvaluation::EvaluateOverallStarGraphMTSpaceBest(int n,int k,int 
       std::flush(std::cout<<"Evaluation Complete, moving on \n");
       //Save best values for attacker
       BestElement=(*mpStepEvaluation).MinElement();
-      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=(*mpStepEvaluation)(BestElement);
-      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=(*mpKeyProbability)(BestElement);
-      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=(*mpBestPatrollerStratNum)(BestElement);
+      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=
+      (*mpStepEvaluation)(BestElement);
+      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=
+      (*mpKeyProbability)(BestElement);
+      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=
+      (*mpBestPatrollerStratNum)(BestElement);
 
       //Saving the Converted patrol vector
 
       //Take best
-      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartT+1,LastT*(j-StartM)+1,mpBestPatrollerStrat->GetBlock(BestElement,1,1,mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
+      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartT+1,LastT*(j-StartM)+1,
+      mpBestPatrollerStrat->GetBlock(BestElement,1,1,
+      mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
      }
      else
      {
@@ -651,7 +692,8 @@ void MixedPolicyEvaluation::EvaluateOverallStarGraphMTSpaceBest(int n,int k,int 
 
 
 //MTSpace Evaluations for Path Wait style walk
-void MixedPolicyEvaluation::EvaluateLineGraphMTSpaceBestPW(int n,int StartM ,int StartT , int LastM , int LastT)
+void MixedPolicyEvaluation::EvaluateLineGraphMTSpaceBestPW
+(int n,int StartM ,int StartT , int LastM , int LastT)
 {
   //Set variable
   mStartT=StartT;
@@ -669,7 +711,8 @@ void MixedPolicyEvaluation::EvaluateLineGraphMTSpaceBestPW(int n,int StartM ,int
   mpMTSpaceEvaluation=new Matrix(LastT-StartT+1,LastM-StartM+1);
   mpMTSpaceKeyProbability=new Matrix(LastT-StartT+1,LastM-StartM+1);
   mpMTSpaceBestPatrollerStratNum=new IntMatrix(LastT-StartT+1,LastM-StartM+1);
-  mpMTSpaceBestPatrollerStrat=new IntMatrix(LastT-StartT+1,LastT*(LastM-StartM+1));
+  mpMTSpaceBestPatrollerStrat=
+  new IntMatrix(LastT-StartT+1,LastT*(LastM-StartM+1));
 
   //Set to Basic Game Time and Attack Time
   mpMixedPatrollerSystem->GetPatrollerSystem()->SetAttackTime(1);
@@ -697,14 +740,19 @@ void MixedPolicyEvaluation::EvaluateLineGraphMTSpaceBestPW(int n,int StartM ,int
       std::flush(std::cout<<"Evaluation Complete, moving on \n");
       //Save best values for attacker
       BestElement=(*mpStepEvaluation).MinElement();
-      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=(*mpStepEvaluation)(BestElement);
-      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=(*mpKeyProbability)(BestElement);
-      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=(*mpBestPatrollerStratNum)(BestElement);
+      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=
+      (*mpStepEvaluation)(BestElement);
+      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=
+      (*mpKeyProbability)(BestElement);
+      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=
+      (*mpBestPatrollerStratNum)(BestElement);
 
       //Saving the Converted patrol vector
 
       //Take best
-      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartT+1,LastT*(j-StartM)+1,mpBestPatrollerStrat->GetBlock(BestElement,1,1,mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
+      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartT+1,LastT*(j-StartM)+1,
+      mpBestPatrollerStrat->GetBlock(BestElement,1,1,
+      mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
      }
      else
      {
@@ -718,7 +766,8 @@ void MixedPolicyEvaluation::EvaluateLineGraphMTSpaceBestPW(int n,int StartM ,int
     i=i+1;
   }
 }
-void MixedPolicyEvaluation::EvaluateTimedLineGraphMTSpaceBestPW(int n,int StartM ,int StartT , int LastM , int LastT)
+void MixedPolicyEvaluation::EvaluateTimedLineGraphMTSpaceBestPW
+(int n,int StartM ,int StartT , int LastM , int LastT)
 {
   //Set variable
   mStartT=StartT;
@@ -736,7 +785,8 @@ void MixedPolicyEvaluation::EvaluateTimedLineGraphMTSpaceBestPW(int n,int StartM
   mpMTSpaceEvaluation=new Matrix(LastT-StartT+1,LastM-StartM+1);
   mpMTSpaceKeyProbability=new Matrix(LastT-StartT+1,LastM-StartM+1);
   mpMTSpaceBestPatrollerStratNum=new IntMatrix(LastT-StartT+1,LastM-StartM+1);
-  mpMTSpaceBestPatrollerStrat=new IntMatrix(LastT-StartT+1,LastT*(LastM-StartM+1));
+  mpMTSpaceBestPatrollerStrat=
+  new IntMatrix(LastT-StartT+1,LastT*(LastM-StartM+1));
 
   //Set to Basic Game Time and Attack Time
   mpMixedPatrollerSystem->GetPatrollerSystem()->SetAttackTime(1);
@@ -764,14 +814,19 @@ void MixedPolicyEvaluation::EvaluateTimedLineGraphMTSpaceBestPW(int n,int StartM
       std::flush(std::cout<<"Evaluation Complete, moving on \n");
       //Save best values for attacker
       BestElement=(*mpStepEvaluation).MinElement();
-      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=(*mpStepEvaluation)(BestElement);
-      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=(*mpKeyProbability)(BestElement);
-      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=(*mpBestPatrollerStratNum)(BestElement);
+      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=
+      (*mpStepEvaluation)(BestElement);
+      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=
+      (*mpKeyProbability)(BestElement);
+      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=
+      (*mpBestPatrollerStratNum)(BestElement);
 
       //Saving the Converted patrol vector
 
       //Take best
-      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartT+1,LastT*(j-StartM)+1,mpBestPatrollerStrat->GetBlock(BestElement,1,1,mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
+      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartT+1,LastT*(j-StartM)+1,
+      mpBestPatrollerStrat->GetBlock(BestElement,1,1,
+      mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
      }
      else
      {
@@ -785,7 +840,8 @@ void MixedPolicyEvaluation::EvaluateTimedLineGraphMTSpaceBestPW(int n,int StartM
     i=i+1;
   }
 }
-void MixedPolicyEvaluation::EvaluateOverallLineGraphMTSpaceBestPW(int n,int StartM ,int StartT , int LastM , int LastT)
+void MixedPolicyEvaluation::EvaluateOverallLineGraphMTSpaceBestPW
+(int n,int StartM ,int StartT , int LastM , int LastT)
 {
   //Set variable
   mStartT=StartT;
@@ -803,7 +859,8 @@ void MixedPolicyEvaluation::EvaluateOverallLineGraphMTSpaceBestPW(int n,int Star
   mpMTSpaceEvaluation=new Matrix(LastT-StartT+1,LastM-StartM+1);
   mpMTSpaceKeyProbability=new Matrix(LastT-StartT+1,LastM-StartM+1);
   mpMTSpaceBestPatrollerStratNum=new IntMatrix(LastT-StartT+1,LastM-StartM+1);
-  mpMTSpaceBestPatrollerStrat=new IntMatrix(LastT-StartT+1,LastT*(LastM-StartM+1));
+  mpMTSpaceBestPatrollerStrat=
+  new IntMatrix(LastT-StartT+1,LastT*(LastM-StartM+1));
 
   //Set to Basic Game Time and Attack Time
   mpMixedPatrollerSystem->GetPatrollerSystem()->SetAttackTime(1);
@@ -831,14 +888,19 @@ void MixedPolicyEvaluation::EvaluateOverallLineGraphMTSpaceBestPW(int n,int Star
       std::flush(std::cout<<"Evaluation Complete, moving on \n");
       //Save best values for attacker
       BestElement=(*mpStepEvaluation).MinElement();
-      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=(*mpStepEvaluation)(BestElement);
-      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=(*mpKeyProbability)(BestElement);
-      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=(*mpBestPatrollerStratNum)(BestElement);
+      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=
+      (*mpStepEvaluation)(BestElement);
+      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=
+      (*mpKeyProbability)(BestElement);
+      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=
+      (*mpBestPatrollerStratNum)(BestElement);
 
       //Saving the Converted patrol vector
 
       //Take best
-      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartT+1,LastT*(j-StartM)+1,mpBestPatrollerStrat->GetBlock(BestElement,1,1,mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
+      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartT+1,LastT*(j-StartM)+1,
+      mpBestPatrollerStrat->GetBlock(BestElement,1,1,
+      mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
      }
      else
      {
@@ -852,7 +914,8 @@ void MixedPolicyEvaluation::EvaluateOverallLineGraphMTSpaceBestPW(int n,int Star
     i=i+1;
   }
 }
-void MixedPolicyEvaluation::EvaluateStarGraphMTSpaceBestPW(int n,int k,int StartM ,int StartT , int LastM , int LastT)
+void MixedPolicyEvaluation::EvaluateStarGraphMTSpaceBestPW
+(int n,int k,int StartM ,int StartT , int LastM , int LastT)
 {
   //Set variable
   mStartT=StartT;
@@ -870,7 +933,8 @@ void MixedPolicyEvaluation::EvaluateStarGraphMTSpaceBestPW(int n,int k,int Start
   mpMTSpaceEvaluation=new Matrix(LastT-StartT+1,LastM-StartM+1);
   mpMTSpaceKeyProbability=new Matrix(LastT-StartT+1,LastM-StartM+1);
   mpMTSpaceBestPatrollerStratNum=new IntMatrix(LastT-StartT+1,LastM-StartM+1);
-  mpMTSpaceBestPatrollerStrat=new IntMatrix(LastT-StartT+1,LastT*(LastM-StartM+1));
+  mpMTSpaceBestPatrollerStrat=
+  new IntMatrix(LastT-StartT+1,LastT*(LastM-StartM+1));
 
   //Set to Basic Game Time and Attack Time
   mpMixedPatrollerSystem->GetPatrollerSystem()->SetAttackTime(1);
@@ -898,14 +962,19 @@ void MixedPolicyEvaluation::EvaluateStarGraphMTSpaceBestPW(int n,int k,int Start
       std::flush(std::cout<<"Evaluation Complete, moving on \n");
       //Save best values for attacker
       BestElement=(*mpStepEvaluation).MinElement();
-      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=(*mpStepEvaluation)(BestElement);
-      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=(*mpKeyProbability)(BestElement);
-      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=(*mpBestPatrollerStratNum)(BestElement);
+      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=
+      (*mpStepEvaluation)(BestElement);
+      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=
+      (*mpKeyProbability)(BestElement);
+      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=
+      (*mpBestPatrollerStratNum)(BestElement);
 
       //Saving the Converted patrol vector
 
       //Take best
-      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartT+1,LastT*(j-StartM)+1,mpBestPatrollerStrat->GetBlock(BestElement,1,1,mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
+      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartT+1,LastT*(j-StartM)+1,
+      mpBestPatrollerStrat->GetBlock(BestElement,1,1,
+      mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
      }
      else
      {
@@ -919,7 +988,8 @@ void MixedPolicyEvaluation::EvaluateStarGraphMTSpaceBestPW(int n,int k,int Start
     i=i+1;
   }
 }
-void MixedPolicyEvaluation::EvaluateTimedStarGraphMTSpaceBestPW(int n,int k,int StartM ,int StartT , int LastM , int LastT)
+void MixedPolicyEvaluation::EvaluateTimedStarGraphMTSpaceBestPW
+(int n,int k,int StartM ,int StartT , int LastM , int LastT)
 {
   //Set variable
   mStartT=StartT;
@@ -937,7 +1007,8 @@ void MixedPolicyEvaluation::EvaluateTimedStarGraphMTSpaceBestPW(int n,int k,int 
   mpMTSpaceEvaluation=new Matrix(LastT-StartT+1,LastM-StartM+1);
   mpMTSpaceKeyProbability=new Matrix(LastT-StartT+1,LastM-StartM+1);
   mpMTSpaceBestPatrollerStratNum=new IntMatrix(LastT-StartT+1,LastM-StartM+1);
-  mpMTSpaceBestPatrollerStrat=new IntMatrix(LastT-StartT+1,LastT*(LastM-StartM+1));
+  mpMTSpaceBestPatrollerStrat=
+  new IntMatrix(LastT-StartT+1,LastT*(LastM-StartM+1));
 
   //Set to Basic Game Time and Attack Time
   mpMixedPatrollerSystem->GetPatrollerSystem()->SetAttackTime(1);
@@ -965,14 +1036,19 @@ void MixedPolicyEvaluation::EvaluateTimedStarGraphMTSpaceBestPW(int n,int k,int 
       std::flush(std::cout<<"Evaluation Complete, moving on \n");
       //Save best values for attacker
       BestElement=(*mpStepEvaluation).MinElement();
-      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=(*mpStepEvaluation)(BestElement);
-      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=(*mpKeyProbability)(BestElement);
-      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=(*mpBestPatrollerStratNum)(BestElement);
+      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=
+      (*mpStepEvaluation)(BestElement);
+      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=
+      (*mpKeyProbability)(BestElement);
+      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=
+      (*mpBestPatrollerStratNum)(BestElement);
 
       //Saving the Converted patrol vector
 
       //Take best
-      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartM+1,LastT*(j-StartM)+1,mpBestPatrollerStrat->GetBlock(BestElement,1,1,mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
+      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartM+1,LastT*(j-StartM)+1,
+      mpBestPatrollerStrat->GetBlock(BestElement,1,1,
+      mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
      }
      else
      {
@@ -986,7 +1062,8 @@ void MixedPolicyEvaluation::EvaluateTimedStarGraphMTSpaceBestPW(int n,int k,int 
     i=i+1;
   }
 }
-void MixedPolicyEvaluation::EvaluateOverallStarGraphMTSpaceBestPW(int n,int k,int StartM ,int StartT , int LastM , int LastT)
+void MixedPolicyEvaluation::EvaluateOverallStarGraphMTSpaceBestPW
+(int n,int k,int StartM ,int StartT , int LastM , int LastT)
 {
   //Set variable
   mStartT=StartT;
@@ -1004,7 +1081,8 @@ void MixedPolicyEvaluation::EvaluateOverallStarGraphMTSpaceBestPW(int n,int k,in
   mpMTSpaceEvaluation=new Matrix(LastT-StartT+1,LastM-StartM+1);
   mpMTSpaceKeyProbability=new Matrix(LastT-StartT+1,LastM-StartM+1);
   mpMTSpaceBestPatrollerStratNum=new IntMatrix(LastT-StartT+1,LastM-StartM+1);
-  mpMTSpaceBestPatrollerStrat=new IntMatrix(LastT-StartT+1,LastT*(LastM-StartM+1));
+  mpMTSpaceBestPatrollerStrat=
+  new IntMatrix(LastT-StartT+1,LastT*(LastM-StartM+1));
 
   //Set to Basic Game Time and Attack Time
   mpMixedPatrollerSystem->GetPatrollerSystem()->SetAttackTime(1);
@@ -1032,14 +1110,19 @@ void MixedPolicyEvaluation::EvaluateOverallStarGraphMTSpaceBestPW(int n,int k,in
       std::flush(std::cout<<"Evaluation Complete, moving on \n");
       //Save best values for attacker
       BestElement=(*mpStepEvaluation).MinElement();
-      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=(*mpStepEvaluation)(BestElement);
-      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=(*mpKeyProbability)(BestElement);
-      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=(*mpBestPatrollerStratNum)(BestElement);
+      (*mpMTSpaceEvaluation)(i-StartT+1,j-StartM+1)=
+      (*mpStepEvaluation)(BestElement);
+      (*mpMTSpaceKeyProbability)(i-StartT+1,j-StartM+1)=
+      (*mpKeyProbability)(BestElement);
+      (*mpMTSpaceBestPatrollerStratNum)(i-StartT+1,j-StartM+1)=
+      (*mpBestPatrollerStratNum)(BestElement);
 
       //Saving the Converted patrol vector
 
       //Take best
-      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartT+1,LastT*(j-StartM)+1,mpBestPatrollerStrat->GetBlock(BestElement,1,1,mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
+      mpMTSpaceBestPatrollerStrat->SetBlock(i-StartT+1,LastT*(j-StartM)+1,
+      mpBestPatrollerStrat->GetBlock(BestElement,1,1,
+      mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()));
      }
      else
      {
@@ -1059,7 +1142,8 @@ void MixedPolicyEvaluation::EvaluateOverallStarGraphMTSpaceBestPW(int n,int k,in
 //Saving and displaying variables
 void MixedPolicyEvaluation::PrintStepEvaluation() const
 {
- std::cout<<"Displaying the Evaluation, for "<<mpStepEvaluation->GetSize()<<" strategies \n";
+ std::cout<<"Displaying the Evaluation, for "<<
+ mpStepEvaluation->GetSize()<<" strategies \n";
  int i=1;
  while(i<=mpStepEvaluation->GetSize())
  {
@@ -1067,7 +1151,8 @@ void MixedPolicyEvaluation::PrintStepEvaluation() const
   i=i+1;
  }
 }
-void MixedPolicyEvaluation::SaveStepEvaluation(std::string FileName/*="StepEvaluation.dat"*/) const
+void MixedPolicyEvaluation::SaveStepEvaluation
+(std::string FileName/*="StepEvaluation.dat"*/) const
 {
  //Open file
  std::ofstream outfile;
@@ -1080,7 +1165,8 @@ void MixedPolicyEvaluation::SaveStepEvaluation(std::string FileName/*="StepEvalu
  outfile<<"Step Evaluation \n"
  <<"Type:Vector of Size"<<mpStepEvaluation->GetSize()<<"\n"
  <<"Game Time:"<<mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()
- <<" Attack Time:"<<mpMixedPatrollerSystem->GetPatrollerSystem()->GetAttackTime()<<"\n";
+ <<" Attack Time:"<<
+ mpMixedPatrollerSystem->GetPatrollerSystem()->GetAttackTime()<<"\n";
 
  //Printing the vector
  int i=1;
@@ -1094,7 +1180,8 @@ void MixedPolicyEvaluation::SaveStepEvaluation(std::string FileName/*="StepEvalu
 }
 void MixedPolicyEvaluation::PrintKeyProbability() const
 {
- std::cout<<"Displaying the Evaluation, for "<<mpStepEvaluation->GetSize()<<" strategies \n";
+ std::cout<<"Displaying the Evaluation, for "<<
+ mpStepEvaluation->GetSize()<<" strategies \n";
  int i=1;
  while(i<=mpKeyProbability->GetSize())
  {
@@ -1102,7 +1189,8 @@ void MixedPolicyEvaluation::PrintKeyProbability() const
   i=i+1;
  }
 }
-void MixedPolicyEvaluation::SaveKeyProbability(std::string FileName/*="KeyProbabilities.dat"*/) const
+void MixedPolicyEvaluation::SaveKeyProbability
+(std::string FileName/*="KeyProbabilities.dat"*/) const
 {
   //Open file
  std::ofstream outfile;
@@ -1115,7 +1203,8 @@ void MixedPolicyEvaluation::SaveKeyProbability(std::string FileName/*="KeyProbab
  outfile<<"Key Probabilities \n"
  <<"Type:Vector of Size"<<mpKeyProbability->GetSize()<<"\n"
  <<"Game Time:"<<mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()
- <<" Attack Time:"<<mpMixedPatrollerSystem->GetPatrollerSystem()->GetAttackTime()<<"\n";
+ <<" Attack Time:"<<
+ mpMixedPatrollerSystem->GetPatrollerSystem()->GetAttackTime()<<"\n";
 
  //Printing the vector
  int i=1;
@@ -1129,7 +1218,8 @@ void MixedPolicyEvaluation::SaveKeyProbability(std::string FileName/*="KeyProbab
 }
 void MixedPolicyEvaluation::PrintBestPatrollerStratNum() const
 {
- std::cout<<"Displaying the Evaluation, for "<<mpStepEvaluation->GetSize()<<" strategies \n";
+ std::cout<<"Displaying the Evaluation, for "<<
+ mpStepEvaluation->GetSize()<<" strategies \n";
  int i=1;
  while(i<=mpBestPatrollerStratNum->GetSize())
  {
@@ -1137,7 +1227,8 @@ void MixedPolicyEvaluation::PrintBestPatrollerStratNum() const
   i=i+1;
  }
 }
-void MixedPolicyEvaluation::SaveBestPatrollerStratNum(std::string FileName/*="BestPatrollerStrategyNumbers.dat"*/) const
+void MixedPolicyEvaluation::SaveBestPatrollerStratNum
+(std::string FileName/*="BestPatrollerStrategyNumbers.dat"*/) const
 {
  //Open file
  std::ofstream outfile;
@@ -1150,7 +1241,8 @@ void MixedPolicyEvaluation::SaveBestPatrollerStratNum(std::string FileName/*="Be
  outfile<<"Best Patroller Numbers \n"
  <<"Type:Vector of Size "<<mpBestPatrollerStratNum->GetSize()<<"\n"
  <<"Game Time:"<<mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()
- <<" Attack Time:"<<mpMixedPatrollerSystem->GetPatrollerSystem()->GetAttackTime()<<"\n";
+ <<" Attack Time:"<<
+ mpMixedPatrollerSystem->GetPatrollerSystem()->GetAttackTime()<<"\n";
 
  //Printing the vector
  int i=1;
@@ -1164,7 +1256,8 @@ void MixedPolicyEvaluation::SaveBestPatrollerStratNum(std::string FileName/*="Be
 }
 void MixedPolicyEvaluation::PrintMTSpaceEvaluation() const
 {
- std::cout<<"Displaying the (T,M) Space Evaluation, for "<<mpStepEvaluation->GetSize()<<" Strategies \n";
+ std::cout<<"Displaying the (T,M) Space Evaluation, for "<<
+ mpStepEvaluation->GetSize()<<" Strategies \n";
  int i=1;
  int j=1;
  while(i<=mpMTSpaceEvaluation->GetNumberOfRows())
@@ -1179,7 +1272,8 @@ void MixedPolicyEvaluation::PrintMTSpaceEvaluation() const
   i=i+1;
  }
 }
-void MixedPolicyEvaluation::SaveMTSpaceEvaluation(std::string FileName/*="MTSpaceEvaluation.dat"*/) const
+void MixedPolicyEvaluation::SaveMTSpaceEvaluation
+(std::string FileName/*="MTSpaceEvaluation.dat"*/) const
 {
   //Open file
  std::ofstream outfile;
@@ -1214,7 +1308,8 @@ void MixedPolicyEvaluation::SaveMTSpaceEvaluation(std::string FileName/*="MTSpac
 }
 void MixedPolicyEvaluation::PrintMTSpaceKeyProbability() const
 {
- std::cout<<"Displaying the (T,M) Space Key Probability, for "<<mpStepEvaluation->GetSize()<<" Strategies \n";
+ std::cout<<"Displaying the (T,M) Space Key Probability, for "<<
+ mpStepEvaluation->GetSize()<<" Strategies \n";
  int i=1;
  int j=1;
  while(i<=mpMTSpaceKeyProbability->GetNumberOfRows())
@@ -1229,7 +1324,8 @@ void MixedPolicyEvaluation::PrintMTSpaceKeyProbability() const
   i=i+1;
  }
 }
-void MixedPolicyEvaluation::SaveMTSpaceKeyProbability(std::string FileName/*="MTSpaceKeyProbabilities.dat"*/) const
+void MixedPolicyEvaluation::SaveMTSpaceKeyProbability
+(std::string FileName/*="MTSpaceKeyProbabilities.dat"*/) const
 {
   //Open file
  std::ofstream outfile;
@@ -1263,7 +1359,8 @@ void MixedPolicyEvaluation::SaveMTSpaceKeyProbability(std::string FileName/*="MT
 }
 void MixedPolicyEvaluation::PrintMTSpaceBestPatrollerStratNum() const
 {
- std::cout<<"Displaying the (T,M) Space best Patroller Strategy Numbers for "<<mpStepEvaluation->GetSize()<<" Strategies \n";
+ std::cout<<"Displaying the (T,M) Space best Patroller Strategy Numbers for "<<
+ mpStepEvaluation->GetSize()<<" Strategies \n";
  int i=1;
  int j=1;
  while(i<=mpMTSpaceBestPatrollerStratNum->GetNumberOfRows())
@@ -1278,7 +1375,8 @@ void MixedPolicyEvaluation::PrintMTSpaceBestPatrollerStratNum() const
   i=i+1;
  }
 }
-void MixedPolicyEvaluation::SaveMTSpaceBestPatrollerStratNum(std::string FileName/*="MTSpaceBestPatrollerStrategyNumbers.dat"*/) const
+void MixedPolicyEvaluation::SaveMTSpaceBestPatrollerStratNum
+(std::string FileName/*="MTSpaceBestPatrollerStrategyNumbers.dat"*/) const
 {
  //Open file
  std::ofstream outfile;
@@ -1312,7 +1410,8 @@ void MixedPolicyEvaluation::SaveMTSpaceBestPatrollerStratNum(std::string FileNam
 }
 void MixedPolicyEvaluation::PrintBestPatrollerStrategies()
 {
- std::cout<<"Displaying the Best Patroller Strategies for "<<mpStepEvaluation->GetSize()<<" Strategies \n";
+ std::cout<<"Displaying the Best Patroller Strategies for "<<
+ mpStepEvaluation->GetSize()<<" Strategies \n";
  int i=1;
  int j=1;
  while(i<=mpBestPatrollerStrat->GetNumberOfRows())
@@ -1335,7 +1434,8 @@ void MixedPolicyEvaluation::PrintBestPatrollerStrategies()
  }
 
 }
-void MixedPolicyEvaluation::SaveBestPatrollerStrategies(std::string FileName/*="BestPatrollerStrategies.dat"*/) const
+void MixedPolicyEvaluation::SaveBestPatrollerStrategies
+(std::string FileName/*="BestPatrollerStrategies.dat"*/) const
 {
  //Open file
  std::ofstream outfile;
@@ -1369,7 +1469,8 @@ void MixedPolicyEvaluation::SaveBestPatrollerStrategies(std::string FileName/*="
 }
 void MixedPolicyEvaluation::PrintMTSpaceBestPatrollerStrategies()
 {
- std::cout<<"Displaying the (T,m) Space Best Patroller Strategies for "<<mpStepEvaluation->GetSize()<<" Strategies \n";
+ std::cout<<"Displaying the (T,m) Space Best Patroller Strategies for "<<
+ mpStepEvaluation->GetSize()<<" Strategies \n";
  int i=1;
  int j=1;
  int k=1;
@@ -1400,7 +1501,8 @@ void MixedPolicyEvaluation::PrintMTSpaceBestPatrollerStrategies()
  }
 
 }
-void MixedPolicyEvaluation::SaveMTSpaceBestPatrollerStrategies(std::string FileName/*="MTSpaceBestPatrollerStrategies.dat"*/) const
+void MixedPolicyEvaluation::SaveMTSpaceBestPatrollerStrategies
+(std::string FileName/*="MTSpaceBestPatrollerStrategies.dat"*/) const
 {
   //Open file
  std::ofstream outfile;
@@ -1447,10 +1549,12 @@ void MixedPolicyEvaluation::SaveMTSpaceBestPatrollerStrategies(std::string FileN
 }
 
 //Print and Save all data for the experiment
-//These print all data for the evaluation (i.e the value, the key probability of the policy and the reaction strategy)
+//These print all data for the evaluation
+//(i.e the value, the key probability of the policy and the reaction strategy)
 void MixedPolicyEvaluation::PrintPolicyEvaluation()
 {
- std::cout<<"Displaying the Policy Evaluation, for "<<mpStepEvaluation->GetSize()<<" Strategies \n";
+ std::cout<<"Displaying the Policy Evaluation, for "<<
+ mpStepEvaluation->GetSize()<<" Strategies \n";
 
  //Set up Column Headers
  std::cout<<"Value         ";
@@ -1490,7 +1594,8 @@ void MixedPolicyEvaluation::PrintPolicyEvaluation()
   i=i+1;
  }
 }
-void MixedPolicyEvaluation::SavePolicyEvaluation(std::string FileName/*="PolicyEvaluation.dat"*/)
+void MixedPolicyEvaluation::SavePolicyEvaluation
+(std::string FileName/*="PolicyEvaluation.dat"*/)
 {
  //Open file
  std::ofstream outfile;
@@ -1504,7 +1609,8 @@ void MixedPolicyEvaluation::SavePolicyEvaluation(std::string FileName/*="PolicyE
  <<"Type:4 Vectors of Size "<<mpStepEvaluation->GetSize()<<"\n"
  <<"In the Order Value, Key Prob , Stratergy Number , Strategy \n"
  <<"Game Time:"<<mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime()
- <<" Attack Time:"<<mpMixedPatrollerSystem->GetPatrollerSystem()->GetAttackTime()<<"\n";
+ <<" Attack Time:"<<
+ mpMixedPatrollerSystem->GetPatrollerSystem()->GetAttackTime()<<"\n";
 
  //Print the Vectors
  int i=1;
@@ -1543,7 +1649,8 @@ void MixedPolicyEvaluation::SavePolicyEvaluation(std::string FileName/*="PolicyE
 void MixedPolicyEvaluation::PrintMTSpacePolicyEvaluation()
 {
   std::cout<<std::scientific;
-  std::cout<<"Displaying the (T,m) Space Policy Evaluation, for "<<mpStepEvaluation->GetSize()<<" Strategies \n";
+  std::cout<<"Displaying the (T,m) Space Policy Evaluation, for "<<
+  mpStepEvaluation->GetSize()<<" Strategies \n";
 
   //Set up initial row=0, having Values of m
   std::cout<<std::setw(15)<<mStartM;
@@ -1570,7 +1677,8 @@ void MixedPolicyEvaluation::PrintMTSpacePolicyEvaluation()
     column=1;
     while(column<=mpMTSpaceEvaluation->GetNumberOfColumns())
     {
-     std::cout<<"Value:"<<std::setw(14)<<(*mpMTSpaceEvaluation)(block,column)<<" ";
+     std::cout<<"Value:"<<std::setw(14)<<
+     (*mpMTSpaceEvaluation)(block,column)<<" ";
      column=column+1;
     }
     column=1;
@@ -1581,7 +1689,8 @@ void MixedPolicyEvaluation::PrintMTSpacePolicyEvaluation()
     column=1;
     while(column<=mpMTSpaceEvaluation->GetNumberOfColumns())
     {
-     std::cout<<"Key Prob:"<<std::setw(11)<<(*mpMTSpaceKeyProbability)(block,column)<<" ";
+     std::cout<<"Key Prob:"<<std::setw(11)<<
+     (*mpMTSpaceKeyProbability)(block,column)<<" ";
      column=column+1;
     }
     column=1;
@@ -1595,7 +1704,8 @@ void MixedPolicyEvaluation::PrintMTSpacePolicyEvaluation()
     column=1;
     while(column<=mpMTSpaceEvaluation->GetNumberOfColumns())
     {
-     std::cout<<"Strat No:"<<std::setw(11)<<(*mpMTSpaceBestPatrollerStratNum)(block,column)<<" ";
+     std::cout<<"Strat No:"<<std::setw(11)<<
+     (*mpMTSpaceBestPatrollerStratNum)(block,column)<<" ";
      column=column+1;
     }
     column=1;
@@ -1634,7 +1744,8 @@ void MixedPolicyEvaluation::PrintMTSpacePolicyEvaluation()
    block=block+1;
   }
 }
-void MixedPolicyEvaluation::SaveMTSpacePolicyEvaluation(std::string FileName/*="MTSpacePolicyEvaluation.dat"*/)
+void MixedPolicyEvaluation::SaveMTSpacePolicyEvaluation
+(std::string FileName/*="MTSpacePolicyEvaluation.dat"*/)
 {
  //Open file
  std::ofstream outfile;
@@ -1646,7 +1757,7 @@ void MixedPolicyEvaluation::SaveMTSpacePolicyEvaluation(std::string FileName/*="
  //Information about the File
  outfile<<"MTSpace Best Patroller Strategy Numbers \n"
  <<"Type:4 Matrix of Size"<<(mLastT-mStartT+1)<<"x"<<(mLastM-mStartM+1)<<"\n"
- <<"In the Order Value, Key Probability, Strategy Number, Strategy and broken up by a -- \n"
+ <<"In the Order Value, Key Probability, Strategy Number,Strategy and broken up by a -- \n"
  <<"Value Starts at Row="<<"\n"
  <<"Key Probability Starts at Row="<<" and ends at Row="<<"\n"
  <<"Strategy Number Starts at Row="<<" and ends at Row="<<"\n"

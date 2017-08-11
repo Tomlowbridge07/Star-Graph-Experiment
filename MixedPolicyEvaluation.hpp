@@ -60,21 +60,33 @@ class MixedPolicyEvaluation
 
 
  //MTSpace Evaluations for normal walk style
- void EvaluateLineGraphMTSpaceBest(int n,int StartM , int StartT , int LastM , int LastT);
- void EvaluateTimedLineGraphMTSpaceBest(int n,int StartM , int StartT , int LastM , int LastT);
- void EvaluateOverallLineGraphMTSpaceBest(int n,int StartM , int StartT , int LastM , int LastT);
- void EvaluateStarGraphMTSpaceBest(int n, int k,int StartM , int StartT , int LastM , int LastT);
- void EvaluateTimedStarGraphMTSpaceBest(int n,int k,int StartM , int StartT , int LastM , int LastT);
- void EvaluateOverallStarGraphMTSpaceBest(int n,int k,int StartM , int StartT , int LastM , int LastT);
+ void EvaluateLineGraphMTSpaceBest
+ (int n,int StartM , int StartT , int LastM , int LastT);
+ void EvaluateTimedLineGraphMTSpaceBest
+ (int n,int StartM , int StartT , int LastM , int LastT);
+ void EvaluateOverallLineGraphMTSpaceBest
+ (int n,int StartM , int StartT , int LastM , int LastT);
+ void EvaluateStarGraphMTSpaceBest
+ (int n, int k,int StartM , int StartT , int LastM , int LastT);
+ void EvaluateTimedStarGraphMTSpaceBest
+ (int n,int k,int StartM , int StartT , int LastM , int LastT);
+ void EvaluateOverallStarGraphMTSpaceBest
+ (int n,int k,int StartM , int StartT , int LastM , int LastT);
 
 
  //MTSpace Evaluations for Path Wait style walk
- void EvaluateLineGraphMTSpaceBestPW(int n,int StartM , int StartT , int LastM , int LastT);
- void EvaluateTimedLineGraphMTSpaceBestPW(int n,int StartM , int StartT , int LastM , int LastT);
- void EvaluateOverallLineGraphMTSpaceBestPW(int n,int StartM , int StartT , int LastM , int LastT);
- void EvaluateStarGraphMTSpaceBestPW(int n, int k,int StartM , int StartT , int LastM , int LastT);
- void EvaluateTimedStarGraphMTSpaceBestPW(int n,int k,int StartM , int StartT , int LastM , int LastT);
- void EvaluateOverallStarGraphMTSpaceBestPW(int n,int k,int StartM , int StartT , int LastM , int LastT);
+ void EvaluateLineGraphMTSpaceBestPW
+ (int n,int StartM , int StartT , int LastM , int LastT);
+ void EvaluateTimedLineGraphMTSpaceBestPW
+ (int n,int StartM , int StartT , int LastM , int LastT);
+ void EvaluateOverallLineGraphMTSpaceBestPW
+ (int n,int StartM , int StartT , int LastM , int LastT);
+ void EvaluateStarGraphMTSpaceBestPW
+ (int n, int k,int StartM , int StartT , int LastM , int LastT);
+ void EvaluateTimedStarGraphMTSpaceBestPW
+ (int n,int k,int StartM , int StartT , int LastM , int LastT);
+ void EvaluateOverallStarGraphMTSpaceBestPW
+ (int n,int k,int StartM , int StartT , int LastM , int LastT);
 
  //Saving and displaying variables
  void PrintStepEvaluation() const;
@@ -82,25 +94,31 @@ class MixedPolicyEvaluation
  void PrintKeyProbability() const;
  void SaveKeyProbability(std::string FileName="KeyProbabilities.dat") const;
  void PrintBestPatrollerStratNum() const;
- void SaveBestPatrollerStratNum(std::string FileName="BestPatrollerStrategyNumbers.dat") const;
+ void SaveBestPatrollerStratNum
+ (std::string FileName="BestPatrollerStrategyNumbers.dat") const;
  void PrintMTSpaceEvaluation() const;
  void SaveMTSpaceEvaluation(std::string FileName="MTSpaceEvaluation.dat") const;
  void PrintMTSpaceKeyProbability() const;
- void SaveMTSpaceKeyProbability(std::string FileName="MTSpaceKeyProbabilities.dat") const;
+ void SaveMTSpaceKeyProbability
+ (std::string FileName="MTSpaceKeyProbabilities.dat") const;
  void PrintMTSpaceBestPatrollerStratNum() const;
- void SaveMTSpaceBestPatrollerStratNum(std::string FileName="MTSpaceBestPatrollerStrategyNumbers.dat") const;
+ void SaveMTSpaceBestPatrollerStratNum
+ (std::string FileName="MTSpaceBestPatrollerStrategyNumbers.dat") const;
 
  //These Print and Save the Converted to actual pure strategy values
  void PrintBestPatrollerStrategies();
- void SaveBestPatrollerStrategies(std::string FileName="BestPatrollerStrategies.dat") const;
+ void SaveBestPatrollerStrategies
+ (std::string FileName="BestPatrollerStrategies.dat") const;
  void PrintMTSpaceBestPatrollerStrategies();
- void SaveMTSpaceBestPatrollerStrategies(std::string FileName="MTSpaceBestPatrollerStrategies.dat") const;
+ void SaveMTSpaceBestPatrollerStrategies
+ (std::string FileName="MTSpaceBestPatrollerStrategies.dat") const;
 
  //Print and Save all data for the experiment
  void PrintPolicyEvaluation();
  void SavePolicyEvaluation(std::string FileName="PolicyEvaluation.dat");
  void PrintMTSpacePolicyEvaluation();
- void SaveMTSpacePolicyEvaluation(std::string FileName="MTSpacePolicyEvaluation.dat");
+ void SaveMTSpacePolicyEvaluation
+ (std::string FileName="MTSpacePolicyEvaluation.dat");
 
  protected:
 
