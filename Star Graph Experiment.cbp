@@ -38,6 +38,8 @@
 		<Unit filename="BatchTimeMixedPolicyEvaluation.cpp" />
 		<Unit filename="BatchTimeMixedPolicyEvaluation.hpp" />
 		<Unit filename="Driver.cpp" />
+		<Unit filename="Int3DMatrix.cpp" />
+		<Unit filename="Int3DMatrix.hpp" />
 		<Unit filename="IntMatrix.cpp" />
 		<Unit filename="IntMatrix.hpp" />
 		<Unit filename="IntVector.cpp" />
