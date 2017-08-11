@@ -59,6 +59,11 @@ int main(int argc,char* argv[])
  Ev.EvaluateExtendedStarGraphTestPW(4,1);
  Ev.PrintPolicyEvaluation();
 
+ //Testing Max and Min elements
+ IntVector Test(6);
+ Test(1)=5; Test(2)=-2; Test(3)=5; Test(4)=0; Test(5)=-2; Test(6)=5;
+ std::cout<<Test.MinElements();
+
 
 
 

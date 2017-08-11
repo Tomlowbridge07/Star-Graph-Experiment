@@ -125,12 +125,18 @@ class MixedPolicyEvaluation
  //Store the Patrolling System
  MixedPatroller* mpMixedPatrollerSystem;
 
- Vector* mpStepEvaluation; //Used to store the value of the game for that step
- Vector* mpKeyProbability; //Used to store the key probability (i.e the probability that each step used)
+ //Used to store the value of the game for that step
+ Vector* mpStepEvaluation;
 
- //Stores the Strategy the patroller will use against each of the key probability strategies
+ //Used to store the key probability (i.e the probability that each step used)
+ Vector* mpKeyProbability;
+
+ //Stores the Strategy the patroller will use against each of
+ //the key probability strategies
  //Note. Stores the strategy number as according to patroller strategy options.
- IntVector* mpBestPatrollerStratNum; //Used alongside the Step Evaluation to see what the best strategy for the patroller was
+ //Used alongside the Step Evaluation to see what the
+ //best strategy for the patroller was
+ IntVector* mpBestPatrollerStratNum;
 
  IntMatrix* mpBestPatrollerStrat;
 
@@ -143,7 +149,7 @@ class MixedPolicyEvaluation
  Matrix* mpMTSpaceKeyProbability;
  IntMatrix* mpMTSpaceBestPatrollerStratNum;
 
- //Note strategies are stored as a whole number with $mGamtime$
+ //Note strategies are stored as a whole number with mGamtime
  IntMatrix* mpMTSpaceBestPatrollerStrat;
 
  private:

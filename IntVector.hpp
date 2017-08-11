@@ -91,8 +91,11 @@ public:
    //Max and Min Utilities
    int Max();
    int MaxElement();
+   IntVector MaxElements();
    int Min();
    int MinElement();
+   IntVector MinElements();
+
 
    //BubbleSorts:
    //Internal Bubble Sort
