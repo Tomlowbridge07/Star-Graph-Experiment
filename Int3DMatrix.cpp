@@ -1,5 +1,6 @@
 #include "Int3DMatrix.hpp"
 #include<cassert>
+#include<iomanip>
 
 //Standard Constructor
 Int3DMatrix::Int3DMatrix(int NumRows, int NumCols, int NumLayers)
@@ -98,3 +99,84 @@ Int3DMatrix::~Int3DMatrix()
  delete[] mData; //Delete Row pointer part
  std::cout<<"\n Destructor sucess";
 }
+
+//Getters and Setters
+int Int3DMatrix::GetNumberRows() const
+{
+ return mNumRows;
+}
+int Int3DMatrix::GetNumberCols() const
+{
+ return mNumCols;
+}
+int Int3DMatrix::GetNumberLayers() const
+{
+ return mNumLayers;
+}
+
+
+// Overloading round bracket operator
+// Note. Uses 1-based indexing
+int& Int3DMatrix::operator()(int i, int j, int k)
+{
+ assert(i>0);
+ assert(i<=mNumRows);
+ assert(j>0);
+ assert(j<=mNumCols);
+ assert(k>0);
+ assert(k<=mNumLayers);
+
+ return mData[i-1][j-1][k-1];
+}
+
+std::ostream& operator<<(std::ostream& output,const Int3DMatrix& m)
+{
+  // Print formatted output
+  for(int k=0; k<m.GetNumberLayers(); k++)
+  {
+   output<< "Displaying Layer:"<<(k+1)<<"\n"
+         <<"----------------------------------- \n";
+    for (int i=0; i< m.GetNumberRows(); i++)
+   {
+    for (int j=0; j< m.GetNumberCols(); j++)
+    {
+      output << std::setw(14)
+             << std::setprecision(5)
+	     << std::scientific
+	     << m.mData[i][j][k];
+    }
+    output << std::endl;
+  }
+  output << std::endl;
+
+  }
+
+  return output;
+}
+
+// Read entry
+int Int3DMatrix::Read(int i, int j, int k)
+{
+ assert(i>0);
+ assert(i<=mNumRows);
+ assert(j>0);
+ assert(j<=mNumCols);
+ assert(k>0);
+ assert(k<=mNumLayers);
+
+ return mData[i-1][j-1][k-1];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

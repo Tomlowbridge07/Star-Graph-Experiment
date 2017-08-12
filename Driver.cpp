@@ -67,8 +67,9 @@ int main(int argc,char* argv[])
 */
 
  //Testing Int3DMatrix
- Int3DMatrix Matrix1(79,10,20);
+ Int3DMatrix Matrix1(9,10,4);
  Int3DMatrix Copy(Matrix1);
+ std::cout<<Copy;
  std::flush(std::cout<<"\n About to return 0");
 
 

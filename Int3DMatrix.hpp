@@ -16,6 +16,21 @@ class Int3DMatrix
  //Desctructor
  ~Int3DMatrix();
 
+ //Getters and Setters
+ int GetNumberRows() const;
+ int GetNumberCols() const;
+ int GetNumberLayers() const;
+
+ // Overloading round bracket operator
+ int& operator()(int i, int j, int k);
+
+ //Overwritten << operator
+ friend std::ostream& operator<<(std::ostream& output,const Int3DMatrix& m);
+
+ // Read entry
+ int Read(int i, int j, int k);
+
+
 
  protected:
 

@@ -914,7 +914,7 @@
 1495558743 e:\files\documents\git repositories\star graph experiment\intmatrix.hpp
 	"IntVector.hpp"
 
-1502103201 e:\files\documents\git repositories\star graph experiment\intvector.hpp
+1502525886 e:\files\documents\git repositories\star graph experiment\intvector.hpp
 	<iostream>
 
 1502119092 source:e:\files\documents\git repositories\star graph experiment\batchmixedpolicyevaluation.cpp
@@ -941,14 +941,14 @@
 1502116221 e:\files\documents\git repositories\star graph experiment\batchtimemixedpolicyevaluation.hpp
 	"BatchMixedPolicyEvaluation.hpp"
 
-1495558775 source:e:\files\documents\git repositories\star graph experiment\intmatrix.cpp
+1502525886 source:e:\files\documents\git repositories\star graph experiment\intmatrix.cpp
 	<cmath>
 	<cassert>
 	<iomanip>
 	"IntMatrix.hpp"
 	"IntVector.hpp"
 
-1502103201 source:e:\files\documents\git repositories\star graph experiment\intvector.cpp
+1502525886 source:e:\files\documents\git repositories\star graph experiment\intvector.cpp
 	<cmath>
 	<cassert>
 	<iomanip>
@@ -962,7 +962,7 @@
 	"Matrix.hpp"
 	"Vector.hpp"
 
-1502120706 source:e:\files\documents\git repositories\star graph experiment\mixedattackgenerator.cpp
+1502196699 source:e:\files\documents\git repositories\star graph experiment\mixedattackgenerator.cpp
 	"MixedAttackGenerator.hpp"
 	"UsefulFunctions.hpp"
 	<cassert>
@@ -973,14 +973,14 @@
 	"MixedPatroller.hpp"
 	<assert.h>
 
-1502195348 source:e:\files\documents\git repositories\star graph experiment\mixedpolicyevaluation.cpp
+1502525886 source:e:\files\documents\git repositories\star graph experiment\mixedpolicyevaluation.cpp
 	"MixedPolicyEvaluation.hpp"
 	"MixedAttackGenerator.hpp"
 	<iomanip>
 	<iostream>
 	<fstream>
 
-1502195348 e:\files\documents\git repositories\star graph experiment\mixedpolicyevaluation.hpp
+1502525886 e:\files\documents\git repositories\star graph experiment\mixedpolicyevaluation.hpp
 	"AbstractPatroller.hpp"
 	"PathWaitPatroller.hpp"
 	"MixedPatroller.hpp"
@@ -1163,9 +1163,10 @@
 	"BatchMixedPolicyEvaluation.hpp"
 	"BatchTimeMixedPolicyEvaluation.hpp"
 
-1502195487 source:e:\files\documents\git repositories\star graph experiment\driver.cpp
+1502528206 source:e:\files\documents\git repositories\star graph experiment\driver.cpp
 	<iostream>
 	"IntMatrix.hpp"
+	"Int3DMatrix.hpp"
 	"AbstractPatroller.hpp"
 	"MixedPatroller.hpp"
 	"MixedPolicyEvaluation.hpp"
@@ -1182,4 +1183,12 @@
 
 1502471014 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Int3DMatrix.hpp
 	"IntMatrix.hpp"
+
+1502528175 e:\files\documents\git repositories\star graph experiment\int3dmatrix.hpp
+	"IntMatrix.hpp"
+
+1502528228 source:e:\files\documents\git repositories\star graph experiment\int3dmatrix.cpp
+	"Int3DMatrix.hpp"
+	<cassert>
+	<iomanip>
 
