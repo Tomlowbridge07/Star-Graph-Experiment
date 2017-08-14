@@ -45,6 +45,14 @@ class Int3DMatrix
  // Binary -
  Int3DMatrix operator-(const Int3DMatrix& m1) const;
 
+ // Scalar multiplication
+ Int3DMatrix operator*(int a) const;
+
+ //Retriving 2d Matrix
+ IntMatrix GetRowMatrix(int Row) const;
+ IntMatrix GetColMatrix(int Col) const;
+ IntMatrix GetLayerMatrix(int Layer) const;
+
  protected:
 
  private:

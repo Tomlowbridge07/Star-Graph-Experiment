@@ -76,6 +76,9 @@ int main(int argc,char* argv[])
  std::cout<<Matrix1;
  std::cout<<Copy;
  std::cout<<Addition;
+ std::cout<<Addition.GetLayerMatrix(1);
+ std::cout<<Addition.GetColMatrix(1);
+ std::cout<<Addition.GetRowMatrix(1);
  std::flush(std::cout<<"\n About to return 0");
 
 

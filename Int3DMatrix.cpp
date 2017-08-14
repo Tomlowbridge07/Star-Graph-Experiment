@@ -239,7 +239,7 @@ Int3DMatrix Int3DMatrix::operator-(const Int3DMatrix& m1) const
  assert(mNumCols==m1.GetNumberCols());
  assert(mNumLayers==m1.GetNumberLayers());
 
-  Int3DMatrix mat(mNumRows,mNumCols,mNumLayers);
+ Int3DMatrix mat(mNumRows,mNumCols,mNumLayers);
  for(int i=0; i<mNumRows; i++)
  {
   for(int j=0; j<mNumCols; j++)
@@ -253,7 +253,79 @@ Int3DMatrix Int3DMatrix::operator-(const Int3DMatrix& m1) const
  return mat;
 }
 
+// Scalar multiplication
+Int3DMatrix Int3DMatrix::operator*(int a) const
+{
+ Int3DMatrix mat(mNumRows,mNumCols,mNumLayers);
+ for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   for(int k=0; k<mNumLayers; k++)
+   {
+    mat(i+1,j+1,k+1)=a*mData[i][j][k];
+   }
+  }
+ }
+ return mat;
+}
 
+//Retriving 2d Matrix
+/*
+This method retrive matrixes for a particular row,col or layer
+Note. It uses 1-based index
+*/
+IntMatrix Int3DMatrix::GetRowMatrix(int Row) const
+{
+ //Check valid layer is chosen
+ assert(Row>0);
+ assert(Row<=mNumRows);
+
+ //Form layer matrix
+ IntMatrix RowMatrix(mNumCols,mNumLayers);
+ for(int j=0; j<mNumCols; j++)
+ {
+  for(int k=0; k<mNumLayers; k++)
+  {
+   RowMatrix(j+1,k+1)=mData[Row-1][j][k];
+  }
+ }
+ return RowMatrix;
+}
+IntMatrix Int3DMatrix::GetColMatrix(int Col) const
+{
+ //Check valid layer is chosen
+ assert(Col>0);
+ assert(Col<=mNumCols);
+
+ //Form layer matrix
+ IntMatrix ColMatrix(mNumRows,mNumLayers);
+ for(int i=0; i<mNumRows; i++)
+ {
+  for(int k=0; k<mNumLayers; k++)
+  {
+   ColMatrix(i+1,k+1)=mData[i][Col-1][k];
+  }
+ }
+ return ColMatrix;
+}
+IntMatrix Int3DMatrix::GetLayerMatrix(int Layer) const
+{
+ //Check valid layer is chosen
+ assert(Layer>0);
+ assert(Layer<=mNumLayers);
+
+ //Form layer matrix
+ IntMatrix LayerMatrix(mNumRows,mNumCols);
+ for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   LayerMatrix(i+1,j+1)=mData[i][j][Layer-1];
+  }
+ }
+ return LayerMatrix;
+}
 
 
 
