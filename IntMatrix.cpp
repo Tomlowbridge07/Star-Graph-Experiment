@@ -715,7 +715,7 @@ void IntMatrix::AddRow(const int Row,const bool below/*=true*/)
   {
    if(below==true) //insert zeros in row Row+1
    {
-    if(i<=Row-1)
+    if(i<Row)
     {
      mData[i][j] = Temp(i+1,j+1);
     }
@@ -781,7 +781,7 @@ void IntMatrix::AddCol(const int Col,const bool right/*=true*/)
   {
    if(right==true) //Insert Zeroes in Column Col+1
    {
-    if(j<=Col-1)
+    if(j<Col)
     {
      mData[i][j] = Temp(i+1,j+1);
     }

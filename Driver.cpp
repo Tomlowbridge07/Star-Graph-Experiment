@@ -91,6 +91,15 @@ int main(int argc,char* argv[])
  std::cout<<Test;
  Test.AddCol(1,false);
  std::cout<<Test;
+ std::cout<<Addition;
+ Addition.ExtendRow(2);
+ Addition.ExtendLayer(5);
+ std::cout<<Addition;
+ Addition.DeleteLayer(1);
+ std::cout<<Addition;
+ Addition.DeleteCol(4);
+ Addition.DeleteRow(2);
+ std::cout<<Addition;
 
 
 /*

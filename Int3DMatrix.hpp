@@ -68,6 +68,21 @@ class Int3DMatrix
  //Fill
  void Fill(const int FillValue);
 
+ //Extending
+ void ExtendRow(const int ExtendBy);
+ void ExtendCol(const int ExtendBy);
+ void ExtendLayer(const int ExtendBy);
+
+ //Adding
+ void AddRow(const int Row, bool below=true);
+ void AddCol(const int Col, bool right=true);
+ void AddLayer(const int Layer, bool backwards=true);
+
+ //Deleting
+ void DeleteRow(const int Row);
+ void DeleteCol(const int Col);
+ void DeleteLayer(const int Layer);
+
  protected:
 
  private:

@@ -468,10 +468,524 @@ void Int3DMatrix::Fill(const int FillValue)
  }
 }
 
+//Extending
+void Int3DMatrix::ExtendRow(const int ExtendBy)
+{
+ //Create temp storage
+ Int3DMatrix Temp(*this);
 
+ //Delete storage
+  for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   delete[] mData[i][j]; //Delete Layer pointer part
+  }
+  delete[] mData[i]; //Delete Column pointer part
+ }
+ delete[] mData; //Delete Row pointer part
 
+ //Alter Size
+ int OldNumRows=mNumRows;
+ mNumRows=mNumRows+ExtendBy;
 
+ //Create Storage
+ mData= new int** [mNumRows];
+ for(int i=0; i<mNumRows; i++)
+ {
+  mData[i]=new int* [mNumCols];
+  for(int j=0; j<mNumCols; j++)
+  {
+   mData[i][j]= new int [mNumLayers];
+  }
+ }
 
+ //Insert Values
+ for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   for(int k=0; k<mNumLayers; k++)
+   {
+    if(i<OldNumRows)
+    {
+     mData[i][j][k]=Temp(i+1,j+1,k+1);
+    }
+    else
+    {
+     mData[i][j][k]=0;
+    }
+   }
+  }
+ }
+}
+void Int3DMatrix::ExtendCol(const int ExtendBy)
+{
+//Create temp storage
+ Int3DMatrix Temp(*this);
+
+ //Delete storage
+  for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   delete[] mData[i][j]; //Delete Layer pointer part
+  }
+  delete[] mData[i]; //Delete Column pointer part
+ }
+ delete[] mData; //Delete Row pointer part
+
+ //Alter Size
+ int OldNumCols=mNumCols;
+ mNumCols=mNumCols+ExtendBy;
+
+ //Create Storage
+ mData= new int** [mNumRows];
+ for(int i=0; i<mNumRows; i++)
+ {
+  mData[i]=new int* [mNumCols];
+  for(int j=0; j<mNumCols; j++)
+  {
+   mData[i][j]= new int [mNumLayers];
+  }
+ }
+
+ //Insert Values
+ for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   for(int k=0; k<mNumLayers; k++)
+   {
+    if(j<OldNumCols)
+    {
+     mData[i][j][k]=Temp(i+1,j+1,k+1);
+    }
+    else
+    {
+     mData[i][j][k]=0;
+    }
+   }
+  }
+ }
+}
+void Int3DMatrix::ExtendLayer(const int ExtendBy)
+{
+//Create temp storage
+ Int3DMatrix Temp(*this);
+
+ //Delete storage
+  for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   delete[] mData[i][j]; //Delete Layer pointer part
+  }
+  delete[] mData[i]; //Delete Column pointer part
+ }
+ delete[] mData; //Delete Row pointer part
+
+ //Alter Size
+ int OldNumLayers=mNumLayers;
+ mNumLayers=mNumLayers+ExtendBy;
+
+ //Create Storage
+ mData= new int** [mNumRows];
+ for(int i=0; i<mNumRows; i++)
+ {
+  mData[i]=new int* [mNumCols];
+  for(int j=0; j<mNumCols; j++)
+  {
+   mData[i][j]= new int [mNumLayers];
+  }
+ }
+
+ //Insert Values
+ for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   for(int k=0; k<mNumLayers; k++)
+   {
+    if(k<OldNumLayers)
+    {
+     mData[i][j][k]=Temp(i+1,j+1,k+1);
+    }
+    else
+    {
+     mData[i][j][k]=0;
+    }
+   }
+  }
+ }
+}
+
+//Adding
+void Int3DMatrix::AddRow(const int Row, bool below/*=true*/)
+{
+//Create temp storage
+ Int3DMatrix Temp(*this);
+
+ //Delete storage
+  for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   delete[] mData[i][j]; //Delete Layer pointer part
+  }
+  delete[] mData[i]; //Delete Column pointer part
+ }
+ delete[] mData; //Delete Row pointer part
+
+ //Alter Size
+ mNumRows=mNumRows+1;
+
+ //Create Storage
+ mData= new int** [mNumRows];
+ for(int i=0; i<mNumRows; i++)
+ {
+  mData[i]=new int* [mNumCols];
+  for(int j=0; j<mNumCols; j++)
+  {
+   mData[i][j]= new int [mNumLayers];
+  }
+ }
+
+ //Insert Values
+ for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   for(int k=0; k<mNumLayers; k++)
+   {
+    if(below==true) //insert zeroes at Row+1
+    {
+     if(i<Row)
+     {
+      mData[i][j][k]=Temp(i+1,j+1,k+1);
+     }
+     else if(i>Row)
+     {
+      mData[i][j][k]=Temp(i,j+1,k+1);
+     }
+     else
+     {
+      mData[i][j][k]=0;
+     }
+    }
+    else //If above insert zeroes at Row
+    {
+     if(i<Row-1)
+     {
+      mData[i][j][k]=Temp(i+1,j+1,k+1);
+     }
+     else if(i>Row-1)
+     {
+      mData[i][j][k]=Temp(i,j+1,k+1);
+     }
+     else
+     {
+      mData[i][j][k]=0;
+     }
+    }
+   }
+  }
+ }
+}
+void Int3DMatrix::AddCol(const int Col, bool right/*=true*/)
+{
+//Create temp storage
+ Int3DMatrix Temp(*this);
+
+ //Delete storage
+  for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   delete[] mData[i][j]; //Delete Layer pointer part
+  }
+  delete[] mData[i]; //Delete Column pointer part
+ }
+ delete[] mData; //Delete Row pointer part
+
+ //Alter Size
+ mNumCols=mNumCols+1;
+
+ //Create Storage
+ mData= new int** [mNumRows];
+ for(int i=0; i<mNumRows; i++)
+ {
+  mData[i]=new int* [mNumCols];
+  for(int j=0; j<mNumCols; j++)
+  {
+   mData[i][j]= new int [mNumLayers];
+  }
+ }
+
+ //Insert Values
+ for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   for(int k=0; k<mNumLayers; k++)
+   {
+    if(right==true) //Insert zeroes at Col+1
+    {
+     if(j<Col)
+     {
+      mData[i][j][k]=Temp(i+1,j+1,k+1);
+     }
+     else if(j>Col)
+     {
+      mData[i][j][k]=Temp(i+1,j,k+1);
+     }
+     else
+     {
+      mData[i][j][k]=0;
+     }
+    }
+    else //If left insert zeroes at Col
+    {
+     if(j<Col-1)
+     {
+      mData[i][j][k]=Temp(i+1,j+1,k+1);
+     }
+     else if(j>Col-1)
+     {
+      mData[i][j][k]=Temp(i+1,j,k+1);
+     }
+     else
+     {
+      mData[i][j][k]=0;
+     }
+    }
+   }
+  }
+ }
+}
+void Int3DMatrix::AddLayer(const int Layer, bool backwards/*=true*/)
+{
+ //Create temp storage
+ Int3DMatrix Temp(*this);
+
+ //Delete storage
+  for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   delete[] mData[i][j]; //Delete Layer pointer part
+  }
+  delete[] mData[i]; //Delete Column pointer part
+ }
+ delete[] mData; //Delete Row pointer part
+
+ //Alter Size
+ mNumLayers=mNumLayers+1;
+
+ //Create Storage
+ mData= new int** [mNumRows];
+ for(int i=0; i<mNumRows; i++)
+ {
+  mData[i]=new int* [mNumCols];
+  for(int j=0; j<mNumCols; j++)
+  {
+   mData[i][j]= new int [mNumLayers];
+  }
+ }
+
+ //Insert Values
+ for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   for(int k=0; k<mNumLayers; k++)
+   {
+    if(backwards==true) //Insert zeroes at Layer+1
+    {
+     if(k<Layer)
+     {
+      mData[i][j][k]=Temp(i+1,j+1,k+1);
+     }
+     else if(k>Layer)
+     {
+      mData[i][j][k]=Temp(i+1,j+1,k);
+     }
+     else
+     {
+      mData[i][j][k]=0;
+     }
+    }
+    else //If forward insert zereoes at Layer
+    {
+     if(k<Layer-1)
+     {
+      mData[i][j][k]=Temp(i+1,j+1,k+1);
+     }
+     else if(k>Layer-1)
+     {
+      mData[i][j][k]=Temp(i+1,j+1,k);
+     }
+     else
+     {
+      mData[i][j][k]=0;
+     }
+    }
+   }
+  }
+ }
+}
+
+//Deleting
+void Int3DMatrix::DeleteRow(const int Row)
+{
+//Create temp storage
+ Int3DMatrix Temp(*this);
+
+ //Delete storage
+  for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   delete[] mData[i][j]; //Delete Layer pointer part
+  }
+  delete[] mData[i]; //Delete Column pointer part
+ }
+ delete[] mData; //Delete Row pointer part
+
+ //Alter Size
+ mNumRows=mNumRows-1;
+
+ //Create Storage
+ mData= new int** [mNumRows];
+ for(int i=0; i<mNumRows; i++)
+ {
+  mData[i]=new int* [mNumCols];
+  for(int j=0; j<mNumCols; j++)
+  {
+   mData[i][j]= new int [mNumLayers];
+  }
+ }
+
+ //Insert Values
+ for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   for(int k=0; k<mNumLayers; k++)
+   {
+    //Copy the temp skipping the 'Row' Row
+    if(i<Row-1)
+    {
+     mData[i][j][k]=Temp(i+1,j+1,k+1);
+    }
+    else
+    {
+     mData[i][j][k]=Temp(i+2,j+1,k+1);
+    }
+   }
+  }
+ }
+}
+void Int3DMatrix::DeleteCol(const int Col)
+{
+//Create temp storage
+ Int3DMatrix Temp(*this);
+
+ //Delete storage
+  for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   delete[] mData[i][j]; //Delete Layer pointer part
+  }
+  delete[] mData[i]; //Delete Column pointer part
+ }
+ delete[] mData; //Delete Row pointer part
+
+ //Alter Size
+ mNumCols=mNumCols-1;
+
+ //Create Storage
+ mData= new int** [mNumRows];
+ for(int i=0; i<mNumRows; i++)
+ {
+  mData[i]=new int* [mNumCols];
+  for(int j=0; j<mNumCols; j++)
+  {
+   mData[i][j]= new int [mNumLayers];
+  }
+ }
+
+ //Insert Values
+ for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   for(int k=0; k<mNumLayers; k++)
+   {
+    //Copy the temp skipping the 'Layer' Layer
+    if(j<Col-1)
+    {
+     mData[i][j][k]=Temp(i+1,j+1,k+1);
+    }
+    else
+    {
+     mData[i][j][k]=Temp(i+1,j+2,k+1);
+    }
+   }
+  }
+ }
+}
+void Int3DMatrix::DeleteLayer(const int Layer)
+{
+//Create temp storage
+ Int3DMatrix Temp(*this);
+
+ //Delete storage
+  for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   delete[] mData[i][j]; //Delete Layer pointer part
+  }
+  delete[] mData[i]; //Delete Column pointer part
+ }
+ delete[] mData; //Delete Row pointer part
+
+ //Alter Size
+ mNumLayers=mNumLayers-1;
+
+ //Create Storage
+ mData= new int** [mNumRows];
+ for(int i=0; i<mNumRows; i++)
+ {
+  mData[i]=new int* [mNumCols];
+  for(int j=0; j<mNumCols; j++)
+  {
+   mData[i][j]= new int [mNumLayers];
+  }
+ }
+
+ //Insert Values
+ for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   for(int k=0; k<mNumLayers; k++)
+   {
+    //Copy the temp skipping the 'Layer' Layer
+    if(k<Layer-1)
+    {
+     mData[i][j][k]=Temp(i+1,j+1,k+1);
+    }
+    else
+    {
+     mData[i][j][k]=Temp(i+1,j+1,k+2);
+    }
+   }
+  }
+ }
+}
 
 
 
