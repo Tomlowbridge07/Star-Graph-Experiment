@@ -84,7 +84,13 @@ int main(int argc,char* argv[])
  Normal(9,10)=100;
  Addition.SetLayerMatrix(2,Normal);
  std::cout<<Addition;
- std::flush(std::cout<<"\n About to return 0");
+ IntMatrix Test(3,2);
+ Test(1,2)=5; Test(3,1)=5; Test(2,2)=7;
+ std::cout<<Test;
+ Test.AddRow(1);
+ std::cout<<Test;
+ Test.AddCol(1,false);
+ std::cout<<Test;
 
 
 /*

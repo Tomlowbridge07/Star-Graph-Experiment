@@ -117,11 +117,23 @@ public:
   //Check Diagonal
   bool IsDiagonal(const int DiagonalValue) const;
 
- //Delete Row
- void DeleteRow(const int Row);
+  //Extend Row
+  void ExtendRow(const int ExtendBy);
 
- //Delete Row
- void DeleteCol(const int Col);
+  //Extend Col
+  void ExtendCol(const int ExtendBy);
+
+  //Add Row
+  void AddRow(const int Row, const bool below=true);
+
+  //Add Col
+  void AddCol(const int Col,const bool right=true);
+
+  //Delete Row
+  void DeleteRow(const int Row);
+
+  //Delete Row
+  void DeleteCol(const int Col);
 
 };
 

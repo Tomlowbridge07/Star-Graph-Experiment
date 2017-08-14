@@ -598,6 +598,222 @@ bool IntMatrix::IsDiagonal(const int DiagonalValue) const
  return true;
 }
 
+//Extend Row
+void IntMatrix::ExtendRow(const int ExtendBy)
+{
+ //Temp store this data
+ IntMatrix Temp(*this);
+
+ //delete current storage
+ for (int i=0; i<mNumRows; i++)
+ {
+  delete[] mData[i];
+ }
+ delete[] mData;
+
+ //Alter Size
+ int oldNumRows=mNumRows;
+ mNumRows=mNumRows+ExtendBy;
+
+ //Create new storage
+ mData = new int* [mNumRows];
+ for (int i=0; i<mNumRows; i++)
+ {
+  mData[i] = new int [mNumCols];
+ }
+
+ //Insert values
+ for (int i=0; i<mNumRows; i++)
+ {
+  for (int j=0; j<mNumCols; j++)
+  {
+   if(i<oldNumRows)
+   {
+    mData[i][j] = Temp(i+1,j+1);
+   }
+   else
+   {
+    mData[i][j] = 0;
+   }
+  }
+ }
+
+}
+
+//Extend Col
+void IntMatrix::ExtendCol(const int ExtendBy)
+{
+ //Temp store this data
+ IntMatrix Temp(*this);
+
+ //delete current storage
+ for (int i=0; i<mNumRows; i++)
+ {
+  delete[] mData[i];
+ }
+ delete[] mData;
+
+ //Alter Size
+ int oldNumCols=mNumCols;
+ mNumCols=mNumCols+ExtendBy;
+
+ //Create new storage
+ mData = new int* [mNumRows];
+ for (int i=0; i<mNumRows; i++)
+ {
+  mData[i] = new int [mNumCols];
+ }
+
+ //Insert values
+ for (int i=0; i<mNumRows; i++)
+ {
+  for (int j=0; j<mNumCols; j++)
+  {
+   if(j<oldNumCols)
+   {
+    mData[i][j] = Temp(i+1,j+1);
+   }
+   else
+   {
+    mData[i][j] = 0;
+   }
+  }
+ }
+}
+
+//Add Row
+/*
+This method adds a zero row below the selected row
+Note. Changing below=false will make it appear above instead
+*/
+void IntMatrix::AddRow(const int Row,const bool below/*=true*/)
+{
+ //Store Temp data
+ IntMatrix Temp(*this);
+
+ //delete current storage
+ for (int i=0; i<mNumRows; i++)
+ {
+  delete[] mData[i];
+ }
+ delete[] mData;
+
+ //Alter Size
+ mNumRows=mNumRows+1;
+
+  //Create new storage
+ mData = new int* [mNumRows];
+ for (int i=0; i<mNumRows; i++)
+ {
+  mData[i] = new int [mNumCols];
+ }
+
+ //Insert values
+ for (int i=0; i<mNumRows; i++)
+ {
+  for (int j=0; j<mNumCols; j++)
+  {
+   if(below==true) //insert zeros in row Row+1
+   {
+    if(i<=Row-1)
+    {
+     mData[i][j] = Temp(i+1,j+1);
+    }
+    else if(i>Row)
+    {
+     mData[i][j] = Temp(i,j+1);
+    }
+    else
+    {
+     mData[i][j]=0;
+    }
+   }
+   else //If above, insert zeroes in row Row
+   {
+    if(i<Row-1)
+    {
+     mData[i][j] = Temp(i+1,j+1);
+    }
+    else if(i>Row-1)
+    {
+     mData[i][j] = Temp(i,j+1);
+    }
+    else
+    {
+     mData[i][j]=0;
+    }
+   }
+  }
+ }
+}
+
+//Add Col
+/*
+This method adds a zero col to the right of the selected col
+Note. Changing right=false will make it appear to the left instead
+*/
+void IntMatrix::AddCol(const int Col,const bool right/*=true*/)
+{
+//Store Temp data
+ IntMatrix Temp(*this);
+
+ //delete current storage
+ for (int i=0; i<mNumRows; i++)
+ {
+  delete[] mData[i];
+ }
+ delete[] mData;
+
+ //Alter Size
+ mNumCols=mNumCols+1;
+
+ //Create new storage
+ mData = new int* [mNumRows];
+ for (int i=0; i<mNumRows; i++)
+ {
+  mData[i] = new int [mNumCols];
+ }
+
+ //Insert values
+ for (int i=0; i<mNumRows; i++)
+ {
+  for (int j=0; j<mNumCols; j++)
+  {
+   if(right==true) //Insert Zeroes in Column Col+1
+   {
+    if(j<=Col-1)
+    {
+     mData[i][j] = Temp(i+1,j+1);
+    }
+    else if(j>Col)
+    {
+     mData[i][j] = Temp(i+1,j);
+    }
+    else
+    {
+     mData[i][j]=0;
+    }
+   }
+   else //If to left insert zereos in column Col
+   {
+    if(j<Col-1)
+    {
+     mData[i][j] = Temp(i+1,j+1);
+    }
+    else if(j>Col-1)
+    {
+     mData[i][j] = Temp(i+1,j);
+    }
+    else
+    {
+     mData[i][j]=0;
+    }
+   }
+  }
+ }
+}
+
+
 //Delete Row
 void IntMatrix::DeleteRow(const int Row)
 {

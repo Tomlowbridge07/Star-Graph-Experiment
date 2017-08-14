@@ -62,6 +62,9 @@ class Int3DMatrix
  Int3DMatrix GetBlock(int TopLeftI,int TopLeftJ,int TopLeftK,
                       int rows, int cols, int layers);
 
+ //Set Block
+ void SetBlock(int TopLeftI, int TopLeftJ, int TopLeftK, Int3DMatrix mat);
+
  //Fill
  void Fill(const int FillValue);
 

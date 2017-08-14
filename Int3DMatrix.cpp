@@ -396,6 +396,19 @@ Also uses 1-based indexing
 Int3DMatrix Int3DMatrix::GetBlock(int TopLeftI,int TopLeftJ,int TopLeftK,
                                   int rows, int cols, int layers)
 {
+ //Check the TopLeft's are valid choices
+ assert(TopLeftI>0);
+ assert(TopLeftI<=mNumRows);
+ assert(TopLeftJ>0);
+ assert(TopLeftJ<=mNumCols);
+ assert(TopLeftK>0);
+ assert(TopLeftK<=mNumLayers);
+ //Check the Block retrival does not go out of bounds
+ assert(TopLeftI+rows-1<=mNumRows);
+ assert(TopLeftJ+cols-1<=mNumCols);
+ assert(TopLeftK+layers-1<=mNumLayers);
+
+ //Create and return Block
  Int3DMatrix Block(rows,cols,layers);
  for(int i=0; i<rows; i++)
  {
@@ -410,6 +423,35 @@ Int3DMatrix Int3DMatrix::GetBlock(int TopLeftI,int TopLeftJ,int TopLeftK,
  return Block;
 }
 
+//Set Block
+void Int3DMatrix::SetBlock(int TopLeftI, int TopLeftJ, int TopLeftK,
+                           Int3DMatrix mat)
+{
+ //Check the TopLeft's are valid choices
+ assert(TopLeftI>0);
+ assert(TopLeftI<=mNumRows);
+ assert(TopLeftJ>0);
+ assert(TopLeftJ<=mNumCols);
+ assert(TopLeftK>0);
+ assert(TopLeftK<=mNumLayers);
+ //Check the Block setting does not go out of bounds
+ assert(TopLeftI+mat.GetNumberRows()-1<=mNumRows);
+ assert(TopLeftJ+mat.GetNumberCols()-1<=mNumCols);
+ assert(TopLeftK+mat.GetNumberLayers()-1<=mNumLayers);
+
+ //Set Block
+ for(int i=0; i<mat.GetNumberRows(); i++)
+ {
+  for(int j=0; j<mat.GetNumberCols(); j++)
+  {
+   for(int k=0; k<mat.GetNumberLayers(); k++)
+   {
+    mData[TopLeftI-1+i][TopLeftJ-1+j][TopLeftK-1+k]=
+    mat(TopLeftI+i,TopLeftJ+j,TopLeftK+k);
+   }
+  }
+ }
+}
 
 //Fill
 void Int3DMatrix::Fill(const int FillValue)
@@ -425,6 +467,7 @@ void Int3DMatrix::Fill(const int FillValue)
   }
  }
 }
+
 
 
 
