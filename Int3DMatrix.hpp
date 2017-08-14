@@ -53,6 +53,18 @@ class Int3DMatrix
  IntMatrix GetColMatrix(int Col) const;
  IntMatrix GetLayerMatrix(int Layer) const;
 
+ //Setting 2d Matrices
+ void SetRowMatrix(int Row, IntMatrix mat);
+ void SetColMatrix(int Col, IntMatrix mat);
+ void SetLayerMatrix(int Layer, IntMatrix mat);
+
+ //Returns a Block of the matrix
+ Int3DMatrix GetBlock(int TopLeftI,int TopLeftJ,int TopLeftK,
+                      int rows, int cols, int layers);
+
+ //Fill
+ void Fill(const int FillValue);
+
  protected:
 
  private:

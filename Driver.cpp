@@ -79,6 +79,11 @@ int main(int argc,char* argv[])
  std::cout<<Addition.GetLayerMatrix(1);
  std::cout<<Addition.GetColMatrix(1);
  std::cout<<Addition.GetRowMatrix(1);
+ IntMatrix Normal(9,10);
+ Normal(1,1)=-100;
+ Normal(9,10)=100;
+ Addition.SetLayerMatrix(2,Normal);
+ std::cout<<Addition;
  std::flush(std::cout<<"\n About to return 0");
 
 

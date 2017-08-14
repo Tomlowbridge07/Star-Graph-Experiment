@@ -275,9 +275,10 @@ Int3DMatrix Int3DMatrix::operator*(int a) const
 This method retrive matrixes for a particular row,col or layer
 Note. It uses 1-based index
 */
+//Retruned matrix is of size [ColxLayers]
 IntMatrix Int3DMatrix::GetRowMatrix(int Row) const
 {
- //Check valid layer is chosen
+ //Check valid row is chosen
  assert(Row>0);
  assert(Row<=mNumRows);
 
@@ -292,9 +293,10 @@ IntMatrix Int3DMatrix::GetRowMatrix(int Row) const
  }
  return RowMatrix;
 }
+//Retruned matrix is of size [RowxLayers]
 IntMatrix Int3DMatrix::GetColMatrix(int Col) const
 {
- //Check valid layer is chosen
+ //Check valid col is chosen
  assert(Col>0);
  assert(Col<=mNumCols);
 
@@ -309,6 +311,7 @@ IntMatrix Int3DMatrix::GetColMatrix(int Col) const
  }
  return ColMatrix;
 }
+//Retruned matrix is of size [RowxCols]
 IntMatrix Int3DMatrix::GetLayerMatrix(int Layer) const
 {
  //Check valid layer is chosen
@@ -325,6 +328,102 @@ IntMatrix Int3DMatrix::GetLayerMatrix(int Layer) const
   }
  }
  return LayerMatrix;
+}
+
+//Setting 2d Matrices
+void Int3DMatrix::SetRowMatrix(int Row, IntMatrix mat)
+{
+ //Check valid row is chosen
+ assert(Row>0);
+ assert(Row<=mNumRows);
+
+ //Check valid matrix is selected to be placed i.e of size [ColsxLayers]
+ assert(mat.GetNumberOfRows()==mNumCols);
+ assert(mat.GetNumberOfColumns()==mNumLayers);
+
+ for(int j=0; j<mNumCols; j++)
+ {
+  for(int k=0; k<mNumLayers; k++)
+  {
+   mData[Row-1][j][k]=mat(j+1,k+1);
+  }
+ }
+}
+void Int3DMatrix::SetColMatrix(int Col, IntMatrix mat)
+{
+ //Check valid row is chosen
+ assert(Col>0);
+ assert(Col<=mNumRows);
+
+ //Check valid matrix is selected to be placed i.e of size [RowsxLayers]
+ assert(mat.GetNumberOfRows()==mNumRows);
+ assert(mat.GetNumberOfColumns()==mNumLayers);
+
+ for(int i=0; i<mNumRows; i++)
+ {
+  for(int k=0; k<mNumLayers; k++)
+  {
+   mData[i][Col-1][k]=mat(i+1,k+1);
+  }
+ }
+}
+void Int3DMatrix::SetLayerMatrix(int Layer, IntMatrix mat)
+{
+ //Check valid row is chosen
+ assert(Layer>0);
+ assert(Layer<=mNumRows);
+
+ //Check valid matrix is selected to be placed i.e of size [RowsxCols]
+ assert(mat.GetNumberOfRows()==mNumRows);
+ assert(mat.GetNumberOfColumns()==mNumCols);
+
+ for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   mData[i][j][Layer-1]=mat(i+1,j+1);
+  }
+ }
+}
+
+
+//Returns a Block of the matrix
+/*
+This method retrives a smaller block of the 3D matrix
+Note. Topleft means closest to (1,1,1)
+Also uses 1-based indexing
+*/
+Int3DMatrix Int3DMatrix::GetBlock(int TopLeftI,int TopLeftJ,int TopLeftK,
+                                  int rows, int cols, int layers)
+{
+ Int3DMatrix Block(rows,cols,layers);
+ for(int i=0; i<rows; i++)
+ {
+  for(int j=0; j<cols; j++)
+  {
+   for(int k=0; k<layers; k++)
+   {
+    Block(i+1,j+1,k+1)=mData[TopLeftI-1+i][TopLeftJ-1+j][TopLeftK-1+k];
+   }
+  }
+ }
+ return Block;
+}
+
+
+//Fill
+void Int3DMatrix::Fill(const int FillValue)
+{
+ for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   for(int k=0; k<mNumLayers; k++)
+   {
+    mData[i][j][k]=FillValue;
+   }
+  }
+ }
 }
 
 
