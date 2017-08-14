@@ -48,10 +48,6 @@ Int3DMatrix::Int3DMatrix(const Int3DMatrix& other3DMatrix)
  mNumCols=other3DMatrix.mNumCols;
  mNumLayers=other3DMatrix.mNumLayers;
 
- std::cout<<"Rows="<<mNumRows;
- std::cout<<"Cols="<<mNumCols;
- std::cout<<"Layers="<<mNumLayers;
-
  //Create storage for 3D matrix
  mData= new int** [mNumRows];
  for(int i=0; i<mNumRows; i++)
@@ -63,9 +59,6 @@ Int3DMatrix::Int3DMatrix(const Int3DMatrix& other3DMatrix)
   }
  }
 
- std::cout<<"hi";
- int counter=0;
-
  //Copy values from other matrix
  for(int i=0; i<mNumRows; i++)
  {
@@ -73,14 +66,10 @@ Int3DMatrix::Int3DMatrix(const Int3DMatrix& other3DMatrix)
   {
    for(int k=0; k<mNumLayers; k++)
    {
-    counter=counter+1;
-    std::cout<<"\nCounter="<<counter;
-    std::cout<<"i="<<i<<"j="<<j<<"k="<<k;
     mData[i][j][k]=other3DMatrix.mData[i][j][k];
    }
   }
  }
- std::flush(std::cout<<"\n Complete");
 }
 
 
@@ -92,12 +81,10 @@ Int3DMatrix::~Int3DMatrix()
   for(int j=0; j<mNumCols; j++)
   {
    delete[] mData[i][j]; //Delete Layer pointer part
-   std::cout<<"\ndelete"<<"i="<<i<<"j="<<j;
   }
   delete[] mData[i]; //Delete Column pointer part
  }
  delete[] mData; //Delete Row pointer part
- std::cout<<"\n Destructor sucess";
 }
 
 //Getters and Setters
@@ -167,8 +154,104 @@ int Int3DMatrix::Read(int i, int j, int k)
  return mData[i-1][j-1][k-1];
 }
 
+//Overloading assignment operator
+Int3DMatrix& Int3DMatrix::operator=(const Int3DMatrix& otherMatrix)
+{
+ //Check they are the same size (or assignment will fail)
+ assert(mNumRows==otherMatrix.GetNumberRows());
+ assert(mNumCols==otherMatrix.GetNumberCols());
+ assert(mNumLayers==otherMatrix.GetNumberLayers());
 
+ for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   for(int k=0; k<mNumLayers; k++)
+   {
+    mData[i][j][k]=otherMatrix.mData[i][j][k];
+   }
+  }
+ }
+}
 
+// Unary +
+Int3DMatrix Int3DMatrix::operator+() const
+{
+ Int3DMatrix mat(mNumRows,mNumCols,mNumLayers);
+ for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   for(int k=0; k<mNumLayers; k++)
+   {
+    mat(i+1,j+1,k+1)=mData[i][j][k];
+   }
+  }
+ }
+ return mat;
+}
+
+// Unary -
+Int3DMatrix Int3DMatrix::operator-() const
+{
+ Int3DMatrix mat(mNumRows,mNumCols,mNumLayers);
+ for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   for(int k=0; k<mNumLayers; k++)
+   {
+    mat(i+1,j+1,k+1)=-mData[i][j][k];
+   }
+  }
+ }
+ return mat;
+}
+
+// Binary +
+Int3DMatrix Int3DMatrix::operator+(const Int3DMatrix& m1) const
+{
+ //Check they are the same size to perform matrix addition
+ assert(mNumRows==m1.GetNumberRows());
+ assert(mNumCols==m1.GetNumberCols());
+ assert(mNumLayers==m1.GetNumberLayers());
+
+ Int3DMatrix mat(mNumRows,mNumCols,mNumLayers);
+ for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   for(int k=0; k<mNumLayers; k++)
+   {
+    mat(i+1,j+1,k+1)=mData[i][j][k]+m1.mData[i][j][k];
+   }
+  }
+ }
+ return mat;
+
+}
+
+// Binary -
+Int3DMatrix Int3DMatrix::operator-(const Int3DMatrix& m1) const
+{
+ //Check they are the same size to perform matrix subtraction
+ assert(mNumRows==m1.GetNumberRows());
+ assert(mNumCols==m1.GetNumberCols());
+ assert(mNumLayers==m1.GetNumberLayers());
+
+  Int3DMatrix mat(mNumRows,mNumCols,mNumLayers);
+ for(int i=0; i<mNumRows; i++)
+ {
+  for(int j=0; j<mNumCols; j++)
+  {
+   for(int k=0; k<mNumLayers; k++)
+   {
+    mat(i+1,j+1,k+1)=mData[i][j][k]-m1.mData[i][j][k];
+   }
+  }
+ }
+ return mat;
+}
 
 
 

@@ -30,7 +30,20 @@ class Int3DMatrix
  // Read entry
  int Read(int i, int j, int k);
 
+ //Overloaded assignment operator
+ Int3DMatrix& operator=(const Int3DMatrix& otherMatrix);
 
+ // Unary +
+ Int3DMatrix operator+() const;
+
+ // Unary -
+ Int3DMatrix operator-() const;
+
+ // Binary +
+ Int3DMatrix operator+(const Int3DMatrix& m1) const;
+
+ // Binary -
+ Int3DMatrix operator-(const Int3DMatrix& m1) const;
 
  protected:
 

@@ -68,8 +68,14 @@ int main(int argc,char* argv[])
 
  //Testing Int3DMatrix
  Int3DMatrix Matrix1(9,10,4);
+ Matrix1(5,6,1)=5; Matrix1(6,2,2)=-3; Matrix1(1,1,1)=4;
  Int3DMatrix Copy(Matrix1);
+ Copy(2,1,1)=-6;
+ Int3DMatrix Addition(9,10,4);
+ Addition=Copy+Matrix1;
+ std::cout<<Matrix1;
  std::cout<<Copy;
+ std::cout<<Addition;
  std::flush(std::cout<<"\n About to return 0");
 
 
