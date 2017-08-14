@@ -116,6 +116,7 @@ int& Int3DMatrix::operator()(int i, int j, int k)
  return mData[i-1][j-1][k-1];
 }
 
+//Overloading Output operator
 std::ostream& operator<<(std::ostream& output,const Int3DMatrix& m)
 {
   // Print formatted output
@@ -331,6 +332,9 @@ IntMatrix Int3DMatrix::GetLayerMatrix(int Layer) const
 }
 
 //Setting 2d Matrices
+/*
+These methods set a Row,Col or Layer 2d matrix to a particular other 2d matrix
+*/
 void Int3DMatrix::SetRowMatrix(int Row, IntMatrix mat)
 {
  //Check valid row is chosen
@@ -424,6 +428,9 @@ Int3DMatrix Int3DMatrix::GetBlock(int TopLeftI,int TopLeftJ,int TopLeftK,
 }
 
 //Set Block
+/*
+This method sets a block of the matrix to another matrix
+*/
 void Int3DMatrix::SetBlock(int TopLeftI, int TopLeftJ, int TopLeftK,
                            Int3DMatrix mat)
 {
@@ -454,6 +461,9 @@ void Int3DMatrix::SetBlock(int TopLeftI, int TopLeftJ, int TopLeftK,
 }
 
 //Fill
+/*
+This method fills the matrix with certain value
+*/
 void Int3DMatrix::Fill(const int FillValue)
 {
  for(int i=0; i<mNumRows; i++)
@@ -469,6 +479,9 @@ void Int3DMatrix::Fill(const int FillValue)
 }
 
 //Extending
+/*
+These methods extend the dimensions of the current matrix
+*/
 void Int3DMatrix::ExtendRow(const int ExtendBy)
 {
  //Create temp storage
@@ -621,6 +634,10 @@ void Int3DMatrix::ExtendLayer(const int ExtendBy)
 }
 
 //Adding
+/*
+These methods add a Row, Col or Layer Matrix(full of zeroes)
+Note. They have the option to add to either side of the given Row,Col or Layer
+*/
 void Int3DMatrix::AddRow(const int Row, bool below/*=true*/)
 {
 //Create temp storage
@@ -836,6 +853,9 @@ void Int3DMatrix::AddLayer(const int Layer, bool backwards/*=true*/)
 }
 
 //Deleting
+/*
+These methods delete a 2d matrix for the selected Row, Col or Layer
+*/
 void Int3DMatrix::DeleteRow(const int Row)
 {
 //Create temp storage

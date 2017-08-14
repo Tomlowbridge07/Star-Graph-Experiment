@@ -68,6 +68,8 @@ class Int3DMatrix
  //Fill
  void Fill(const int FillValue);
 
+
+
  //Extending
  void ExtendRow(const int ExtendBy);
  void ExtendCol(const int ExtendBy);
