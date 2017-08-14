@@ -1040,8 +1040,9 @@
 	"Vector.hpp"
 	"IntMatrix.hpp"
 
-1501845947 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Vector.hpp
+1502710318 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Vector.hpp
 	<iostream>
+	"IntVector.hpp"
 
 1502705592 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/IntMatrix.hpp
 	"IntVector.hpp"
@@ -1105,17 +1106,18 @@
 	"MixedPatroller.hpp"
 	<assert.h>
 
-1502460239 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/MixedPolicyEvaluation.cpp
+1502711338 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/MixedPolicyEvaluation.cpp
 	"MixedPolicyEvaluation.hpp"
 	"MixedAttackGenerator.hpp"
 	<iomanip>
 	<iostream>
 	<fstream>
 
-1502460587 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/MixedPolicyEvaluation.hpp
+1502711338 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/MixedPolicyEvaluation.hpp
 	"AbstractPatroller.hpp"
 	"PathWaitPatroller.hpp"
 	"MixedPatroller.hpp"
+	"Int3DMatrix.hpp"
 
 1501845947 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/PathWaitPatroller.hpp
 	"AbstractPatroller.hpp"
@@ -1142,14 +1144,14 @@
 1501845947 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/UsefulFunctions.cpp
 	"UsefulFunctions.hpp"
 
-1501845947 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Vector.cpp
+1502710318 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Vector.cpp
 	<cmath>
 	<cassert>
 	<iomanip>
 	<fstream>
 	"Vector.hpp"
 
-1502708019 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Driver.cpp
+1502708780 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Driver.cpp
 	<iostream>
 	"IntMatrix.hpp"
 	"Int3DMatrix.hpp"
@@ -1177,12 +1179,12 @@
 	"BatchMixedPolicyEvaluation.hpp"
 	"BatchTimeMixedPolicyEvaluation.hpp"
 
-1502707945 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Int3DMatrix.cpp
+1502711172 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Int3DMatrix.cpp
 	"Int3DMatrix.hpp"
 	<cassert>
 	<iomanip>
 
-1502708701 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Int3DMatrix.hpp
+1502711172 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Int3DMatrix.hpp
 	"IntMatrix.hpp"
 
 1502528175 e:\files\documents\git repositories\star graph experiment\int3dmatrix.hpp

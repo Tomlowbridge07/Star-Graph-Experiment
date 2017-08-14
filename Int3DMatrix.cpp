@@ -390,6 +390,55 @@ void Int3DMatrix::SetLayerMatrix(int Layer, IntMatrix mat)
  }
 }
 
+//Setting Vectors
+void Int3DMatrix::SetRowVector(int Row,int Layer, IntVector Vec)
+{
+ //Check Valid Row and Layer are selected
+ assert(Row>0);
+ assert(Row<=mNumRows);
+ assert(Layer>0);
+ assert(Layer<=mNumLayers);
+ //Check Vector is valid for insertion
+ assert(Vec.GetSize()==mNumCols);
+
+ //Insert Values
+ for(int j=0; j<mNumCols; j++)
+ {
+  mData[Row-1][j][Layer-1]=Vec(j+1);
+ }
+}
+void Int3DMatrix::SetColVector(int Col, int Layer, IntVector Vec)
+{
+ //Check Valid Row and Layer are selected
+ assert(Col>0);
+ assert(Col<=mNumCols);
+ assert(Layer>0);
+ assert(Layer<=mNumLayers);
+ //Check Vector is valid for insertion
+ assert(Vec.GetSize()==mNumRows);
+
+ //Insert Values
+ for(int i=0; i<mNumRows; i++)
+ {
+  mData[i][Col-1][Layer-1]=Vec(i+1);
+ }
+}
+void Int3DMatrix::SetLayerVector(int Row, int Col, IntVector Vec)
+{
+ //Check Valid Row and Layer are selected
+ assert(Row>0);
+ assert(Row<=mNumRows);
+ assert(Col>0);
+ assert(Col<=mNumCols);
+ //Check Vector is valid for insertion
+ assert(Vec.GetSize()==mNumLayers);
+
+ //Insert Values
+ for(int k=0; k<mNumLayers; k++)
+ {
+  mData[Row-1][Col-1][k]=Vec(k+1);
+ }
+}
 
 //Returns a Block of the matrix
 /*

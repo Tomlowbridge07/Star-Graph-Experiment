@@ -2,6 +2,7 @@
 #define VECTORHEADERDEF
 
 #include <iostream>
+#include "IntVector.hpp"
 
 // Class adapted from Whiteley, Pitt-Francis
 class Vector
@@ -88,15 +89,11 @@ public:
 
    //Max of the vector
    double Max();
-
-   //Find the element that generates the maximum
    int MaxElement();
-
-   //Min of the vector
+   IntVector MaxElements();
    double Min();
-
-   //Find the element that generates the minimum
    int MinElement();
+   IntVector MinElements();
 
    //BubbleSorts
    //This returns as a seperate vector the bubble sorted vector

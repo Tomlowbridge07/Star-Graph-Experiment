@@ -101,6 +101,26 @@ int main(int argc,char* argv[])
  Addition.DeleteRow(2);
  std::cout<<Addition;
 
+ SpecialGraphGenerator GraphGen;
+ GraphGen.GenerateExtendedStar(4,1);
+ IntMatrix Star(GraphGen.GetAdjacenyMatrix());
+ std::flush(std::cout<<"Star graph is: "<<Star<<"\n");
+ PathGenerator PathGen(Star);
+ IntVector AttackNodes(4);
+ AttackNodes(1)=1;
+ AttackNodes(2)=4;
+ AttackNodes(3)=5;
+ AttackNodes(4)=6;
+ PathGen.GeneratePathsFromDepth(AttackNodes,AttackNodes);
+ IntMatrix Paths(PathGen.GetPaths());
+ std::flush(std::cout<<"Paths are:"<<Paths<<"\n");
+ PathWaitPatroller PWPat(Star,AttackNodes,Paths,12,7);
+ PWPat.PrintPurePatrollerOptions();
+ MixedPatroller MPWPat(PWPat);
+ MixedPolicyEvaluation Ev(MPWPat);
+ Ev.EvaluateExtendedStarGraphTestPW(4,1);
+ std::cout<<Ev.GetAllBestPatrollerStrat();
+
 
 /*
  SpecialGraphGenerator GraphGen;

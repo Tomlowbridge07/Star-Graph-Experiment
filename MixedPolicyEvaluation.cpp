@@ -19,6 +19,10 @@ MixedPolicyEvaluation::
  mpBestPatrollerStrat=new IntMatrix(1,mpMixedPatrollerSystem
                                     ->GetPatrollerSystem()->GetGameTime());
 
+ mpAllBestPatrollerStratNum=new IntMatrix(1,1);
+ mpAllBestPatrollerStrat=new Int3DMatrix(1,mpMixedPatrollerSystem
+                                    ->GetPatrollerSystem()->GetGameTime(),1);
+
  //Store Empty/Null Matrices for MT Space Evaluation
  mpMTSpaceEvaluation=new Matrix(1,1);
  mpMTSpaceKeyProbability=new Matrix(1,1);
@@ -34,6 +38,9 @@ MixedPolicyEvaluation::~MixedPolicyEvaluation()
  delete mpKeyProbability;
  delete mpBestPatrollerStratNum;
  delete mpBestPatrollerStrat;
+ delete mpAllBestPatrollerStratNum;
+ delete mpAllBestPatrollerStrat;
+
 
  delete mpMTSpaceEvaluation;
  delete mpMTSpaceKeyProbability;
@@ -67,6 +74,10 @@ IntMatrix MixedPolicyEvaluation::GetBestPatrollerStrat()
 {
  return (*mpBestPatrollerStrat);
 }
+Int3DMatrix MixedPolicyEvaluation::GetAllBestPatrollerStrat()
+{
+ return (*mpAllBestPatrollerStrat);
+}
 Matrix MixedPolicyEvaluation::GetMTSpaceEvaluation()
 {
  return (*mpMTSpaceEvaluation);
@@ -92,12 +103,18 @@ void MixedPolicyEvaluation::EvaluateGraph(Vector MixedAttackerStrat)
  delete mpKeyProbability;
  delete mpBestPatrollerStratNum;
  delete mpBestPatrollerStrat;
+ delete mpAllBestPatrollerStratNum;
+ delete mpAllBestPatrollerStrat;
 
  mpStepEvaluation=new Vector(1);
  mpKeyProbability=new Vector(1);
  mpBestPatrollerStratNum=new IntVector(1);
  mpBestPatrollerStrat=
  new IntMatrix(1,mpMixedPatrollerSystem->GetPatrollerSystem()->GetGameTime());
+
+ mpAllBestPatrollerStratNum=new IntMatrix(1,1);
+ mpAllBestPatrollerStrat=new Int3DMatrix(1,mpMixedPatrollerSystem
+                                    ->GetPatrollerSystem()->GetGameTime(),1);
 
  //Once Set up We evaluate the mixed attacker strat.
  mpMixedPatrollerSystem->SetMixedAttackerStrategy(MixedAttackerStrat);
@@ -112,6 +129,25 @@ void MixedPolicyEvaluation::EvaluateGraph(Vector MixedAttackerStrat)
  //store the strategy
  mpBestPatrollerStrat->SetRow(1,mpMixedPatrollerSystem->GetPatrollerSystem()->
                     ConvertPatrollerOptionNum((*mpBestPatrollerStratNum)(1)));
+
+
+ //Saving All Best Strategies
+ //Alter Storage Size
+ IntVector AllBestElements(
+ (mpMixedPatrollerSystem->GetAttackerAgainstPureEvaluation()).MaxElements());
+ int NumOfBestStrategies=AllBestElements.GetSize();
+ mpAllBestPatrollerStratNum->ExtendRow(NumOfBestStrategies-1);
+ mpAllBestPatrollerStrat->ExtendRow(NumOfBestStrategies-1);
+
+ //Store Strat Num's and Strat
+ for(int i=1; i<=NumOfBestStrategies; i++)
+ {
+  (*mpAllBestPatrollerStratNum)(i,1)=AllBestElements(i);
+  mpAllBestPatrollerStrat->SetRowVector(i,1,
+  mpMixedPatrollerSystem->GetPatrollerSystem()->
+  ConvertPatrollerOptionNum(AllBestElements(i)));
+ }
+
 }
 
 //Evaluations designed to use the generators for a normal walk style

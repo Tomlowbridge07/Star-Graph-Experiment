@@ -58,6 +58,11 @@ class Int3DMatrix
  void SetColMatrix(int Col, IntMatrix mat);
  void SetLayerMatrix(int Layer, IntMatrix mat);
 
+ //Setting Vectors
+ void SetRowVector(int Row,int Layer, IntVector Vec);
+ void SetColVector(int Col, int Layer, IntVector Vec);
+ void SetLayerVector(int Row, int Col, IntVector Vec);
+
  //Returns a Block of the matrix
  Int3DMatrix GetBlock(int TopLeftI,int TopLeftJ,int TopLeftK,
                       int rows, int cols, int layers);

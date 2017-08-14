@@ -319,6 +319,34 @@ int Vector::MaxElement()
  return element;
 }
 
+//Maximum Elements
+/*
+This method returns the 1-based index maximum elements of a vector.
+The size of the vector determines how many maximum elements there are
+*/
+IntVector Vector::MaxElements()
+{
+ int i=1;
+ IntVector maxelements(1);
+ double maxer=(*this).Max();
+ int counter=1;
+ while(i<=mSize)
+ {
+  if((*this)(i)==maxer)
+  {
+   if(counter!=1)
+   {
+    maxelements.Extend(1);
+   }
+   maxelements(counter)=i;
+   counter=counter+1;
+  }
+
+  i=i+1;
+ }
+ return maxelements;
+}
+
 //Min of the vector
 double Vector::Min()
 {
@@ -366,6 +394,33 @@ int Vector::MinElement()
   i=i+1;
  }
  return element;
+}
+
+//Minimum Elements
+/*
+This method returns the 1-based index minimum elements of a vector.
+The size of the vector determines how many minimum elements there are
+*/
+IntVector Vector::MinElements()
+{
+ int i=1;
+ IntVector minelements(1);
+ double miner=(*this).Min();
+ int counter=1;
+ while(i<=mSize)
+ {
+  if((*this)(i)==miner)
+  {
+   if(counter!=1)
+   {
+    minelements.Extend(1);
+   }
+   minelements(counter)=i;
+   counter=counter+1;
+  }
+  i=i+1;
+ }
+ return minelements;
 }
 
 //BubbleSort

@@ -4,6 +4,7 @@
 #include "AbstractPatroller.hpp"
 #include "PathWaitPatroller.hpp"
 #include "MixedPatroller.hpp"
+#include "Int3DMatrix.hpp"
 
 /*
 Class:Mixed Policy Batch Evaluation
@@ -31,6 +32,7 @@ class MixedPolicyEvaluation
  Vector GetKeyProbabilityVector();
  IntVector GetBestPatrollerVector();
  IntMatrix GetBestPatrollerStrat();
+ Int3DMatrix GetAllBestPatrollerStrat();
  Matrix GetMTSpaceEvaluation();
  Matrix GetMTSpaceKeyProbability();
  IntMatrix GetMTSpaceBestPatrollerStratNum();
@@ -139,6 +141,13 @@ class MixedPolicyEvaluation
  IntVector* mpBestPatrollerStratNum;
 
  IntMatrix* mpBestPatrollerStrat;
+
+ //Stores all Best Patroller StratNum's and actual strategies
+ //Rows for each of the evaluation number and number of cols is the number of
+ //evaluations
+ IntMatrix* mpAllBestPatrollerStratNum;
+ //Layer Matrices store all the different strategies for a particular evaluation
+ Int3DMatrix* mpAllBestPatrollerStrat;
 
  int mStartT;
  int mLastT;
