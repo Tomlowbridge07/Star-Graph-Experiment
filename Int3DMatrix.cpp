@@ -446,7 +446,7 @@ This method retrives a smaller block of the 3D matrix
 Note. Topleft means closest to (1,1,1)
 Also uses 1-based indexing
 */
-Int3DMatrix Int3DMatrix::GetBlock(int TopLeftI,int TopLeftJ,int TopLeftK,
+Int3DMatrix Int3DMatrix::Get3DBlock(int TopLeftI,int TopLeftJ,int TopLeftK,
                                   int rows, int cols, int layers)
 {
  //Check the TopLeft's are valid choices
@@ -480,7 +480,7 @@ Int3DMatrix Int3DMatrix::GetBlock(int TopLeftI,int TopLeftJ,int TopLeftK,
 /*
 This method sets a block of the matrix to another matrix
 */
-void Int3DMatrix::SetBlock(int TopLeftI, int TopLeftJ, int TopLeftK,
+void Int3DMatrix::Set3DBlock(int TopLeftI, int TopLeftJ, int TopLeftK,
                            Int3DMatrix mat)
 {
  //Check the TopLeft's are valid choices
@@ -503,7 +503,7 @@ void Int3DMatrix::SetBlock(int TopLeftI, int TopLeftJ, int TopLeftK,
    for(int k=0; k<mat.GetNumberLayers(); k++)
    {
     mData[TopLeftI-1+i][TopLeftJ-1+j][TopLeftK-1+k]=
-    mat(TopLeftI+i,TopLeftJ+j,TopLeftK+k);
+    mat(i+1,j+1,k+1);
    }
   }
  }

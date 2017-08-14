@@ -1050,16 +1050,18 @@
 1502461626 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/IntVector.hpp
 	<iostream>
 
-1502365131 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/BatchMixedPolicyEvaluation.cpp
+1502718278 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/BatchMixedPolicyEvaluation.cpp
 	"BatchMixedPolicyEvaluation.hpp"
+	<cassert>
 
-1502365131 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/BatchMixedPolicyEvaluation.hpp
+1502714472 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/BatchMixedPolicyEvaluation.hpp
 	"MixedPatroller.hpp"
 	"MixedAttackGenerator.hpp"
 	"Vector.hpp"
 	"Matrix.hpp"
 	"IntVector.hpp"
 	"IntMatrix.hpp"
+	"Int3DMatrix.hpp"
 
 1501845947 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/MixedPatroller.hpp
 	"AbstractPatroller.hpp"
@@ -1067,11 +1069,12 @@
 1502365131 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/MixedAttackGenerator.hpp
 	"AbstractPatroller.hpp"
 
-1502365131 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/BatchTimeMixedPolicyEvaluation.cpp
+1502717576 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/BatchTimeMixedPolicyEvaluation.cpp
 	"BatchTimeMixedPolicyEvaluation.hpp"
 	<cmath>
+	<cassert>
 
-1502365131 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/BatchTimeMixedPolicyEvaluation.hpp
+1502714036 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/BatchTimeMixedPolicyEvaluation.hpp
 	"BatchMixedPolicyEvaluation.hpp"
 
 1502707492 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/IntMatrix.cpp
@@ -1151,7 +1154,7 @@
 	<fstream>
 	"Vector.hpp"
 
-1502708780 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Driver.cpp
+1502714787 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Driver.cpp
 	<iostream>
 	"IntMatrix.hpp"
 	"Int3DMatrix.hpp"
@@ -1179,12 +1182,12 @@
 	"BatchMixedPolicyEvaluation.hpp"
 	"BatchTimeMixedPolicyEvaluation.hpp"
 
-1502711172 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Int3DMatrix.cpp
+1502717462 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Int3DMatrix.cpp
 	"Int3DMatrix.hpp"
 	<cassert>
 	<iomanip>
 
-1502711172 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Int3DMatrix.hpp
+1502715556 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Int3DMatrix.hpp
 	"IntMatrix.hpp"
 
 1502528175 e:\files\documents\git repositories\star graph experiment\int3dmatrix.hpp

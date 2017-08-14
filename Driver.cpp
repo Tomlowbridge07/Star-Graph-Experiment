@@ -64,7 +64,7 @@ int main(int argc,char* argv[])
  IntVector Test(6);
  Test(1)=5; Test(2)=-2; Test(3)=5; Test(4)=0; Test(5)=-2; Test(6)=5;
  std::cout<<Test.MaxElements();
-*/
+
 
  //Testing Int3DMatrix
  Int3DMatrix Matrix1(9,10,4);
@@ -114,13 +114,43 @@ int main(int argc,char* argv[])
  PathGen.GeneratePathsFromDepth(AttackNodes,AttackNodes);
  IntMatrix Paths(PathGen.GetPaths());
  std::flush(std::cout<<"Paths are:"<<Paths<<"\n");
- PathWaitPatroller PWPat(Star,AttackNodes,Paths,12,7);
+ PathWaitPatroller PWPat(Star,AttackNodes,Paths,12,8);
  PWPat.PrintPurePatrollerOptions();
  MixedPatroller MPWPat(PWPat);
  MixedPolicyEvaluation Ev(MPWPat);
  Ev.EvaluateExtendedStarGraphTestPW(4,1);
  std::cout<<Ev.GetAllBestPatrollerStrat();
+ if((Ev.GetAllBestPatrollerStrat()).GetNumberRows()==
+ PWPat.GetNumPurePatrolOptions())
+ {
+  std::cout<<"\nYes";
+ }
+ else
+ {
+  std::cout<<"\nNo";
+ }
 
+ */
+
+ SpecialGraphGenerator GraphGen;
+ GraphGen.GenerateExtendedStar(4,1);
+ IntMatrix Star(GraphGen.GetAdjacenyMatrix());
+ std::flush(std::cout<<"Star graph is: "<<Star<<"\n");
+ PathGenerator PathGen(Star);
+ IntVector AttackNodes(4);
+ AttackNodes(1)=1;
+ AttackNodes(2)=4;
+ AttackNodes(3)=5;
+ AttackNodes(4)=6;
+ PathGen.GeneratePathsFromDepth(AttackNodes,AttackNodes);
+ IntMatrix Paths(PathGen.GetPaths());
+ std::flush(std::cout<<"Paths are:"<<Paths<<"\n");
+ PathWaitPatroller PWPat(Star,AttackNodes,Paths,9,6);
+ PWPat.PrintPurePatrollerOptions();
+ MixedPatroller MPWPat(PWPat);
+ BatchMixedPolicyEvaluation Batcher(MPWPat,0.1);
+ BatchTimeMixedPolicyEvaluation TimeBatcher(Batcher);
+ TimeBatcher.EvaluateBatchTimeTest(4,1);
 
 /*
  SpecialGraphGenerator GraphGen;

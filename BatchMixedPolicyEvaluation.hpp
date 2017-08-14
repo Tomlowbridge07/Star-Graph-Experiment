@@ -7,6 +7,7 @@
 #include "Matrix.hpp"
 #include "IntVector.hpp"
 #include "IntMatrix.hpp"
+#include "Int3DMatrix.hpp"
 
 /*
 This class is designed to evaluate an attack for a mixed policy for a variety of
@@ -42,6 +43,8 @@ class BatchMixedPolicyEvaluation
  IntVector GetBestPatrollerVector();
  IntVector GetBestPatrollerStratNum();
  IntMatrix GetBestPatrollerStrat();
+ IntMatrix GetAllBestPatrollerStratNum();
+ Int3DMatrix GetAllBestPatrollerStrat();
  Matrix GetMTSpaceEvaluation();
  Matrix GetMTSpaceKeyProbability();
  IntMatrix GetMTSpaceBestPatrollerStratNum();
@@ -83,6 +86,13 @@ class BatchMixedPolicyEvaluation
 
  //Store the strategy the patroller will use against each choice of weight
  IntMatrix* mpBestPatrollerStrat;
+
+ //Stores all Best Patroller StratNum's and actual strategies
+ //Rows for each of the evaluation number and number of cols is the number of
+ //evaluations
+ IntMatrix* mpAllBestPatrollerStratNum;
+ //Layer Matrices store all the different strategies for a particular evaluation
+ Int3DMatrix* mpAllBestPatrollerStrat;
 
  int mStartT;
  int mLastT;

@@ -1,4 +1,5 @@
 #include "BatchMixedPolicyEvaluation.hpp"
+#include<cassert>
 
 //Standard constructor
 BatchMixedPolicyEvaluation::
@@ -22,6 +23,11 @@ BatchMixedPolicyEvaluation::
  new IntMatrix(mNumSteps+1,mpMixedPatrollerSystem
                ->GetPatrollerSystem()->GetGameTime());
 
+ mpAllBestPatrollerStratNum=new IntMatrix(1,mNumSteps+1);
+ mpAllBestPatrollerStrat=new Int3DMatrix(1,mpMixedPatrollerSystem
+                                    ->GetPatrollerSystem()->GetGameTime(),
+                                    mNumSteps+1);
+
  //Store Empty/Null Matrices for MT Space Evaluation
  mpMTSpaceEvaluation=new Matrix(1,1);
  mpMTSpaceKeyProbability=new Matrix(1,1);
@@ -37,6 +43,8 @@ BatchMixedPolicyEvaluation::~BatchMixedPolicyEvaluation()
  delete mpAllEvaluations;
  delete mpBestPatrollerStratNum;
  delete mpBestPatrollerStrat;
+ delete mpAllBestPatrollerStratNum;
+ delete mpAllBestPatrollerStrat;
 
  delete mpMTSpaceEvaluation;
  delete mpMTSpaceKeyProbability;
@@ -103,6 +111,14 @@ IntMatrix BatchMixedPolicyEvaluation::GetBestPatrollerStrat()
 {
  return (*mpBestPatrollerStrat);
 }
+IntMatrix BatchMixedPolicyEvaluation::GetAllBestPatrollerStratNum()
+{
+ return (*mpAllBestPatrollerStratNum);
+}
+Int3DMatrix BatchMixedPolicyEvaluation::GetAllBestPatrollerStrat()
+{
+ return (*mpAllBestPatrollerStrat);
+}
 Matrix BatchMixedPolicyEvaluation::GetMTSpaceEvaluation()
 {
  return (*mpMTSpaceEvaluation);
@@ -150,6 +166,34 @@ void BatchMixedPolicyEvaluation::
  mpBestPatrollerStrat
  ->SetRow(entry,mpMixedPatrollerSystem->GetPatrollerSystem()
           ->ConvertPatrollerOptionNum(((*mpBestPatrollerStratNum)(entry))));
+
+
+ //Storing all for this evaluation
+ //Alter Storage Size
+ IntVector AllBestElements(
+ (mpMixedPatrollerSystem->GetAttackerAgainstPureEvaluation()).MaxElements());
+ int NumOfBestStrategies=AllBestElements.GetSize();
+
+ if(NumOfBestStrategies>mpAllBestPatrollerStratNum->GetNumberOfRows())
+ {
+  mpAllBestPatrollerStratNum->
+  ExtendRow(NumOfBestStrategies-mpAllBestPatrollerStratNum->GetNumberOfRows());
+ }
+
+ if(NumOfBestStrategies>mpAllBestPatrollerStrat->GetNumberRows())
+ {
+  mpAllBestPatrollerStrat->
+  ExtendRow(NumOfBestStrategies-mpAllBestPatrollerStrat->GetNumberRows());
+ }
+
+ //Store Strat Num's and Strat
+ for(int i=1; i<=NumOfBestStrategies; i++)
+ {
+  (*mpAllBestPatrollerStratNum)(i,entry)=AllBestElements(i);
+  mpAllBestPatrollerStrat->SetRowVector(i,entry,
+  mpMixedPatrollerSystem->GetPatrollerSystem()->
+  ConvertPatrollerOptionNum(AllBestElements(i)));
+ }
 }
 
 //Test Evaluation
@@ -165,6 +209,8 @@ void BatchMixedPolicyEvaluation::EvaluateBatchTest1(int n, int k)
  delete mpAllEvaluations;
  delete mpBestPatrollerStratNum;
  delete mpBestPatrollerStrat;
+ delete mpAllBestPatrollerStratNum;
+ delete mpAllBestPatrollerStrat;
 
  mpStepEvaluation=new Vector(mNumSteps+1);
  mpKeyProbability=new Vector(mNumSteps+1);
@@ -175,6 +221,11 @@ void BatchMixedPolicyEvaluation::EvaluateBatchTest1(int n, int k)
  mpBestPatrollerStrat=
  new IntMatrix(mNumSteps+1,mpMixedPatrollerSystem
                ->GetPatrollerSystem()->GetGameTime());
+
+  mpAllBestPatrollerStratNum=new IntMatrix(1,mNumSteps+1);
+ mpAllBestPatrollerStrat=new Int3DMatrix(1,mpMixedPatrollerSystem
+                                    ->GetPatrollerSystem()->GetGameTime(),
+                                    mNumSteps+1);
 
  int i=0;
  double weight;

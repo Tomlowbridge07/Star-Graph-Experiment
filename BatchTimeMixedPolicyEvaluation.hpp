@@ -53,6 +53,13 @@ class BatchTimeMixedPolicyEvaluation
   // and the choice of the best weight
   IntMatrix* mpBestTimePosPatrollerStrat;
 
+  //Storing All best patroller
+  //Rows for each of the evaluation number and number of cols is the number of
+  //evaluations
+  IntMatrix* mpAllBestTimePatrollerStratNum;
+  //Layer Matrices store all the different strategies for a particular evaluation
+  Int3DMatrix* mpAllBestTimePatrollerStrat;
+
   //Conversion of number to binary vector
   void ConvToBinary(int number,IntVector* pStorageVector,int StartEntry=1);
 

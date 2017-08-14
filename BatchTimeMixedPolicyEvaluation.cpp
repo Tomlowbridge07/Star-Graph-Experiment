@@ -1,5 +1,6 @@
 #include "BatchTimeMixedPolicyEvaluation.hpp"
 #include<cmath>
+#include<cassert>
 
 //Standard constructor
 BatchTimeMixedPolicyEvaluation::
@@ -27,6 +28,11 @@ BatchTimeMixedPolicyEvaluation::
  new IntMatrix(mNumTimeChoices,mpBatchPolicyEvaluation
                ->GetMixedPatrollerSystem()->GetPatrollerSystem()
                ->GetGameTime());
+
+ mpAllBestTimePatrollerStratNum=new IntMatrix(1,mNumTimeChoices);
+ mpAllBestTimePatrollerStrat=new Int3DMatrix(1,
+ mpBatchPolicyEvaluation->GetMixedPatrollerSystem()
+ ->GetPatrollerSystem()->GetGameTime(), mNumTimeChoices);
 }
 
 //Destructor
@@ -38,6 +44,8 @@ BatchTimeMixedPolicyEvaluation::~BatchTimeMixedPolicyEvaluation()
  delete mpBestTimePosWeight;
  delete mpBestTimePosPatrollerStratNum;
  delete mpBestTimePosPatrollerStrat;
+ delete mpAllBestTimePatrollerStratNum;
+ delete mpAllBestTimePatrollerStrat;
 }
 
 //Setters and Getters
@@ -86,6 +94,8 @@ void BatchTimeMixedPolicyEvaluation::EvaluateBatchTimeTest(int n,int k)
  delete mpBestTimePosWeight;
  delete mpBestTimePosPatrollerStratNum;
  delete mpBestTimePosPatrollerStrat;
+ delete mpAllBestTimePatrollerStratNum;
+ delete mpAllBestTimePatrollerStrat;
 
  mpTimePosEvaluation=new Vector(mNumTimeChoices);
  mpBestTimePosWeight=new Vector(mNumTimeChoices);
@@ -93,6 +103,11 @@ void BatchTimeMixedPolicyEvaluation::EvaluateBatchTimeTest(int n,int k)
  mpBestTimePosPatrollerStrat=
  new IntMatrix(mNumTimeChoices,mpBatchPolicyEvaluation->
                GetMixedPatrollerSystem()->GetPatrollerSystem()->GetGameTime());
+
+ mpAllBestTimePatrollerStratNum=new IntMatrix(1,mNumTimeChoices);
+ mpAllBestTimePatrollerStrat=new Int3DMatrix(1,
+ mpBatchPolicyEvaluation->GetMixedPatrollerSystem()
+ ->GetPatrollerSystem()->GetGameTime(), mNumTimeChoices);
 
  //Perform evaluation
  int choice=1;
@@ -127,7 +142,31 @@ void BatchTimeMixedPolicyEvaluation::EvaluateBatchTimeTest(int n,int k)
    SetRow(choice,(mpBatchPolicyEvaluation->
                   GetBestPatrollerStrat()).GetRow(minElement));
 
+   //Storing all for that best weighted time choice
+   IntMatrix
+   BestWeightNumMat(mpBatchPolicyEvaluation->GetAllBestPatrollerStratNum());
+   Int3DMatrix
+   BestWeight3DMat(mpBatchPolicyEvaluation->GetAllBestPatrollerStrat());
+   int NumberOfStrategies=BestWeightNumMat.GetNumberOfRows();
+   NumberOfStrategies=BestWeight3DMat.GetNumberRows();
+   assert(BestWeightNumMat.GetNumberOfRows()==NumberOfStrategies);
 
+   //Make sure correct size
+   if(NumberOfStrategies>mpAllBestTimePatrollerStratNum->GetNumberOfRows())
+   {
+    mpAllBestTimePatrollerStratNum->ExtendRow(NumberOfStrategies-
+    mpAllBestTimePatrollerStratNum->GetNumberOfRows());
+
+    mpAllBestTimePatrollerStrat->ExtendRow(NumberOfStrategies-
+    mpAllBestTimePatrollerStrat->GetNumberRows());
+   }
+   //Storing all patrolling strategies for this time choice
+   mpAllBestTimePatrollerStratNum->SetCol(choice,
+   BestWeightNumMat.GetCol(minElement));
+   mpAllBestTimePatrollerStrat->Set3DBlock(1,1,choice,
+   BestWeight3DMat.Get3DBlock(1,1,minElement,NumberOfStrategies,
+    mpBatchPolicyEvaluation->GetMixedPatrollerSystem()
+    ->GetPatrollerSystem()->GetGameTime(),1));
 
   choice=choice+1;
   }
@@ -146,7 +185,10 @@ void BatchTimeMixedPolicyEvaluation::EvaluateBatchTimeTest(int n,int k)
  std::cout<<"For an evaluation of "
  <<(*mpTimePosEvaluation)(BestTimeChoice)<<"\n";
  std::cout<<"The response patrol will be:"<<mpBestTimePosPatrollerStrat
-                                             ->GetRow(BestTimeChoice);
+                                             ->GetRow(BestTimeChoice)<<"\n";
+ std::cout<<"With Other response patrolling being:"<<
+ mpAllBestTimePatrollerStrat->GetLayerMatrix(BestTimeChoice)<<"\n";
+
 }
 
 //Converts to binary vector

@@ -64,11 +64,11 @@ class Int3DMatrix
  void SetLayerVector(int Row, int Col, IntVector Vec);
 
  //Returns a Block of the matrix
- Int3DMatrix GetBlock(int TopLeftI,int TopLeftJ,int TopLeftK,
+ Int3DMatrix Get3DBlock(int TopLeftI,int TopLeftJ,int TopLeftK,
                       int rows, int cols, int layers);
 
  //Set Block
- void SetBlock(int TopLeftI, int TopLeftJ, int TopLeftK, Int3DMatrix mat);
+ void Set3DBlock(int TopLeftI, int TopLeftJ, int TopLeftK, Int3DMatrix mat);
 
  //Fill
  void Fill(const int FillValue);
