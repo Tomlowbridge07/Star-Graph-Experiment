@@ -59,7 +59,13 @@ class BatchMixedPolicyEvaluation
  void EvaluateBatchTest1(int n, int k);
 
  //This is designed for use with the Class BatchTimeMixedPolicyEvaluation
- void EvaluateBatchTimePosTest(int n, int k,IntVector TimePosAttackVector);
+ /*It is supposed to be used with PW patroller (as it calls its matching
+    attack generator*/
+ void EvaluateExtenedStarBatchTimePosTestPW
+ (int n, int k,IntVector TimePosAttackVector);
+
+ void EvaluateExtenedStarBatchTimePosTest
+ (int n, int k,IntVector TimePosAttackVector);
 
  protected:
  int mNumSteps;

@@ -52,6 +52,8 @@
 		<Unit filename="MixedPatroller.hpp" />
 		<Unit filename="MixedPolicyEvaluation.cpp" />
 		<Unit filename="MixedPolicyEvaluation.hpp" />
+		<Unit filename="ObjectsInBins.cpp" />
+		<Unit filename="ObjectsInBins.hpp" />
 		<Unit filename="PathGenerator.cpp" />
 		<Unit filename="PathGenerator.hpp" />
 		<Unit filename="PathWaitPatroller.cpp" />

@@ -250,9 +250,12 @@ void BatchMixedPolicyEvaluation::EvaluateBatchTest1(int n, int k)
 This method is designed to take a time position vector and goes for all weights
 using a particular attack generator method designed for use with a time position
 attack vector.
+
+This method is meant to be used with PW type on the extended star graph for
+attacking two types of nodes (The extended one and normal ones).
 */
 void BatchMixedPolicyEvaluation::
-    EvaluateBatchTimePosTest(int n, int k,IntVector TimePosAttackVector)
+EvaluateExtenedStarBatchTimePosTestPW(int n, int k,IntVector TimePosAttackVector)
 {
  //Delete and reinizalize
  delete mpStepEvaluation;
@@ -288,3 +291,51 @@ void BatchMixedPolicyEvaluation::
   i=i+1;
  }
 }
+
+/*
+This method is designed to take a time position vector and goes for all weights
+using a particular attack generator method designed for use with a time position
+attack vector.
+
+This method is meant to be used with normal patrolling (not PW format).
+*/
+void BatchMixedPolicyEvaluation::
+EvaluateExtenedStarBatchTimePosTest(int n, int k,IntVector TimePosAttackVector)
+{
+ //Delete and reinizalize
+ delete mpStepEvaluation;
+ delete mpKeyProbability;
+ delete mpAllEvaluations;
+ delete mpBestPatrollerStratNum;
+ delete mpBestPatrollerStrat;
+
+ mpStepEvaluation=new Vector(mNumSteps+1);
+ mpKeyProbability=new Vector(mNumSteps+1);
+ mpAllEvaluations=
+ new Matrix(mpMixedPatrollerSystem->GetPatrollerSystem()
+            ->GetNumPurePatrolOptions(),mNumSteps+1);
+ mpBestPatrollerStratNum=new IntVector(mNumSteps+1);
+ mpBestPatrollerStrat=
+ new IntMatrix(mNumSteps+1,mpMixedPatrollerSystem
+               ->GetPatrollerSystem()->GetGameTime());
+
+ Vector Weights(k+3);
+
+ //Generate all possible weights
+ int i=1;
+ while(i<=mNumSteps)
+ {
+
+
+  Weights(i)=i*(mStepSize);
+
+  MixedAttackGenerator Generator(*mpMixedPatrollerSystem->GetPatrollerSystem());
+  Generator.GenerateExtendedStarTestTime(n,k,Weights,TimePosAttackVector);
+  Vector MixedAttackerStrat(Generator.GetGeneratedAttackVector());
+
+  EvaluateSingle(MixedAttackerStrat,i+1);
+
+  i=i+1;
+ }
+}
+

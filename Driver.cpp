@@ -10,6 +10,7 @@
 #include "Vector.hpp"
 #include "BatchMixedPolicyEvaluation.hpp"
 #include "BatchTimeMixedPolicyEvaluation.hpp"
+#include "ObjectsInBins.hpp"
 
 int main(int argc,char* argv[])
 {
@@ -39,6 +40,7 @@ int main(int argc,char* argv[])
  MPWPat.EvaluateAttackerAgainstPurePatroller();
  std::cout<<MPWPat.GetAttackerAgainstPureEvaluation().Max();
 */
+
 /*
  SpecialGraphGenerator GraphGen;
  GraphGen.GenerateExtendedStar(4,1);
@@ -131,7 +133,23 @@ int main(int argc,char* argv[])
  }
 
  */
+/*
+ SpecialGraphGenerator GraphGen;
+ GraphGen.GenerateExtendedStar(4,1);
+ IntMatrix Star(GraphGen.GetAdjacenyMatrix());
+ std::flush(std::cout<<"Star graph is: "<<Star<<"\n");
+ AbstractPatroller Pat(Star,5,1);
+ MixedPatroller MPat(Pat);
+ BatchMixedPolicyEvaluation Batcher(MPat,0.1);
+ BatchTimeMixedPolicyEvaluation TimeBatcher(Batcher);
+ TimeBatcher.EvaluateExtendedStarBatchTimeTestPW(4,1); */
 
+ ObjectsInBins Obj(10,5);
+ std::cout<<"Here are the things \n"
+ <<Obj.GetSeperatorMatrix();
+
+
+/*
  SpecialGraphGenerator GraphGen;
  GraphGen.GenerateExtendedStar(4,1);
  IntMatrix Star(GraphGen.GetAdjacenyMatrix());
@@ -145,7 +163,7 @@ int main(int argc,char* argv[])
  PathGen.GeneratePathsFromDepth(AttackNodes,AttackNodes);
  IntMatrix Paths(PathGen.GetPaths());
  std::flush(std::cout<<"Paths are:"<<Paths<<"\n");
- PathWaitPatroller PWPat(Star,AttackNodes,Paths,9,6);
+ PathWaitPatroller PWPat(Star,AttackNodes,Paths,7,4);
  PWPat.PrintPurePatrollerOptions();
  MixedPatroller MPWPat(PWPat);
  BatchMixedPolicyEvaluation Batcher(MPWPat,0.1);

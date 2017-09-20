@@ -1187,3 +1187,115 @@ void MixedAttackGenerator::GenerateExtendedStarTestTimePW(int n,int k,
  }
  //std::flush(std::cout<<(*mpGeneratedAttackVector));
 }
+
+//For use with the batch time posistion testing
+void MixedAttackGenerator::
+GenerateExtendedStarTestTime(int n,int k,
+Vector Weights,IntVector TimesToAttack)
+{
+
+ int i=1;
+ int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem
+                ->GetAttackTime()+1);
+
+ //Need to know how many attacks are there on each of the nodes
+ IntVector NumberofAttacks(k+3); //Assuming k>0
+
+ i=1;
+ int j=1;
+ while(i<=k+3)
+ {
+  j=1;
+  while(j<=blocksize)
+  {
+   if(TimesToAttack((i-1)*blocksize+j))
+   {
+    NumberofAttacks(i)=NumberofAttacks(i)+1;
+   }
+   j=j+1;
+  }
+  i=i+1;
+ }
+
+ //Check on weights, weights must be made to be zero if its time is not selected
+ i=1;
+ while(i<=k+3)
+ {
+  if(NumberofAttacks(i)==0) //No attacks here (as no times selected)
+  {
+   int temp=Weights(i);
+   //Set weight to zero
+   Weights(i)=0;
+
+   /*
+   We could now distribute the temp, however as we will test all weights this
+   doesn't have to be completed ?
+   */
+  }
+  i=i+1;
+ }
+
+
+ //Construct the attack
+ i=1;
+ int block=1; //There will be n+k+1 blocks (with k+3,k+4,...,n+k+1 being normal type
+ int readcounter=1;
+ while(block <= n)
+ {
+  if(block<=k+2)
+  {
+   i=1;
+   while(i<=blocksize)
+   {
+    if(TimesToAttack((block-1)*blocksize+i)==1)
+    {
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     ((double)(1)/(double)(NumberofAttacks(block))) * Weights(block);
+    }
+    else
+    {
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=0;
+    }
+    i=i+1;
+   }
+  }
+  else // I.e in normal external nodes (so only look at final block)
+  {
+   i=1;
+   while(i<=blocksize)
+   {
+    if(TimesToAttack((k+3-1)*blocksize+i)==1)
+    {
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     ((double)(1)/(double)(NumberofAttacks(k+3))) * Weights(k+3);
+    }
+    else
+    {
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=0;
+    }
+    i=i+1;
+   }
+  }
+  block=block+1;
+ }
+ //std::flush(std::cout<<(*mpGeneratedAttackVector));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

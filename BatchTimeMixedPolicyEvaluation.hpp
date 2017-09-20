@@ -2,30 +2,41 @@
 #define BATCHTIMEMIXEDPOLICYEVALUATIONHEADERDEF
 
 #include "BatchMixedPolicyEvaluation.hpp"
+/*
+This class is currently designed to use the PWPatrooler for the star graph to
+select only 2 types of time attack patterns.
 
+It tests all time positions for the best (i.e minimal) best weight evaluation.
+
+*/
 class BatchTimeMixedPolicyEvaluation
 {
  public:
 
   //Standard constructor
-  BatchTimeMixedPolicyEvaluation(BatchMixedPolicyEvaluation &aBatch);
+  BatchTimeMixedPolicyEvaluation
+  (BatchMixedPolicyEvaluation &aBatch, int NumTypes=2);
 
   //Deconstructor
   ~BatchTimeMixedPolicyEvaluation();
 
   //Setters and Getters
   void SetBatchPolicyEvaluation(BatchMixedPolicyEvaluation &aBatch);
+  void SetNumTypes(int NumTypes);
   BatchMixedPolicyEvaluation* GetMixedPolicyEvaluation();
   int GetNumTimeChoices();
   IntVector GetAttackingTimePos();
 
-  //Batch Evaluation
-  void EvaluateBatchTimeTest(int n,int k);
+  //Batch Evaluation for Extended Star PW
+  void EvaluateExtendedStarBatchTimeTestPW(int n,int k);
 
  protected:
 
   //Pointer to Batch weight process
   BatchMixedPolicyEvaluation* mpBatchPolicyEvaluation;
+
+  //Number of types of nodes (to allow variety on number of attacks)
+  int mNumTypes;
 
   //Number of start times for attack (stored for ease of use)
   int mNumStartTimes;

@@ -4,9 +4,11 @@
 
 //Standard constructor
 BatchTimeMixedPolicyEvaluation::
-    BatchTimeMixedPolicyEvaluation(BatchMixedPolicyEvaluation &aBatch)
+BatchTimeMixedPolicyEvaluation
+(BatchMixedPolicyEvaluation &aBatch,int NumTypes/*=2*/)
 {
  mpBatchPolicyEvaluation=&aBatch;
+ mNumTypes=NumTypes;
 
  //Store the number of options to start the attack at each node
  mNumStartTimes=mpBatchPolicyEvaluation->GetMixedPatrollerSystem()
@@ -16,9 +18,9 @@ BatchTimeMixedPolicyEvaluation::
 
  //Number of choices to try for time
  //Note. 1 is subtracted due to not allowing the null choice (i.e no attack)
- mNumTimeChoices=pow(2,2*mNumStartTimes)-1;
+ mNumTimeChoices=pow(2,mNumTypes*mNumStartTimes)-1;
 
- mpAttackingTimePos=new IntVector(2*mNumStartTimes);
+ mpAttackingTimePos=new IntVector(mNumTypes*mNumStartTimes);
 
  //Create Storage
  mpTimePosEvaluation=new Vector(mNumTimeChoices);
@@ -60,9 +62,44 @@ void BatchTimeMixedPolicyEvaluation::SetBatchPolicyEvaluation
  ->GetMixedPatrollerSystem()->GetPatrollerSystem()->GetAttackTime()+1;
 
  //Number of choices to try for time
- mNumTimeChoices=pow(2,2*mNumStartTimes)-1;
+ mNumTimeChoices=pow(2,mNumTypes*mNumStartTimes)-1;
 
  mpAttackingTimePos=new IntVector(2*mNumStartTimes);
+}
+void BatchTimeMixedPolicyEvaluation::SetNumTypes(int NumTypes)
+{
+ mNumTypes=NumTypes;
+
+ //Number of choices to try for time
+ //Note. 1 is subtracted due to not allowing the null choice (i.e no attack)
+ mNumTimeChoices=pow(2,mNumTypes*mNumStartTimes)-1;
+
+ mpAttackingTimePos=new IntVector(mNumTypes*mNumStartTimes);
+
+ //delete storage
+ delete mpAttackingTimePos;
+
+ delete mpTimePosEvaluation;
+ delete mpBestTimePosWeight;
+ delete mpBestTimePosPatrollerStratNum;
+ delete mpBestTimePosPatrollerStrat;
+ delete mpAllBestTimePatrollerStratNum;
+ delete mpAllBestTimePatrollerStrat;
+
+
+ //Create Storage
+ mpTimePosEvaluation=new Vector(mNumTimeChoices);
+ mpBestTimePosWeight=new Vector(mNumTimeChoices);
+ mpBestTimePosPatrollerStratNum=new IntVector(mNumTimeChoices);
+ mpBestTimePosPatrollerStrat=
+ new IntMatrix(mNumTimeChoices,mpBatchPolicyEvaluation
+               ->GetMixedPatrollerSystem()->GetPatrollerSystem()
+               ->GetGameTime());
+
+ mpAllBestTimePatrollerStratNum=new IntMatrix(1,mNumTimeChoices);
+ mpAllBestTimePatrollerStrat=new Int3DMatrix(1,
+ mpBatchPolicyEvaluation->GetMixedPatrollerSystem()
+ ->GetPatrollerSystem()->GetGameTime(), mNumTimeChoices);
 }
 BatchMixedPolicyEvaluation* BatchTimeMixedPolicyEvaluation::
                             GetMixedPolicyEvaluation()
@@ -85,10 +122,18 @@ Weight Batch evaluator passed to the object.
 
 Note. The Possible number of time positions checked is 2^(2*number of time
                                                           attack options)
-      Therefore for great choices, it is very slow at evaluating
+Therefore for great choices, it is very slow at evaluating
 */
-void BatchTimeMixedPolicyEvaluation::EvaluateBatchTimeTest(int n,int k)
+void BatchTimeMixedPolicyEvaluation::
+EvaluateExtendedStarBatchTimeTestPW(int n,int k)
 {
+ if(mNumTypes!=2)
+ {
+  std::cout<<"Error: Did you mean to run this \n"
+  <<"This method is designed to only attack the extended end node and"
+  <<"the normal end nodes";
+ }
+
  //Reinisalize storage
  delete mpTimePosEvaluation;
  delete mpBestTimePosWeight;
@@ -118,13 +163,14 @@ void BatchTimeMixedPolicyEvaluation::EvaluateBatchTimeTest(int n,int k)
  {
   //Create time selection vector
   delete mpAttackingTimePos;
-  mpAttackingTimePos=new IntVector(2*mNumStartTimes);
+  mpAttackingTimePos=new IntVector(mNumTypes*mNumStartTimes);
   ConvToBinary(choice,mpAttackingTimePos,1);
 
   std::cout<<"Choice:"<<choice<<" Attacking Pattern: \n"<<(*mpAttackingTimePos);
 
   //Evaluate the time positions for each step in the weight
-  mpBatchPolicyEvaluation->EvaluateBatchTimePosTest(n,k,(*mpAttackingTimePos));
+  mpBatchPolicyEvaluation->
+  EvaluateExtenedStarBatchTimePosTestPW(n,k,(*mpAttackingTimePos));
 
   //Retrive the best weight for the attack time position and store information
 
@@ -178,7 +224,7 @@ void BatchTimeMixedPolicyEvaluation::EvaluateBatchTimeTest(int n,int k)
  int BestTimeChoice=mpTimePosEvaluation->MinElement();
  std::cout<<"Attack Position is number "<<BestTimeChoice<<" being: \n";
  IntVector* pAttackPattern;
- pAttackPattern=new IntVector(2*mNumStartTimes);
+ pAttackPattern=new IntVector(mNumTypes*mNumStartTimes);
  ConvToBinary(BestTimeChoice,pAttackPattern,1);
  std::cout<<(*pAttackPattern);
  std::cout<<"Weight is "<<(*mpBestTimePosWeight)(BestTimeChoice)<<"\n";
@@ -186,9 +232,26 @@ void BatchTimeMixedPolicyEvaluation::EvaluateBatchTimeTest(int n,int k)
  <<(*mpTimePosEvaluation)(BestTimeChoice)<<"\n";
  std::cout<<"The response patrol will be:"<<mpBestTimePosPatrollerStrat
                                              ->GetRow(BestTimeChoice)<<"\n";
- std::cout<<"With Other response patrolling being:"<<
+ std::cout<<"With Other (equally good) response patrolling being:"<<
  mpAllBestTimePatrollerStrat->GetLayerMatrix(BestTimeChoice)<<"\n";
+ std::cout<<"------------------------------------------------------------ \n";
+ std::cout<<"Other (equally good) attack position numbers are \n ";
+ IntVector BestTimeChoices(mpTimePosEvaluation->MinElements());
+ std::cout<<BestTimeChoices<<"\n";
+ std::cout<<"Corresponding to attack positions being: \n";
+ std::cout<<"Note:The following are displayed in Rows \n";
 
+ IntMatrix AttackPatterns(BestTimeChoices.GetSize(),mNumTypes*mNumStartTimes);
+ for(int i=1; i<=BestTimeChoices.GetSize(); i++)
+ {
+  delete pAttackPattern;
+  pAttackPattern=new IntVector(2*mNumStartTimes);
+  ConvToBinary(BestTimeChoices(i),pAttackPattern,1);
+  AttackPatterns.SetRow(i,(*pAttackPattern));
+ }
+ std::cout<<AttackPatterns;
+
+ delete pAttackPattern;
 }
 
 //Converts to binary vector

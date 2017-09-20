@@ -79,6 +79,12 @@ class MixedAttackGenerator
  void GenerateExtendedStarTestTimePW(int n,int k,double weight,
                                      IntVector TimesToAttack);
 
+ //For use with the batch time posistion testing
+ //Note. This does not use PW, so it is a bigger function
+ void GenerateExtendedStarTestTime(int n,int k,
+                               Vector Weights
+                               ,IntVector TimesToAttack);
+
  protected:
 
  //Pointer to Pure Patrolling System
