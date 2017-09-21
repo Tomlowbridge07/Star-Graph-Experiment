@@ -45,6 +45,7 @@ class BatchMixedPolicyEvaluation
  IntMatrix GetBestPatrollerStrat();
  IntMatrix GetAllBestPatrollerStratNum();
  Int3DMatrix GetAllBestPatrollerStrat();
+ Matrix GetWeightings();
  Matrix GetMTSpaceEvaluation();
  Matrix GetMTSpaceKeyProbability();
  IntMatrix GetMTSpaceBestPatrollerStratNum();
@@ -100,6 +101,10 @@ class BatchMixedPolicyEvaluation
 
  //Layer Matrices store all the different strategies for a particular evaluation
  Int3DMatrix* mpAllBestPatrollerStrat;
+
+ //This matrix stores the weightings
+ Matrix* mpWeightings;
+
 
  int mStartT;
  int mLastT;

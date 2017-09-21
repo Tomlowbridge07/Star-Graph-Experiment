@@ -1199,7 +1199,7 @@ Vector Weights,IntVector TimesToAttack)
                 ->GetAttackTime()+1);
 
  int numberoftypes=0;
- if(mpPatrollerSystem->GetGameTime()>=3)
+ if(mpPatrollerSystem->GetAttackTime()>=3)
  {
   //removal of penultimate nodes along the line
   numberoftypes=k+1;
@@ -1209,6 +1209,7 @@ Vector Weights,IntVector TimesToAttack)
   //no removal has occured
   numberoftypes=k+3;
  }
+
 
  //Need to know how many attacks are there on each of the nodes
  IntVector NumberofAttacks(numberoftypes); //Assuming k>0
@@ -1220,7 +1221,7 @@ Vector Weights,IntVector TimesToAttack)
   j=1;
   while(j<=blocksize)
   {
-   if(TimesToAttack((i-1)*blocksize+j))
+   if(TimesToAttack((i-1)*blocksize+j)==1)
    {
     NumberofAttacks(i)=NumberofAttacks(i)+1;
    }
@@ -1233,16 +1234,11 @@ Vector Weights,IntVector TimesToAttack)
  i=1;
  while(i<=numberoftypes)
  {
-  if(NumberofAttacks(i)==0) //No attacks here (as no times selected)
+  if(NumberofAttacks(i)==0 && Weights(i)!=0) //No attacks here (as no times selected)
   {
-   int temp=Weights(i);
-   //Set weight to zero
-   Weights(i)=0;
-
-   /*
-   We could now distribute the temp, however as we will test all weights this
-   doesn't have to be completed ?
-   */
+   // We form an illegal (but overcosted attacked) which will be ignored
+   (*mpGeneratedAttackVector)((i-1)*blocksize+1)=2;
+   return; //We return nothing to finish early
   }
   i=i+1;
  }
@@ -1252,7 +1248,7 @@ Vector Weights,IntVector TimesToAttack)
  i=1;
  int block=1; //There will be n+k+1 blocks (with k+3,k+4,...,n+k+1 being normal type
  int readcounter=1;
- while(block <= n)
+ while(block <= n+numberoftypes-2)
  {
   if(block<=numberoftypes-1)
   {
@@ -1279,7 +1275,7 @@ Vector Weights,IntVector TimesToAttack)
     if(TimesToAttack((numberoftypes-1)*blocksize+i)==1)
     {
      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
-     ((double)(1)/(double)(NumberofAttacks(numberoftypes)))
+     ((double)(1)/(double)(NumberofAttacks(numberoftypes)*(n-1)))
      * Weights(numberoftypes);
     }
     else

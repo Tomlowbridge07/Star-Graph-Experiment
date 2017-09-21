@@ -29,11 +29,17 @@ BatchMixedPolicyEvaluation::
                                     ->GetPatrollerSystem()->GetGameTime(),
                                     mNumSteps+1);
 
+
+ //Store weightings
+ mpWeightings=new Matrix(mNumSteps+1,2);
+
  //Store Empty/Null Matrices for MT Space Evaluation
  mpMTSpaceEvaluation=new Matrix(1,1);
  mpMTSpaceKeyProbability=new Matrix(1,1);
  mpMTSpaceBestPatrollerStratNum=new IntMatrix(1,1);
  mpMTSpaceBestPatrollerStrat=new IntMatrix(1,1);
+
+
 }
 
 //Deconstructor
@@ -51,6 +57,8 @@ BatchMixedPolicyEvaluation::~BatchMixedPolicyEvaluation()
  delete mpMTSpaceKeyProbability;
  delete mpMTSpaceBestPatrollerStratNum;
  delete mpMTSpaceBestPatrollerStrat;
+
+ delete mpWeightings;
 }
 
 //Setters and Getters
@@ -119,6 +127,10 @@ IntMatrix BatchMixedPolicyEvaluation::GetAllBestPatrollerStratNum()
 Int3DMatrix BatchMixedPolicyEvaluation::GetAllBestPatrollerStrat()
 {
  return (*mpAllBestPatrollerStrat);
+}
+Matrix BatchMixedPolicyEvaluation::GetWeightings()
+{
+ return (*mpWeightings);
 }
 Matrix BatchMixedPolicyEvaluation::GetMTSpaceEvaluation()
 {
@@ -311,6 +323,7 @@ EvaluateExtenedStarBatchTimePosTest(int n, int k,IntVector TimePosAttackVector)
  delete mpBestPatrollerStrat;
  delete mpAllBestPatrollerStratNum;
  delete mpAllBestPatrollerStrat;
+ delete mpWeightings;
 
   //Setting up Weights for some choice later
  //We need to know if the centre (i.e type k+2) has been removed by domination
@@ -331,8 +344,9 @@ EvaluateExtenedStarBatchTimePosTest(int n, int k,IntVector TimePosAttackVector)
  }
   ObjectsInBins ObjBins(mNumSteps,numberoftypes);
   Matrix Weighting(ObjBins.GetNumberInBins());
+  //assert(Weighting.GetNumberOfRows()==ObjBins.GetNumCombinations());
   Weighting=Weighting*mStepSize;
-  std::flush(std::cout<<"the total number of combs is "<<ObjBins.GetNumCombinations()<<"\n");
+  //std::flush(std::cout<<"the total number of combs is "<<ObjBins.GetNumCombinations()<<"\n");
 
 
  mpStepEvaluation=new Vector(ObjBins.GetNumCombinations());
@@ -349,7 +363,7 @@ EvaluateExtenedStarBatchTimePosTest(int n, int k,IntVector TimePosAttackVector)
                                     ->GetPatrollerSystem()->GetGameTime(),
                                     ObjBins.GetNumCombinations());
 
-
+ mpWeightings=new Matrix(Weighting);
 
  //For each Weighting we will perform the single evaluation
  int i=1;
@@ -359,7 +373,7 @@ EvaluateExtenedStarBatchTimePosTest(int n, int k,IntVector TimePosAttackVector)
   Generator.GenerateExtendedStarTestTime(n,k,
   Weighting.GetRow(i),TimePosAttackVector);
   Vector MixedAttackerStrat(Generator.GetGeneratedAttackVector());
-  std::flush(std::cout<<"We are evaluating the "<<i<<"th\n");
+  //std::flush(std::cout<<"We are evaluating the "<<i<<"th\n");
   EvaluateSingle(MixedAttackerStrat,i);
 
   i=i+1;

@@ -24,7 +24,7 @@ BatchTimeMixedPolicyEvaluation
 
  //Create Storage
  mpTimePosEvaluation=new Vector(mNumTimeChoices);
- mpBestTimePosWeight=new Vector(mNumTimeChoices);
+ mpBestTimePosWeight=new Matrix(mNumTimeChoices,mNumTypes);
  mpBestTimePosPatrollerStratNum=new IntVector(mNumTimeChoices);
  mpBestTimePosPatrollerStrat=
  new IntMatrix(mNumTimeChoices,mpBatchPolicyEvaluation
@@ -89,7 +89,7 @@ void BatchTimeMixedPolicyEvaluation::SetNumTypes(int NumTypes)
 
  //Create Storage
  mpTimePosEvaluation=new Vector(mNumTimeChoices);
- mpBestTimePosWeight=new Vector(mNumTimeChoices);
+ mpBestTimePosWeight=new Matrix(mNumTimeChoices,mNumTypes);
  mpBestTimePosPatrollerStratNum=new IntVector(mNumTimeChoices);
  mpBestTimePosPatrollerStrat=
  new IntMatrix(mNumTimeChoices,mpBatchPolicyEvaluation
@@ -143,7 +143,7 @@ EvaluateExtendedStarBatchTimeTestPW(int n,int k)
  delete mpAllBestTimePatrollerStrat;
 
  mpTimePosEvaluation=new Vector(mNumTimeChoices);
- mpBestTimePosWeight=new Vector(mNumTimeChoices);
+ mpBestTimePosWeight=new Matrix(mNumTimeChoices,mNumTypes);
  mpBestTimePosPatrollerStratNum=new IntVector(mNumTimeChoices);
  mpBestTimePosPatrollerStrat=
  new IntMatrix(mNumTimeChoices,mpBatchPolicyEvaluation->
@@ -180,8 +180,13 @@ EvaluateExtendedStarBatchTimeTestPW(int n,int k)
   //Store the information for the choice of time positioning
   (*mpTimePosEvaluation)(choice)=(mpBatchPolicyEvaluation->
                                   GetEvaluationVector())(minElement);
-  (*mpBestTimePosWeight)(choice)=
-  (minElement-1)*(mpBatchPolicyEvaluation->GetStepSize());
+  ///Need to fix to allow it either store the vector of weights (or the combination number
+  ///which can be retrived later
+  Vector Weight(mNumTypes);
+  Weight(1)=(minElement-1)*(mpBatchPolicyEvaluation->GetStepSize());
+  Weight(2)=1-Weight(1);
+  mpBestTimePosWeight->SetRow(choice,Weight);
+
   (*mpBestTimePosPatrollerStratNum)(choice)=
   (mpBatchPolicyEvaluation->GetBestPatrollerStratNum())(minElement);
    mpBestTimePosPatrollerStrat->
@@ -207,8 +212,16 @@ EvaluateExtendedStarBatchTimeTestPW(int n,int k)
     mpAllBestTimePatrollerStrat->GetNumberRows());
    }
    //Storing all patrolling strategies for this time choice
-   mpAllBestTimePatrollerStratNum->SetCol(choice,
-   BestWeightNumMat.GetCol(minElement));
+
+   //Form in matrix form to allow block storage
+   /*
+    The conversion to a column matrix and block insertion is used as the
+    inserted vector may not be of the correct length.
+   */
+   IntMatrix InsertingColMatrix(BestWeightNumMat.GetCol(minElement),false);
+   mpAllBestTimePatrollerStratNum->SetBlock(1,choice,
+   InsertingColMatrix);
+
    mpAllBestTimePatrollerStrat->Set3DBlock(1,1,choice,
    BestWeight3DMat.Get3DBlock(1,1,minElement,NumberOfStrategies,
     mpBatchPolicyEvaluation->GetMixedPatrollerSystem()
@@ -227,7 +240,7 @@ EvaluateExtendedStarBatchTimeTestPW(int n,int k)
  pAttackPattern=new IntVector(mNumTypes*mNumStartTimes);
  ConvToBinary(BestTimeChoice,pAttackPattern,1);
  std::cout<<(*pAttackPattern);
- std::cout<<"Weight is "<<(*mpBestTimePosWeight)(BestTimeChoice)<<"\n";
+ std::cout<<"Weight is "<<mpBestTimePosWeight->GetRow(BestTimeChoice)<<"\n";
  std::cout<<"For an evaluation of "
  <<(*mpTimePosEvaluation)(BestTimeChoice)<<"\n";
  std::cout<<"The response patrol will be:"<<mpBestTimePosPatrollerStrat
@@ -282,7 +295,7 @@ EvaluateExtendedStarBatchTimeTest(int n,int k)
  delete mpAllBestTimePatrollerStrat;
 
  mpTimePosEvaluation=new Vector(mNumTimeChoices);
- mpBestTimePosWeight=new Vector(mNumTimeChoices);
+ mpBestTimePosWeight=new Matrix(mNumTimeChoices,mNumTypes);
  mpBestTimePosPatrollerStratNum=new IntVector(mNumTimeChoices);
  mpBestTimePosPatrollerStrat=
  new IntMatrix(mNumTimeChoices,mpBatchPolicyEvaluation->
@@ -312,23 +325,30 @@ EvaluateExtendedStarBatchTimeTest(int n,int k)
   EvaluateExtenedStarBatchTimePosTest(n,k,(*mpAttackingTimePos));
 
   //Retrive the best weight for the attack time position and store information
-  std::flush(std::cout<<"Here");
+  //std::flush(std::cout<<"Here");
 
   //Store the minimum for choice fo time positioning
   minElement=(mpBatchPolicyEvaluation->GetEvaluationVector()).MinElement();
+  std::cout<<"min element is"<<minElement;
 
   //Store the information for the choice of time positioning
   (*mpTimePosEvaluation)(choice)=(mpBatchPolicyEvaluation->
                                   GetEvaluationVector())(minElement);
-  (*mpBestTimePosWeight)(choice)=
-  (minElement-1)*(mpBatchPolicyEvaluation->GetStepSize());
+
+ //std::flush(std::cout<<"Weightings "<<(mpBatchPolicyEvaluation->GetWeightings()));
+ mpBestTimePosWeight->SetRow(choice,(mpBatchPolicyEvaluation->GetWeightings()).GetRow(minElement));
+
+
+  //std::flush(std::cout<<"Change is "<<(*mpBestTimePosWeight));
+
   (*mpBestTimePosPatrollerStratNum)(choice)=
   (mpBatchPolicyEvaluation->GetBestPatrollerStratNum())(minElement);
+
    mpBestTimePosPatrollerStrat->
    SetRow(choice,(mpBatchPolicyEvaluation->
                   GetBestPatrollerStrat()).GetRow(minElement));
 
-   std::flush(std::cout<<"Here2"<<(*mpBestTimePosPatrollerStrat));
+   //std::flush(std::cout<<"Here2"<<(*mpBestTimePosPatrollerStrat));
 
    //Storing all for that best weighted time choice
 
@@ -342,7 +362,7 @@ EvaluateExtendedStarBatchTimeTest(int n,int k)
    int NumberOfStrategies=BestWeightNumMat.GetNumberOfRows();
    NumberOfStrategies=BestWeight3DMat.GetNumberRows();
    assert(BestWeightNumMat.GetNumberOfRows()==NumberOfStrategies);
-   std::flush(std::cout<<"Here3"<<BestWeightNumMat<<"\n");
+   //std::flush(std::cout<<"Here3"<<BestWeightNumMat<<"\n");
 
    //Make sure correct size
    if(NumberOfStrategies>mpAllBestTimePatrollerStratNum->GetNumberOfRows())
@@ -353,14 +373,14 @@ EvaluateExtendedStarBatchTimeTest(int n,int k)
     mpAllBestTimePatrollerStrat->ExtendRow(NumberOfStrategies-
     mpAllBestTimePatrollerStrat->GetNumberRows());
    }
-   std::flush(std::cout<<"Here4"<<(*mpAllBestTimePatrollerStratNum));
+   //std::flush(std::cout<<"Here4"<<(*mpAllBestTimePatrollerStratNum));
 
    //Storing all patrolling strategies for this time choice
    //Form in matrix form to allow block storage
    IntMatrix InsertingColMatrix(BestWeightNumMat.GetCol(minElement),false);
    mpAllBestTimePatrollerStratNum->SetBlock(1,choice,
    InsertingColMatrix);
-   std::flush(std::cout<<"Here5");
+   //std::flush(std::cout<<"Here5");
    mpAllBestTimePatrollerStrat->Set3DBlock(1,1,choice,
    BestWeight3DMat.Get3DBlock(1,1,minElement,NumberOfStrategies,
     mpBatchPolicyEvaluation->GetMixedPatrollerSystem()
@@ -379,7 +399,7 @@ EvaluateExtendedStarBatchTimeTest(int n,int k)
  pAttackPattern=new IntVector(mNumTypes*mNumStartTimes);
  ConvToBinary(BestTimeChoice,pAttackPattern,1);
  std::cout<<(*pAttackPattern);
- std::cout<<"Weight is "<<(*mpBestTimePosWeight)(BestTimeChoice)<<"\n";
+ std::cout<<"Weight is "<<mpBestTimePosWeight->GetRow(BestTimeChoice)<<"\n";
  std::cout<<"For an evaluation of "
  <<(*mpTimePosEvaluation)(BestTimeChoice)<<"\n";
  std::cout<<"The response patrol will be:"<<mpBestTimePosPatrollerStrat
@@ -397,13 +417,12 @@ EvaluateExtendedStarBatchTimeTest(int n,int k)
  for(int i=1; i<=BestTimeChoices.GetSize(); i++)
  {
   delete pAttackPattern;
-  pAttackPattern=new IntVector(2*mNumStartTimes);
+  pAttackPattern=new IntVector(mNumTypes*mNumStartTimes);
   ConvToBinary(BestTimeChoices(i),pAttackPattern,1);
   AttackPatterns.SetRow(i,(*pAttackPattern));
  }
- std::cout<<AttackPatterns;
-
  delete pAttackPattern;
+ std::cout<<AttackPatterns;
 }
 
 
