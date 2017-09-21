@@ -1,5 +1,6 @@
 #include "BatchMixedPolicyEvaluation.hpp"
 #include<cassert>
+#include "ObjectsInBins.hpp"
 
 //Standard constructor
 BatchMixedPolicyEvaluation::
@@ -167,7 +168,6 @@ void BatchMixedPolicyEvaluation::
  ->SetRow(entry,mpMixedPatrollerSystem->GetPatrollerSystem()
           ->ConvertPatrollerOptionNum(((*mpBestPatrollerStratNum)(entry))));
 
-
  //Storing all for this evaluation
  //Alter Storage Size
  IntVector AllBestElements(
@@ -194,6 +194,7 @@ void BatchMixedPolicyEvaluation::
   mpMixedPatrollerSystem->GetPatrollerSystem()->
   ConvertPatrollerOptionNum(AllBestElements(i)));
  }
+
 }
 
 //Test Evaluation
@@ -308,32 +309,58 @@ EvaluateExtenedStarBatchTimePosTest(int n, int k,IntVector TimePosAttackVector)
  delete mpAllEvaluations;
  delete mpBestPatrollerStratNum;
  delete mpBestPatrollerStrat;
+ delete mpAllBestPatrollerStratNum;
+ delete mpAllBestPatrollerStrat;
 
- mpStepEvaluation=new Vector(mNumSteps+1);
- mpKeyProbability=new Vector(mNumSteps+1);
+  //Setting up Weights for some choice later
+ //We need to know if the centre (i.e type k+2) has been removed by domination
+ int attacktime=mpMixedPatrollerSystem->GetPatrollerSystem()->GetAttackTime();
+
+ int numberoftypes=0;
+ if(attacktime>=3)
+ {
+  //removal of penultimate nodes has occured so only k+1 types
+  //Form Objects in bins to generate all combinations
+  numberoftypes=k+1;
+ }
+ else
+ {
+  //no removal has occured so only k+3 types
+  //Form Objects in bins to generate all combinations
+  numberoftypes=k+3;
+ }
+  ObjectsInBins ObjBins(mNumSteps,numberoftypes);
+  Matrix Weighting(ObjBins.GetNumberInBins());
+  Weighting=Weighting*mStepSize;
+  std::flush(std::cout<<"the total number of combs is "<<ObjBins.GetNumCombinations()<<"\n");
+
+
+ mpStepEvaluation=new Vector(ObjBins.GetNumCombinations());
+ mpKeyProbability=new Vector(ObjBins.GetNumCombinations());
  mpAllEvaluations=
  new Matrix(mpMixedPatrollerSystem->GetPatrollerSystem()
-            ->GetNumPurePatrolOptions(),mNumSteps+1);
- mpBestPatrollerStratNum=new IntVector(mNumSteps+1);
+            ->GetNumPurePatrolOptions(),ObjBins.GetNumCombinations());
+ mpBestPatrollerStratNum=new IntVector(ObjBins.GetNumCombinations());
  mpBestPatrollerStrat=
- new IntMatrix(mNumSteps+1,mpMixedPatrollerSystem
+ new IntMatrix(ObjBins.GetNumCombinations(),mpMixedPatrollerSystem
                ->GetPatrollerSystem()->GetGameTime());
+ mpAllBestPatrollerStratNum=new IntMatrix(1,ObjBins.GetNumCombinations());
+ mpAllBestPatrollerStrat=new Int3DMatrix(1,mpMixedPatrollerSystem
+                                    ->GetPatrollerSystem()->GetGameTime(),
+                                    ObjBins.GetNumCombinations());
 
- Vector Weights(k+3);
 
- //Generate all possible weights
+
+ //For each Weighting we will perform the single evaluation
  int i=1;
- while(i<=mNumSteps)
+ while(i<=Weighting.GetNumberOfRows())
  {
-
-
-  Weights(i)=i*(mStepSize);
-
   MixedAttackGenerator Generator(*mpMixedPatrollerSystem->GetPatrollerSystem());
-  Generator.GenerateExtendedStarTestTime(n,k,Weights,TimePosAttackVector);
+  Generator.GenerateExtendedStarTestTime(n,k,
+  Weighting.GetRow(i),TimePosAttackVector);
   Vector MixedAttackerStrat(Generator.GetGeneratedAttackVector());
-
-  EvaluateSingle(MixedAttackerStrat,i+1);
+  std::flush(std::cout<<"We are evaluating the "<<i<<"th\n");
+  EvaluateSingle(MixedAttackerStrat,i);
 
   i=i+1;
  }

@@ -97,6 +97,7 @@ class BatchMixedPolicyEvaluation
  //Rows for each of the evaluation number and number of cols is the number of
  //evaluations
  IntMatrix* mpAllBestPatrollerStratNum;
+
  //Layer Matrices store all the different strategies for a particular evaluation
  Int3DMatrix* mpAllBestPatrollerStrat;
 

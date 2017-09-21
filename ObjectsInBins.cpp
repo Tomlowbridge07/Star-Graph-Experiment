@@ -14,7 +14,6 @@ ObjectsInBins::ObjectsInBins(int NumObjects, int NumBins)
 
  //Calculate number of combinations
  mNumCombinations=combinatorial(mNumSpaces,mNumSeperators);
- std::flush(std::cout<<"combs of"<<mNumSpaces<<" and "<<mNumSeperators<< " is "<<mNumCombinations<<"\n");
 
  //Store null matrices
  mpSeperatorMat=NULL;
@@ -23,12 +22,39 @@ ObjectsInBins::ObjectsInBins(int NumObjects, int NumBins)
 
  //Compute Seperator matrix
  ComputeSeperatorMat();
+
+ //Compute Amount in bins matrix
+ ComputeNumInBins();
 }
 
 //Getters and Setters
+int ObjectsInBins::GetNumObjects()
+{
+ return mNumObjects;
+}
+int ObjectsInBins::GetNumBins()
+{
+ return mNumBins;
+}
+int ObjectsInBins::GetNumSeperators()
+{
+ return mNumSeperators;
+}
+int ObjectsInBins::GetNumSpaces()
+{
+ return mNumSpaces;
+}
+int ObjectsInBins::GetNumCombinations()
+{
+ return mNumCombinations;
+}
 IntMatrix ObjectsInBins::GetSeperatorMatrix()
 {
  return (*mpSeperatorMat);
+}
+IntMatrix ObjectsInBins::GetNumberInBins()
+{
+ return (*mpNumberInBins);
 }
 
 //Destructor
@@ -46,7 +72,6 @@ void ObjectsInBins::ComputeSeperatorMat()
  mpSeperatorMat=new IntMatrix(mNumCombinations,mNumSeperators);
  mpOptionsLeft=new IntMatrix(mNumCombinations,mNumSpaces);
 
- std::flush(std::cout<<"Here");
 
  //Set up options
  IntVector Asscending(mNumSpaces);
@@ -112,5 +137,32 @@ void ObjectsInBins::ComputeSeperatorMat()
   }
   IterationNum=IterationNum+1;
  }
+}
 
+/*
+This method reads the seperator matrix and converts it to the number in each bin
+*/
+void ObjectsInBins::ComputeNumInBins()
+{
+ delete mpNumberInBins;
+ mpNumberInBins=new IntMatrix(mNumCombinations,mNumBins);
+
+ //Read each row and create each row of the matrix
+ int row=1;
+ int col=1;
+ int last=0;
+ while(row<=mNumCombinations)
+ {
+  col=1;
+  last=0;
+  while(col<mNumBins)
+  {
+   (*mpNumberInBins)(row,col)=(*mpSeperatorMat)(row,col)-last-1;
+   last=(*mpSeperatorMat)(row,col);
+   col=col+1;
+  }
+  //Final one is what is left
+  (*mpNumberInBins)(row,mNumBins)=mNumSpaces-last;
+  row=row+1;
+ }
 }

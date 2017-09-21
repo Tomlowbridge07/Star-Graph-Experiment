@@ -17,6 +17,17 @@ Vector::Vector(const Vector& otherVector)
    }
 }
 
+//Copy constructor (from interger type vector)
+Vector::Vector(const IntVector anIntVector)
+{
+   mSize = anIntVector.GetSize();
+   mData = new double [mSize];
+   for (int i=0; i<mSize; i++)
+   {
+      mData[i] = anIntVector.Read(i+1);
+   }
+}
+
 // Constructor for vector of a given size
 // Allocates memory, and initialises entries
 // to zero

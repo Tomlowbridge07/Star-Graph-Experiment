@@ -26,6 +26,25 @@ Matrix::Matrix(const Matrix& otherMatrix)
    }
 }
 
+// Copy constructor (from interger type)
+Matrix::Matrix(const IntMatrix& anIntMatrix)
+{
+   mNumRows = anIntMatrix.GetNumberOfRows();
+   mNumCols = anIntMatrix.GetNumberOfColumns();
+   mData = new double* [mNumRows];
+   for (int i=0; i<mNumRows; i++)
+   {
+      mData[i] = new double [mNumCols];
+   }
+   for (int i=0; i<mNumRows; i++)
+   {
+      for (int j=0; j<mNumCols; j++)
+      {
+         mData[i][j] = anIntMatrix.Read(i+1,j+1);
+      }
+   }
+}
+
 // Constructor for vector of a given length
 // Allocates memory, and initialises entries
 // to zero

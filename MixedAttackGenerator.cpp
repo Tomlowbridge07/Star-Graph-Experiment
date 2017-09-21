@@ -1198,12 +1198,24 @@ Vector Weights,IntVector TimesToAttack)
  int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem
                 ->GetAttackTime()+1);
 
+ int numberoftypes=0;
+ if(mpPatrollerSystem->GetGameTime()>=3)
+ {
+  //removal of penultimate nodes along the line
+  numberoftypes=k+1;
+ }
+ else
+ {
+  //no removal has occured
+  numberoftypes=k+3;
+ }
+
  //Need to know how many attacks are there on each of the nodes
- IntVector NumberofAttacks(k+3); //Assuming k>0
+ IntVector NumberofAttacks(numberoftypes); //Assuming k>0
 
  i=1;
  int j=1;
- while(i<=k+3)
+ while(i<=numberoftypes)
  {
   j=1;
   while(j<=blocksize)
@@ -1219,7 +1231,7 @@ Vector Weights,IntVector TimesToAttack)
 
  //Check on weights, weights must be made to be zero if its time is not selected
  i=1;
- while(i<=k+3)
+ while(i<=numberoftypes)
  {
   if(NumberofAttacks(i)==0) //No attacks here (as no times selected)
   {
@@ -1242,7 +1254,7 @@ Vector Weights,IntVector TimesToAttack)
  int readcounter=1;
  while(block <= n)
  {
-  if(block<=k+2)
+  if(block<=numberoftypes-1)
   {
    i=1;
    while(i<=blocksize)
@@ -1264,10 +1276,11 @@ Vector Weights,IntVector TimesToAttack)
    i=1;
    while(i<=blocksize)
    {
-    if(TimesToAttack((k+3-1)*blocksize+i)==1)
+    if(TimesToAttack((numberoftypes-1)*blocksize+i)==1)
     {
      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
-     ((double)(1)/(double)(NumberofAttacks(k+3))) * Weights(k+3);
+     ((double)(1)/(double)(NumberofAttacks(numberoftypes)))
+     * Weights(numberoftypes);
     }
     else
     {

@@ -37,7 +37,6 @@ int combinatorial(int n, int r)
  double answer=1;
  while(i<r)
  {
-  std::flush(std::cout<<"answer is "<<answer<<"\n");
   answer=answer*(n-i);
   answer=answer/(i+1);
   i=i+1;

@@ -141,6 +141,7 @@ IntVector IntVector::operator*(int a) const
    return v;
 }
 
+
 // Method to calculate norm (with default value p=2)
 // corresponding to the Euclidean norm
 double IntVector::CalculateNorm(int p) const

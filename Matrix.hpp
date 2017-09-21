@@ -20,6 +20,9 @@ public:
   // Copy constructor
   Matrix(const Matrix& otherMatrix);
 
+  // Copy constructor (from interger type)
+  Matrix(const IntMatrix& anIntMatrix);
+
   // Specialised Constructor
   Matrix(int numRows, int numCols);
 

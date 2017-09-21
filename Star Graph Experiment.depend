@@ -1036,25 +1036,26 @@
 	"IntVector.hpp"
 	<string>
 
-1501845947 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Matrix.hpp
+1505986941 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Matrix.hpp
 	"Vector.hpp"
 	"IntMatrix.hpp"
 
-1502710318 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Vector.hpp
+1505986617 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Vector.hpp
 	<iostream>
 	"IntVector.hpp"
 
 1502705592 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/IntMatrix.hpp
 	"IntVector.hpp"
 
-1502461626 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/IntVector.hpp
+1505986577 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/IntVector.hpp
 	<iostream>
 
-1505924705 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/BatchMixedPolicyEvaluation.cpp
+1505993777 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/BatchMixedPolicyEvaluation.cpp
 	"BatchMixedPolicyEvaluation.hpp"
 	<cassert>
+	"ObjectsInBins.hpp"
 
-1505923529 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/BatchMixedPolicyEvaluation.hpp
+1505995518 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/BatchMixedPolicyEvaluation.hpp
 	"MixedPatroller.hpp"
 	"MixedAttackGenerator.hpp"
 	"Vector.hpp"
@@ -1069,12 +1070,12 @@
 1505924752 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/MixedAttackGenerator.hpp
 	"AbstractPatroller.hpp"
 
-1505909560 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/BatchTimeMixedPolicyEvaluation.cpp
+1505994862 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/BatchTimeMixedPolicyEvaluation.cpp
 	"BatchTimeMixedPolicyEvaluation.hpp"
 	<cmath>
 	<cassert>
 
-1505923529 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/BatchTimeMixedPolicyEvaluation.hpp
+1505995188 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/BatchTimeMixedPolicyEvaluation.hpp
 	"BatchMixedPolicyEvaluation.hpp"
 
 1502707492 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/IntMatrix.cpp
@@ -1084,21 +1085,21 @@
 	"IntMatrix.hpp"
 	"IntVector.hpp"
 
-1502470246 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/IntVector.cpp
+1505986400 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/IntVector.cpp
 	<cmath>
 	<cassert>
 	<iomanip>
 	<fstream>
 	"IntVector.hpp"
 
-1501845947 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Matrix.cpp
+1505987020 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Matrix.cpp
 	<cmath>
 	<cassert>
 	<iomanip>
 	"Matrix.hpp"
 	"Vector.hpp"
 
-1505924759 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/MixedAttackGenerator.cpp
+1505991655 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/MixedAttackGenerator.cpp
 	"MixedAttackGenerator.hpp"
 	"UsefulFunctions.hpp"
 	<cassert>
@@ -1144,19 +1145,19 @@
 	"IntVector.hpp"
 	"IntMatrix.hpp"
 
-1505929023 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/UsefulFunctions.cpp
+1505985623 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/UsefulFunctions.cpp
 	"UsefulFunctions.hpp"
 	<cassert>
 	<iostream>
 
-1502710318 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Vector.cpp
+1505986665 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Vector.cpp
 	<cmath>
 	<cassert>
 	<iomanip>
 	<fstream>
 	"Vector.hpp"
 
-1505928839 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Driver.cpp
+1505994453 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/Driver.cpp
 	<iostream>
 	"IntMatrix.hpp"
 	"Int3DMatrix.hpp"
@@ -1201,10 +1202,10 @@
 	<cassert>
 	<iomanip>
 
-1505928824 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/ObjectsInBins.cpp
+1505985644 source:/maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/ObjectsInBins.cpp
 	"ObjectsInBins.hpp"
 	"UsefulFunctions.hpp"
 
-1505927447 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/ObjectsInBins.hpp
+1505985623 /maths/pg/pmxtol/Documents/Git Repositories/Star-Graph-Experiment/ObjectsInBins.hpp
 	"IntMatrix.hpp"
 

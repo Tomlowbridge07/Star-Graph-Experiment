@@ -30,6 +30,9 @@ class BatchTimeMixedPolicyEvaluation
   //Batch Evaluation for Extended Star PW
   void EvaluateExtendedStarBatchTimeTestPW(int n,int k);
 
+  //Batch Evaluation for Extended Star (for use with normal)
+  void EvaluateExtendedStarBatchTimeTest(int n,int k);
+
  protected:
 
   //Pointer to Batch weight process
@@ -68,6 +71,7 @@ class BatchTimeMixedPolicyEvaluation
   //Rows for each of the evaluation number and number of cols is the number of
   //evaluations
   IntMatrix* mpAllBestTimePatrollerStratNum;
+
   //Layer Matrices store all the different strategies for a particular evaluation
   Int3DMatrix* mpAllBestTimePatrollerStrat;
 

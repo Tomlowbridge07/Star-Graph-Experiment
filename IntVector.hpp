@@ -54,7 +54,7 @@ public:
   // Binary -
   IntVector operator-(const IntVector& v1) const;
 
-  // Scalar multiplication
+  // Scalar multiplication (int)
   IntVector operator*(int a) const;
 
   // p-norm method

@@ -21,6 +21,9 @@ public:
   // Copy constructor
   Vector(const Vector& otherVector);
 
+  //Copy constructor (from interger type vector)
+  Vector(const IntVector anIntVector);
+
   // Specialised constructor
   Vector(int size);
 
