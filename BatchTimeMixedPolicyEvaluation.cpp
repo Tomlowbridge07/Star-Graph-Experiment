@@ -404,8 +404,10 @@ EvaluateExtendedStarBatchTimeTest(int n,int k)
  <<(*mpTimePosEvaluation)(BestTimeChoice)<<"\n";
  std::cout<<"The response patrol will be:"<<mpBestTimePosPatrollerStrat
                                              ->GetRow(BestTimeChoice)<<"\n";
- std::cout<<"With Other (equally good) response patrolling being:"<<
+ /*std::cout<<"With Other (equally good) response patrolling being:"<<
  mpAllBestTimePatrollerStrat->GetLayerMatrix(BestTimeChoice)<<"\n";
+
+
  std::cout<<"------------------------------------------------------------ \n";
  std::cout<<"Other (equally good) attack position numbers are \n ";
  IntVector BestTimeChoices(mpTimePosEvaluation->MinElements());
@@ -420,9 +422,9 @@ EvaluateExtendedStarBatchTimeTest(int n,int k)
   pAttackPattern=new IntVector(mNumTypes*mNumStartTimes);
   ConvToBinary(BestTimeChoices(i),pAttackPattern,1);
   AttackPatterns.SetRow(i,(*pAttackPattern));
- }
+ } */
  delete pAttackPattern;
- std::cout<<AttackPatterns;
+ //std::cout<<AttackPatterns;
 }
 
 

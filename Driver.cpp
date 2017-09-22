@@ -135,14 +135,14 @@ int main(int argc,char* argv[])
  */
 
  SpecialGraphGenerator GraphGen;
- GraphGen.GenerateExtendedStar(4,2);
+ GraphGen.GenerateExtendedStar(4,1);
  IntMatrix Star(GraphGen.GetAdjacenyMatrix());
  std::flush(std::cout<<"Star graph is: "<<Star<<"\n");
- AbstractPatroller Pat(Star,7,5);
+ AbstractPatroller Pat(Star,6,4);
  MixedPatroller MPat(Pat);
  BatchMixedPolicyEvaluation Batcher(MPat,0.05);
- BatchTimeMixedPolicyEvaluation TimeBatcher(Batcher,3);
- TimeBatcher.EvaluateExtendedStarBatchTimeTest(4,2);
+ BatchTimeMixedPolicyEvaluation TimeBatcher(Batcher,4);
+ TimeBatcher.EvaluateExtendedStarBatchTimeTest(4,1);
 
 
 /*
