@@ -134,6 +134,29 @@ int main(int argc,char* argv[])
 
  */
 
+ IntMatrix TwinStar(6,6);
+ TwinStar(1,1)=1; TwinStar(1,3)=1;
+ TwinStar(2,2)=1; TwinStar(2,3)=1;
+ TwinStar(3,1)=1; TwinStar(3,2)=1; TwinStar(3,3)=1; TwinStar(3,6)=1;
+ TwinStar(4,4)=1; TwinStar(4,6)=1;
+ TwinStar(5,5)=1; TwinStar(5,6)=1;
+ TwinStar(6,3)=1; TwinStar(6,4)=1; TwinStar(6,5)=1; TwinStar(6,6)=1;
+
+ IntVector AttackNodes(4);
+ AttackNodes(1)=1; AttackNodes(2)=2; AttackNodes(3)=4; AttackNodes(4)=5;
+ PathGenerator Pathgen(TwinStar);
+ Pathgen.GeneratePathsFromDepth(AttackNodes,AttackNodes);
+ IntMatrix Paths(Pathgen.GetPaths());
+ PathWaitPatroller PWPat(TwinStar,AttackNodes,Paths,10,5);
+ PWPat.PrintPurePatrollerOptions();
+ MixedPatroller MPWPat(PWPat);
+ MixedPolicyEvaluation Ev(MPWPat);
+ BatchMixedPolicyEvaluation Batcher(MPWPat,0.5);
+ BatchTimeMixedPolicyEvaluation TimeBatcher(Batcher,2);
+ TimeBatcher.EvaluateDualStarBatchTimeTestPW(2,2);
+
+
+/*
  SpecialGraphGenerator GraphGen;
  GraphGen.GenerateExtendedStar(4,1);
  IntMatrix Star(GraphGen.GetAdjacenyMatrix());
@@ -143,7 +166,7 @@ int main(int argc,char* argv[])
  BatchMixedPolicyEvaluation Batcher(MPat,0.05);
  BatchTimeMixedPolicyEvaluation TimeBatcher(Batcher,4);
  TimeBatcher.EvaluateExtendedStarBatchTimeTest(4,1);
-
+*/
 
 /*
  SpecialGraphGenerator GraphGen;

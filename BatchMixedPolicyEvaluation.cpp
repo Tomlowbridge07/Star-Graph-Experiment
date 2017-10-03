@@ -180,8 +180,10 @@ void BatchMixedPolicyEvaluation::
  ->SetRow(entry,mpMixedPatrollerSystem->GetPatrollerSystem()
           ->ConvertPatrollerOptionNum(((*mpBestPatrollerStratNum)(entry))));
 
+
  //Storing all for this evaluation
  //Alter Storage Size
+ /*
  IntVector AllBestElements(
  (mpMixedPatrollerSystem->GetAttackerAgainstPureEvaluation()).MaxElements());
  int NumOfBestStrategies=AllBestElements.GetSize();
@@ -205,7 +207,8 @@ void BatchMixedPolicyEvaluation::
   mpAllBestPatrollerStrat->SetRowVector(i,entry,
   mpMixedPatrollerSystem->GetPatrollerSystem()->
   ConvertPatrollerOptionNum(AllBestElements(i)));
- }
+ } */
+
 
 }
 
@@ -380,3 +383,49 @@ EvaluateExtenedStarBatchTimePosTest(int n, int k,IntVector TimePosAttackVector)
  }
 }
 
+void BatchMixedPolicyEvaluation::EvaluateDualStarBatchTimePosTestPW
+(int n1, int n2, IntVector TimePosAttackVector)
+{
+ //Delete and reinizalize
+ delete mpStepEvaluation;
+ delete mpKeyProbability;
+ delete mpAllEvaluations;
+ delete mpBestPatrollerStratNum;
+ delete mpBestPatrollerStrat;
+ delete mpAllBestPatrollerStratNum;
+ delete mpAllBestPatrollerStrat;
+
+
+ mpStepEvaluation=new Vector(mNumSteps+1);
+ mpKeyProbability=new Vector(mNumSteps+1);
+ mpAllEvaluations=
+ new Matrix(mpMixedPatrollerSystem->GetPatrollerSystem()
+            ->GetNumPurePatrolOptions(),mNumSteps+1);
+ mpBestPatrollerStratNum=new IntVector(mNumSteps+1);
+ mpBestPatrollerStrat=
+ new IntMatrix(mNumSteps+1,mpMixedPatrollerSystem
+               ->GetPatrollerSystem()->GetGameTime());
+
+  mpAllBestPatrollerStratNum=new IntMatrix(1,mNumSteps+1);
+ mpAllBestPatrollerStrat=new Int3DMatrix(1,mpMixedPatrollerSystem
+                                    ->GetPatrollerSystem()->GetGameTime(),
+                                    mNumSteps+1);
+
+ int i=0;
+ double weight;
+ while(i<=mNumSteps)
+ {
+  //For each step size generate the attack and evaluate
+
+  weight=i*(mStepSize);
+
+  MixedAttackGenerator Generator(*mpMixedPatrollerSystem->GetPatrollerSystem());
+  Generator.GenerateDualStarTestTimePW(n1,n1,weight,TimePosAttackVector);
+  Vector MixedAttackerStrat(Generator.GetGeneratedAttackVector());
+
+  EvaluateSingle(MixedAttackerStrat,i+1);
+
+  i=i+1;
+ }
+
+}

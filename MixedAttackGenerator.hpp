@@ -85,6 +85,10 @@ class MixedAttackGenerator
                                Vector Weights
                                ,IntVector TimesToAttack);
 
+ //Currently in testing for use with BatchTime (IN TESTING)
+ void GenerateDualStarTestTimePW(int n1, int n2, double Weight,
+                                IntVector TimesToAttack);
+
  protected:
 
  //Pointer to Pure Patrolling System

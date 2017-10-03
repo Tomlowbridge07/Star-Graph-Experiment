@@ -68,6 +68,9 @@ class BatchMixedPolicyEvaluation
  void EvaluateExtenedStarBatchTimePosTest
  (int n, int k,IntVector TimePosAttackVector);
 
+ void EvaluateDualStarBatchTimePosTestPW
+ (int n1, int n2, IntVector TimePosAttackVector);
+
  protected:
  int mNumSteps;
  double mStepSize;

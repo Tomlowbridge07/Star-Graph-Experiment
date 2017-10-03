@@ -1290,6 +1290,102 @@ Vector Weights,IntVector TimesToAttack)
  //std::flush(std::cout<<(*mpGeneratedAttackVector));
 }
 
+//We place attacks at the times specified and at weights specified on nodes
+//1,..,n_1 and n_1+2,...,n_2 (Nodes n_1+1 is the first centre and n_2+1 is the
+//second centre)
+
+//As all attacked nodes are of the same type we will
+void MixedAttackGenerator::GenerateDualStarTestTimePW
+(int n1, int n2,double Weight,IntVector TimesToAttack)
+{
+ int i=1;
+ int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem
+                ->GetAttackTime()+1);
+
+ //Need to know how many attacks through time there at the left stars nodes
+ // and how many at the right stars nodes
+ int leftattackcounter=0;
+ while(i<=blocksize)
+ {
+  if(TimesToAttack(i)==1)
+  {
+   leftattackcounter=leftattackcounter+1;
+  }
+  i=i+1;
+ }
+
+ i=1;
+ int rightattackcounter=0;
+ while(i<=blocksize)
+ {
+  if(TimesToAttack(blocksize+i)==1)
+  {
+   rightattackcounter=rightattackcounter+1;
+  }
+  i=i+1;
+ }
+
+
+ //If no attack takes places at an left nodes we need to ignore the weight
+ // and place only weight 1 on normal
+ if(leftattackcounter==0)
+ {
+  Weight=0;
+ }
+
+
+ //If no attack takes place at a right nodes we nede to ignore the weight
+ // and palce only weight 1 on extended
+ if(rightattackcounter==0)
+ {
+  Weight=1;
+ }
+
+ //Construct the attack
+ i=1;
+ int block=1;
+ while(block <= (n1+n2))
+ {
+  if(block<=n1) //left star nodes
+  {
+   i=1;
+   while(i<=blocksize)
+   {
+    if(TimesToAttack(i)==1)
+    {
+      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+      ((double)(1)/(double)(leftattackcounter)) *
+      ((double)(Weight)/(double)(n1));
+    }
+    else
+    {
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=0;
+    }
+    i=i+1;
+   }
+  }
+  else //Right star nodes
+  {
+   i=1;
+   while(i<=blocksize)
+   {
+    if(TimesToAttack(blocksize+i)==1)
+    {
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+     ((double)(1)/(double)(rightattackcounter)) *
+     ((double)(1-Weight)/(double)(n2));
+    }
+    else
+    {
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=0;
+    }
+    i=i+1;
+   }
+  }
+  block=block+1;
+ }
+ //std::flush(std::cout<<(*mpGeneratedAttackVector));
+}
 
 
 

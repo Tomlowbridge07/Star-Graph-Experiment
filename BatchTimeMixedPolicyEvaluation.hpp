@@ -33,6 +33,9 @@ class BatchTimeMixedPolicyEvaluation
   //Batch Evaluation for Extended Star (for use with normal)
   void EvaluateExtendedStarBatchTimeTest(int n,int k);
 
+  //Batch Evaluation for Dual star PW (currently implemented for testing)
+  void EvaluateDualStarBatchTimeTestPW(int n1 , int n2);
+
  protected:
 
   //Pointer to Batch weight process
