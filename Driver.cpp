@@ -134,6 +134,30 @@ int main(int argc,char* argv[])
 
  */
 
+ IntMatrix TwinStar(7,7);
+ TwinStar(1,1)=1; TwinStar(1,3)=1;
+ TwinStar(2,2)=1; TwinStar(2,3)=1;
+ TwinStar(3,1)=1; TwinStar(3,2)=1; TwinStar(3,3)=1; TwinStar(3,7)=1;
+ TwinStar(4,4)=1; TwinStar(4,7)=1;
+ TwinStar(5,5)=1; TwinStar(5,7)=1;
+ TwinStar(6,6)=1; TwinStar(6,7)=1;
+ TwinStar(7,3)=1; TwinStar(7,4)=1; TwinStar(7,5)=1; TwinStar(7,6)=1; TwinStar(7,7)=1;
+
+ IntVector AttackNodes(5);
+ AttackNodes(1)=1; AttackNodes(2)=2; AttackNodes(3)=4; AttackNodes(4)=5; AttackNodes(5)=6;
+ PathGenerator Pathgen(TwinStar);
+ Pathgen.GeneratePathsFromDepth(AttackNodes,AttackNodes);
+ IntMatrix Paths(Pathgen.GetPaths());
+ PathWaitPatroller PWPat(TwinStar,AttackNodes,Paths,12,7);
+ PWPat.PrintPurePatrollerOptions();
+ MixedPatroller MPWPat(PWPat);
+ MixedPolicyEvaluation Ev(MPWPat);
+ BatchMixedPolicyEvaluation Batcher(MPWPat,0.1);
+ BatchTimeMixedPolicyEvaluation TimeBatcher(Batcher,2);
+ TimeBatcher.EvaluateDualStarBatchTimeTestPW(2,3);
+
+
+/*
  IntMatrix TwinStar(6,6);
  TwinStar(1,1)=1; TwinStar(1,3)=1;
  TwinStar(2,2)=1; TwinStar(2,3)=1;
@@ -153,7 +177,7 @@ int main(int argc,char* argv[])
  MixedPolicyEvaluation Ev(MPWPat);
  BatchMixedPolicyEvaluation Batcher(MPWPat,0.5);
  BatchTimeMixedPolicyEvaluation TimeBatcher(Batcher,2);
- TimeBatcher.EvaluateDualStarBatchTimeTestPW(2,2);
+ TimeBatcher.EvaluateDualStarBatchTimeTestPW(2,2); */
 
 
 /*
