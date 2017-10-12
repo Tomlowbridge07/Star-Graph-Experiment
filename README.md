@@ -1,6 +1,6 @@
 # Star-Graph-Experiment
 This is testing the ReadMe.md markdown file
 
-```{cpp}
+```cpp
 std::cout<<"Hello World!"
 ```
