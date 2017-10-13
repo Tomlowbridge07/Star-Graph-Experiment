@@ -27,6 +27,8 @@ class SpecialGraphGenerator
  //General (Extended) Star Graph
  void GenerateGeneralExtendedStar(int n, IntVector k);
 
+ //Symmetric Dual Star Graph
+ void GenerateSymmetricDualStar(int n, int l);
 
  //Setters and Getters
  IntMatrix GetAdjacenyMatrix();

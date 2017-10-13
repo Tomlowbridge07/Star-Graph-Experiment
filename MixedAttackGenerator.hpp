@@ -71,6 +71,9 @@ class MixedAttackGenerator
  void GenerateExtendedStarTestEvenPW(int n,int k);
  void GenerateExtendedStarTestOverallPW(int n, int k);
 
+ //Informed from time position test
+ void GenerateSymmetricDualStarTestPW(int n,int l);
+
  //Informed from time position test extended to a more
  //general extended star graph
  void GenerateGeneralExtendedStarTestPW(int n, IntVector VectorK);
@@ -88,6 +91,8 @@ class MixedAttackGenerator
  //Currently in testing for use with BatchTime (IN TESTING)
  void GenerateDualStarTestTimePW(int n1, int n2, double Weight,
                                 IntVector TimesToAttack);
+
+
 
  protected:
 

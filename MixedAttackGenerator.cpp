@@ -1033,6 +1033,35 @@ void MixedAttackGenerator::GenerateExtendedStarTestOverallPW(int n, int k)
  }
 }
 
+//Informed from time position test
+void MixedAttackGenerator::GenerateSymmetricDualStarTestPW(int n,int l)
+{
+ int block=1;
+ int i=1;
+ int blocksize=(mpPatrollerSystem->GetGameTime()-mpPatrollerSystem
+                ->GetAttackTime()+1);
+ double weight=(double)(1)/(double)(2*n);
+ int timechoice=2*n+l+1;
+ while(block <= 2*n)
+ {
+  i=1;
+   while(i<=blocksize)
+   {
+    if(i<=timechoice)
+    {
+      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=
+      ((double)(1)/(double)(timechoice)) * weight;
+    }
+    else
+    {
+     (*mpGeneratedAttackVector)((block-1)*blocksize+i)=0;
+    }
+    i=i+1;
+   }
+   block=block+1;
+  }
+ std::flush(std::cout<<(*mpGeneratedAttackVector));
+}
 //General Extended Star Graph Test
 /*
 This method generates an attack on S_{n}^{VecK} according to the testing

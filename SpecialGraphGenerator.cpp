@@ -193,6 +193,54 @@ void SpecialGraphGenerator::GenerateGeneralExtendedStar(int n, IntVector k)
  (*mpAdjacencyMatrix)(n+sum+1,n+sum+1)=1;
 }
 
+//Symmetric Dual Star Graph
+//Note. The labeling is 1,...,n are the left nodes then n+1 is centre
+//Next centre is n+l+2 and n+l+3,...,2n+l+2 are the right nodes
+void SpecialGraphGenerator::GenerateSymmetricDualStar(int n, int l)
+{
+ //Create Storage for matrix
+ delete mpAdjacencyMatrix;
+ mpAdjacencyMatrix=new IntMatrix(2*n+l+2,2*n+l+2);
+ mpAdjacencyMatrix->Fill(0);
+
+ //Place 1 for adjacent nodes
+ int i=1;
+ int j=1;
+ while(i<=2*n+l+2)
+ {
+  if(i<=n) //Left external nodes are self adjacent and adjacent to centre
+  {
+   (*mpAdjacencyMatrix)(i,i)=1;
+   (*mpAdjacencyMatrix)(i,n+1)=1;
+   //We also do the reverse now
+   (*mpAdjacencyMatrix)(n+1,i)=1;
+  }
+  if(i==n+1) //Left centre is adjacent to itself and next on line (and other lefts which is already connected to)
+  {
+   (*mpAdjacencyMatrix)(i,i)=1;
+   (*mpAdjacencyMatrix)(i,n+2)=1;
+  }
+  if(i>=n+2 && i<=n+l+1) //Along the line are connected behind,self and infront
+  {
+   (*mpAdjacencyMatrix)(i,i-1)=1;
+   (*mpAdjacencyMatrix)(i,i)=1;
+   (*mpAdjacencyMatrix)(i,i+1)=1;
+  }
+  if(i==n+l+2) //Right centre connected to behind,self (and right nodes which will be included later)
+  {
+   (*mpAdjacencyMatrix)(i,i-1)=1;
+   (*mpAdjacencyMatrix)(i,i)=1;
+  }
+  if(i>=n+l+3) //Right Nodes
+  {
+   (*mpAdjacencyMatrix)(i,i)=1;
+   (*mpAdjacencyMatrix)(i,n+l+2)=1;
+   //And reverse
+   (*mpAdjacencyMatrix)(n+l+2,i)=1;
+  }
+  i=i+1;
+ }
+}
 
 //Setters and Getters
 IntMatrix SpecialGraphGenerator::GetAdjacenyMatrix()

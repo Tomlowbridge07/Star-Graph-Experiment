@@ -14,6 +14,50 @@
 
 int main(int argc,char* argv[])
 {
+ std::flush(std::cout<<"Starting");
+ SpecialGraphGenerator GraphGen;
+ GraphGen.GenerateSymmetricDualStar(3,1);
+ IntMatrix SymDualStar(GraphGen.GetAdjacenyMatrix());
+ std::flush(std::cout<<SymDualStar);
+ IntVector AttackNodes(6);
+ AttackNodes(1)=1; AttackNodes(2)=2; AttackNodes(3)=3;
+ AttackNodes(4)=7; AttackNodes(5)=8; AttackNodes(6)=9; ;
+ PathGenerator PathGen(SymDualStar);
+ PathGen.GeneratePathsFromDepth(AttackNodes,AttackNodes);
+ IntMatrix Paths(PathGen.GetPaths());
+ PathWaitPatroller PWPat(SymDualStar,AttackNodes,Paths,16,6);
+ MixedPatroller MPWPat(PWPat);
+ MixedAttackGenerator Gen(PWPat);
+ Gen.GenerateSymmetricDualStarTestPW(3,1);
+ MPWPat.SetMixedAttackerStrategy(Gen.GetGeneratedAttackVector());
+ MPWPat.EvaluateAttackerAgainstPurePatroller();
+ std::cout<<MPWPat.GetAttackerAgainstPureEvaluation().Max();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
  IntVector VectorK(4);
@@ -133,7 +177,7 @@ int main(int argc,char* argv[])
  }
 
  */
-
+/*
  IntMatrix TwinStar(7,7);
  TwinStar(1,1)=1; TwinStar(1,3)=1;
  TwinStar(2,2)=1; TwinStar(2,3)=1;
@@ -155,7 +199,7 @@ int main(int argc,char* argv[])
  BatchMixedPolicyEvaluation Batcher(MPWPat,0.1);
  BatchTimeMixedPolicyEvaluation TimeBatcher(Batcher,2);
  TimeBatcher.EvaluateDualStarBatchTimeTestPW(2,3);
-
+ */
 
 /*
  IntMatrix TwinStar(6,6);
