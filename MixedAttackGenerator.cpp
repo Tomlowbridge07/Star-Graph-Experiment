@@ -1417,10 +1417,92 @@ void MixedAttackGenerator::GenerateDualStarTestTimePW
 }
 
 
+//Experimental lower line type attack
+//TURN OFF REDUCTION WHEN USING THIS ATTACK PATTERN
+void MixedAttackGenerator::GenerateLowerExtendedStarAttack(int n, int k)
+{
+ int i=1;
+ int blocksize=mpPatrollerSystem->GetGameTime()-
+               mpPatrollerSystem->GetAttackTime()+1;
 
+ //Determine exact attack type used (1,2,3,4)
+ int Type=0;
+ int m=mpPatrollerSystem->GetAttackTime();
+ if(m%2==0)
+ {
+  if(k-(m/2)%2==0)
+  {
+   Type=1;
+  }
+  else
+  {
+   std::flush(std::cout<<"Type 3 has been selected");
+   Type=3;
+  }
+ }
+ else
+ {
+  if(k-((m+1)/2)%2==0)
+  {
+   Type=2;
+  }
+  else
+  {
+   Type=4;
+  }
+ }
 
+ //Now depending on type we construct the attack
+ if(Type==1)
+ {
 
+ }
 
+ else if(Type==2)
+ {
+
+ }
+
+ else if(Type==3)
+ {
+ std::cout<<"this is run";
+  i=1;
+  int block=1;
+  int TotalNumAttacks=4*n+2*k+m-2; //For even stratgies(type 1,3) we use double weight
+  double Weight=1/((double)TotalNumAttacks);
+  int FirstTwolineNode=(m/2)+2;
+
+  while(block<=n+k+1)
+  {
+   if(block==1) //On the end place m attacks
+   {
+    i=1;
+    while(i<=m)
+    {
+      (*mpGeneratedAttackVector)((block-1)*blocksize+i)=2*Weight;
+      i=i+1;
+    }
+   }
+   else if(block>=FirstTwolineNode && block<=k+1 && block-(FirstTwolineNode)%2==0) //Place 2 centralised attacks at every other node
+   {
+    (*mpGeneratedAttackVector)((block-1)*blocksize+(m/2))=2*Weight;
+    (*mpGeneratedAttackVector)((block-1)*blocksize+(m/2)+1)=2*Weight;
+   }
+   else if(block>=k+3) //On star part make 2 centralised attacks on each
+   {
+    (*mpGeneratedAttackVector)((block-1)*blocksize+(m/2))=2*Weight;
+    (*mpGeneratedAttackVector)((block-1)*blocksize+(m/2)+1)=2*Weight;
+   }
+   block=block+1;
+  }
+ //std::flush(std::cout<<(*mpGeneratedAttackVector));
+ }
+
+ else if(Type==4)
+ {
+
+ }
+}
 
 
 

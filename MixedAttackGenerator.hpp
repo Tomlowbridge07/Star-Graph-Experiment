@@ -36,6 +36,10 @@ class MixedAttackGenerator
  //Star overall (i.e timed attacked when possible otherwise normal diametric)
  void GenerateOverallExtendedStarAttack(int n,int k);
 
+ //Experimental lower line type attack
+ void GenerateLowerExtendedStarAttack(int n, int k);
+
+
  /*
  Methods to internally set Generated Attack- Designed
  for use with Path Wait Patroller generation of attacks

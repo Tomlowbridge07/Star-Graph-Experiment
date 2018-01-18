@@ -38,8 +38,8 @@ AbstractPatroller:: AbstractPatroller(IntMatrix& AdjacencyMatrix,const int GameT
  mpPureWinMatrix=new IntMatrix(*mpPurePayoffMatrix);
 
  //Removed dominated and update
- RemoveDominatedWaitingStrategies();
- RemovePenultimateAttackStrategies();
+ //RemoveDominatedWaitingStrategies();
+ //RemovePenultimateAttackStrategies();
  //RemovePayoffDominatedStrategies();
  UpdatePureWinMatrix();
 }
@@ -272,6 +272,7 @@ void AbstractPatroller::UpdatePurePatrollerStrategies()
   j=1;
   while(j<=mNumNodes)
   {
+   std::flush(std::cout<<"Currently counting walks from "<<i<<" to "<<j<<"\n");
    NumberofOptions=NumberofOptions+CountWalks(i,j,mGameTime-1);
    j=j+1;
   }
@@ -343,6 +344,7 @@ void AbstractPatroller::UpdatePurePatrollerStrategies()
  int Steps=1;
  while(Steps<mGameTime) //Moving across Time's i.e the column number of the final matrix
  {
+  std::flush(std::cout<<"On step "<<Steps<<"out of"<<mGameTime);
   //Copy the Patroller matrix
   Temp=PatrollerOptions;
   Counter=1;

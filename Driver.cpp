@@ -14,6 +14,9 @@
 
 int main(int argc,char* argv[])
 {
+
+
+/*
  std::flush(std::cout<<"Starting");
  SpecialGraphGenerator GraphGen;
  GraphGen.GenerateSymmetricDualStar(3,1);
@@ -32,11 +35,26 @@ int main(int argc,char* argv[])
  MPWPat.SetMixedAttackerStrategy(Gen.GetGeneratedAttackVector());
  MPWPat.EvaluateAttackerAgainstPurePatroller();
  std::cout<<MPWPat.GetAttackerAgainstPureEvaluation().Max();
+*/
 
-
-
-
-
+ //We want to test the new range of strategies for m<2(k+1), m<2(n+1)
+ //Consruct extended star graph
+ SpecialGraphGenerator GraphGen;
+ GraphGen.GenerateExtendedStar(7,5);
+ IntMatrix ExtendedStar(GraphGen.GetAdjacenyMatrix());
+ std::flush(std::cout<<"Adjacency matrix generated is:\n"<<ExtendedStar);
+ //Construct Patroller system
+ AbstractPatroller Patroller(ExtendedStar,7,4);
+ //Construct attack we wish to use
+ MixedAttackGenerator AttackGen(Patroller);
+ AttackGen.GenerateLowerExtendedStarAttack(7,5);
+ Vector Attack(AttackGen.GetGeneratedAttackVector());
+ std::flush(std::cout<<"Attack generated is:\n"<<Attack);
+ //Make Mixed patroller to evaluate the attack
+ /*MixedPatroller MixPatroller(Patroller)
+ MixPatroller.SetMixedAttackerStrategy(Attack);
+ MixPatroller.EvaluatePatrollerAgainstPureAttacker();
+ MixPatroller.GetPatrollerAgainstPureEvaluation();*/
 
 
 
